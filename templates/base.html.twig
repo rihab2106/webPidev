@@ -62,9 +62,10 @@
 	</head>
 	<body>
 		{{ include('home/header.html.twig') }}
+        
 		{% block body %}{% endblock %}
 		{#{{ include('home/home.html.twig') }}#}
-
+		{{ include('home/footer.html.twig') }}
 		{% block javascripts %}
 
 			<!-- Object Fit Polyfill -->
