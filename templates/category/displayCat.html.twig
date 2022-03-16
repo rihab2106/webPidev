@@ -1,0 +1,28 @@
+{% extends "back/table-datatable.html.twig" %}
+
+
+{% block body %}
+    <a href="{{ path('addCat') }}"><input type="button" value="Add Category"></a>
+    <table class="table">
+        <tr >
+        <th>Id</th>
+        <th>Category</th>
+            <th>Edit</th>
+        </tr>
+        {% for c in cat %}
+        <tr>
+            <td>{{ c.idCategory }}</td>
+            <td>{{ c.category }}</td>
+            <td>
+                <a href="{{ path('updateCat', {'id': c.idCategory}) }}">
+                    <i class="carousel-control-next-icon"></i>
+                </a>
+                <a href="{{ path('deleteCat', {'id': c.idCategory}) }}">
+                <i class="carousel-control-prev-icon"></i>
+                </a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+{% endblock %}
+

@@ -1,0 +1,79 @@
+{% extends "back/component-cards.html.twig" %}
+
+{% block body %}
+    <div class="row">
+        {% for g in games %}
+            <div class="col-sm-4" style="margin: 5px">
+                <div class="card">
+                    <img src="{{ asset(g.img) }}">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ g.name }}</h5>
+                        <p class="card-text">{{ g.description|slice(0,200) }} </p>
+                        <a class="btn btn-primary" href="{{ path('updateGames', {'id': g.idGame}) }}">Update</a>
+                        <a class="btn btn-dark" href="{{ path('deleteGames', {'id': g.idGame}) }}">Delete</a>
+                        <a class="card-link" href="{{ path('GamesTrophies', {'id': g.idGame}) }}">Trophies</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
+
+{% block Cat %}
+    <div class="card">
+        <div class="card-body">
+            <div class="card-title">
+                <h5 class="mb-0">Categories</h5>
+            </div>
+            <hr>
+            <div class="row row-cols-auto g-3">
+                {% for c in cat %}
+                <div class="col">
+                    <!-- Button trigger modal -->
+                    <a href="{{ path('filterGames', {'id': c.idCategory }) }}" > <button type="button" class="btn btn-light" >
+                        {{ c.category  }}
+
+                    </button></a>
+                    <!-- Modal -->
+
+                </div>
+                {% endfor %}
+
+                <!--end row-->
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block displayGames %}
+    <div class="row row-cols-1 row-cols-md-1 row-cols-lg-3 row-cols-xl-3">
+        {% for g in games %}
+            <div class="col">
+                <div class="card">
+                    {% if g.img is not empty %}
+                        <img src="{{ asset(g.img) }}" class="card-img-top" alt="{{ g.img }}">
+                    {% else %}
+                        <img src="{{ asset('BackAssets/images/GameImgs/grand-theft-auto-v.jpg') }}" class="card-img-top" alt="...">
+                    {% endif %}
+                    <div class="card-body">
+                        <h5 class="card-title">{{ g.name }}</h5>
+                        <p class="card-text">{{ g.description|slice(0,200) }} </p>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">{{ "Category : " ~ g.category }}</li>
+                        <li class="list-group-item">{{ "Rate :"~ g.rate }}</li>
+
+                    </ul>
+                    <div class="card-body"><a href="{{ path('updateGames', {'id': g.idGame }) }}" class="card-link">Update</a>
+                        <a href="{{ path('deleteGames', {'id': g.idGame}) }}" class="card-link" style="color: darkred">Delete</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
+
+{% block title %}
+
+{% endblock %}
+

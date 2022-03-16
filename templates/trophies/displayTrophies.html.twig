@@ -1,0 +1,51 @@
+{% extends 'category/displayCat.html.twig' %}
+
+{% block body %}
+    <a href="" class="btn btn-danger" id="deleteTrophy">Delete</a>
+
+    <form action="{{ path('deleteTrophies') }}" method="post">
+        <table class="table" contenteditable="false">
+    </form>
+    <tr>
+        <th>
+                <input type="checkbox" id="checkAll"> Check All
+
+        </th>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Platform</th>
+        <th>Difficulty</th>
+        <th>Edit</th>
+    </tr>
+    {% for t in trophies %}
+        <tr>
+            <td>
+
+                <input type="checkbox" name="check[]" value="{{ t.idTrophy }}">
+
+            </td>
+            <td>
+                    {{ t.title }}
+               </td>
+            <td>{{ t.description }}</td>
+            <td>{{ t.platform }}</td>
+            <td>{{ t.difficulity }}</td>
+            <td>
+            </td>
+        </tr>
+    {% endfor %}
+</table>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+        $("#checkAll").click( function (){
+            $('input:checkbox').not(this).prop('checked',this.checked)
+        });
+        $("tr:odd").css("background-color","rgba(34,128,234,0.85)");
+
+    </script>
+{% endblock %}
+
+{% block title %}
+
+{% endblock %}
+
