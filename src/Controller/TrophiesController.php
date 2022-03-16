@@ -83,6 +83,9 @@ class TrophiesController extends AbstractController
             foreach ($check as $c)
                 $mng->remove($rep->find($c));
         }
+        return $this->render("trophies/displayTrophies.html.twig", [
+            "trophies"=> $rep->findAll()
+        ]);
     }
 
 }
