@@ -39,7 +39,7 @@ class AdminController extends AbstractController
     }
 
      /**
-     * @Route("/addProduct", name="adminaddproduct")
+     * @Route("/addProduct", name="adminProduct")
      */
     public function Productadmin(): Response
     {
