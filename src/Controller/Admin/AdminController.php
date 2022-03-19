@@ -27,6 +27,22 @@ class AdminController extends AbstractController
      */
     public function homeadmin(): Response
     {
-        return $this->render('admin/adminhome.html.twig');
+        return $this->render('back/index.html.twig');
+    }
+    
+     /**
+     * @Route("/shop", name="adminshop")
+     */
+    public function shopadmin(): Response
+    {
+        return $this->render('back/ecommerce-products.html.twig');
+    }
+
+     /**
+     * @Route("/addProduct", name="adminaddproduct")
+     */
+    public function Productadmin(): Response
+    {
+        return $this->render('back/ecommerce-add-new-products.html.twig');
     }
 }
