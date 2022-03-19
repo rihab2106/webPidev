@@ -28,6 +28,14 @@ class HomeController extends AbstractController
     
     }
 
+/**
+     * @Route("/blog", name="app_home")
+     */
+    public function blog():Response
+    {
 
+        return $this->render('home/blog-article.html.twig');
+    
+    }
 
 }
