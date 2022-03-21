@@ -19,7 +19,7 @@ class HomeController extends AbstractController
     }
 
     /**
-     * @Route("/", name="app_home")
+     * @Route("", name="app_home")
      */
     public function Home():Response
     {
@@ -29,7 +29,7 @@ class HomeController extends AbstractController
     }
 
 /**
-     * @Route("/blog", name="app_home")
+     * @Route("/blog", name="blog_home")
      */
     public function blog():Response
     {
