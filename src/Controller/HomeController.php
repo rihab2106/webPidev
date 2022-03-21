@@ -34,7 +34,7 @@ class HomeController extends AbstractController
     public function blog():Response
     {
 
-        return $this->render('home/blog-article.html.twig');
+        return $this->render('home/widgets.html.twig');
     
     }
 
