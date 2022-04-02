@@ -44,7 +44,7 @@ class CategoryController extends AbstractController
        $form=$this->createForm(CategoryFormType::class,$c);
        $form->add("Add", SubmitType::class);
        $form->handleRequest($request);
-       if ($form->isSubmitted()){
+       if ($form->isSubmitted() && $form->isValid()){
            $c=$form->getData();
 
            $mng->persist($c);
@@ -67,7 +67,7 @@ class CategoryController extends AbstractController
         $form=$this->createForm(CategoryFormType::class,$c);
         $form->add("Update",SubmitType::class);
         $form->handleRequest($request);
-        if ($form->isSubmitted()){
+        if ($form->isSubmitted() && $form->isValid()){
             $c=$form->getData();
             $mng->flush();
             return $this->redirectToRoute("displayCat");
@@ -83,6 +83,7 @@ class CategoryController extends AbstractController
     {
         $mng=$this->getDoctrine()->getManager();
         $mng->remove($this->getDoctrine()->getRepository(Category::class)->find($id));
+        $mng->flush();
         return $this->redirectToRoute("displayCat");
     }
 

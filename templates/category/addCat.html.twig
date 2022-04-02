@@ -1,17 +1,21 @@
-{% extends "back/form-validations.html.twig" %}
+{% extends "back/BackBase.html.twig" %}
 
 {% block form %}
     {{ form(fo) }}
 {% endblock %}
-{% block addGames %}
+{% block content %}
     <div class="card">
         <div class="card-body">
             <div class="p-4 border rounded">
-                <form class="was-validated">
+                <div class="was-validated">
 
-                    {{ form(fo) }}
 
-                </form>
+                  {{ form_start(fo) }}
+                    {{ form_label(fo.category,"Category") }}
+                    {{ form_widget(fo.category, {'attr': {'class': "form-control is-invalid", "required": "true"}}) }}
+                    {{ form_end(fo) }}
+
+                </div>
             </div>
         </div>
     </div>

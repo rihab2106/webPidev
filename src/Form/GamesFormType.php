@@ -4,7 +4,10 @@ namespace App\Form;
 
 use App\Entity\Category;
 use App\Entity\Games;
+
+use KMS\FroalaEditorBundle\Form\Type\FroalaEditorType;
 use phpDocumentor\Reflection\Types\Collection;
+use PhpParser\Node\Scalar\String_;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;

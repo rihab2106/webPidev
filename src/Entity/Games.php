@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 
 /**
@@ -33,6 +34,7 @@ class Games
      * @var string|null
      *
      * @ORM\Column(name="DESCRIPTION", type="text", length=65535, nullable=true)
+     * @Assert\NotBlank
      */
     private $description;
 
@@ -40,6 +42,8 @@ class Games
      * @var string|null
      *
      * @ORM\Column(name="RATE", type="decimal", precision=8, scale=4, nullable=true)
+     * @Assert\GreaterThanOrEqual(value="0")
+     * @Assert\LessThanOrEqual(value="100")
      */
     private $rate;
 
@@ -47,13 +51,14 @@ class Games
      * @var string|null
      *
      * @ORM\Column(name="img", type="string", length=1000, nullable=true)
+     * @Assert\Image()
      */
     private $img;
 
     /**
      * @var ?Category
      *
-     * @ORM\ManyToOne(targetEntity="Category", cascade={"all"})
+     * @ORM\ManyToOne(targetEntity="Category")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="ID_CATEGORY", referencedColumnName="ID_CATEGORY")
      * })
@@ -123,6 +128,11 @@ class Games
         $this->Category = $Category;
 
         return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->name;
     }
 
 

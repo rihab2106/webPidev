@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "463a566d0e389b3e69bb93ea9ebd5671",
+    "content-hash": "e44a812bbe261f0cadeac52478909f75",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -1512,6 +1512,71 @@
                 }
             ],
             "time": "2022-03-02T09:29:19+00:00"
+        },
+        {
+            "name": "kms/froala-editor-bundle",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/froala/KMSFroalaEditorBundle.git",
+                "reference": "6c584c3ddabcf5beb1cac11c79fd6f3465a2641c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/froala/KMSFroalaEditorBundle/zipball/6c584c3ddabcf5beb1cac11c79fd6f3465a2641c",
+                "reference": "6c584c3ddabcf5beb1cac11c79fd6f3465a2641c",
+                "shasum": ""
+            },
+            "require": {
+                "doctrine/inflector": "^1.4|^2.0",
+                "ext-zip": "*",
+                "php": "^7.2 || ^8.0",
+                "symfony/asset": "^4.4|^5.0",
+                "symfony/console": "^4.4|^5.0",
+                "symfony/form": "^4.4|^5.0",
+                "symfony/framework-bundle": "^4.4|^5.0",
+                "symfony/http-client": "^4.4|^5.0",
+                "symfony/twig-bundle": "^4.4|^5.0",
+                "twig/twig": "^1.1|^2.0|^3.0"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^2.16.7",
+                "phpstan/phpstan": "^0.12.56",
+                "symfony/phpunit-bridge": "^4.4|^5.0",
+                "symfony/yaml": "^4.4|^5.0"
+            },
+            "default-branch": true,
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-4": {
+                    "KMS\\FroalaEditorBundle\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Simon Guionniere",
+                    "email": "simon.guionniere@gmail.com"
+                },
+                {
+                    "name": "Stefan Neculai",
+                    "email": "stefan.neculai@gmail.com"
+                }
+            ],
+            "description": "Provides a Froala editor integration for Symfony 4 & 5.",
+            "keywords": [
+                "editor",
+                "froala",
+                "wysiwyg"
+            ],
+            "support": {
+                "issues": "https://github.com/froala/KMSFroalaEditorBundle/issues",
+                "source": "https://github.com/froala/KMSFroalaEditorBundle/tree/v4.0.1"
+            },
+            "time": "2021-06-09T07:10:45+00:00"
         },
         {
             "name": "laminas/laminas-code",
@@ -9516,7 +9581,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "kms/froala-editor-bundle": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {

@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
+use Symfony\Component\Validator\Constraints as Assert;
+
 /**
  * Category
  *
@@ -25,6 +27,8 @@ class Category
      * @var string|null
      *
      * @ORM\Column(name="CATEGORY", type="string", length=30, nullable=true)
+     * @Assert\NotBlank
+     * @Assert\Regex(pattern="/[a-zA-Z]+/")
      */
     private $category;
 

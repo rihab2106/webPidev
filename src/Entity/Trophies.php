@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Trophies
@@ -35,6 +36,7 @@ class Trophies
      */
     private $description;
 
+
     /**
      * @var string|null
      *
@@ -50,7 +52,7 @@ class Trophies
     private $difficulity;
 
     /**
-     * @var \Games
+     * @var ?Games
      *
      * @ORM\ManyToOne(targetEntity="Games")
      * @ORM\JoinColumns({

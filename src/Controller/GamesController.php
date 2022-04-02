@@ -8,6 +8,7 @@ use App\Entity\Trophies;
 use App\Form\GamesFormType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -45,8 +46,11 @@ class GamesController extends AbstractController
         $form=$this->createForm(GamesFormType::class,$g);
         $form->add("Add Game", SubmitType::class);
         $form->handleRequest($request);
-        if ($form->isSubmitted()){
+        if ($form->isSubmitted() && $form->isValid()){
             $g=$form->getData();
+            $file =$form["img"]->getData();
+            $file->move("C:\\xampp\\htdocs\\TrophyHunter\\public\\BackAssets\\images\\GameImgs",$file->getClientOriginalName());
+            $g->setImg("BackAssets\\images\\GameImgs\\".$file->getClientOriginalName());
             $mng->persist($g);
             $mng->flush();
             return $this->redirectToRoute("displayGames");
@@ -66,8 +70,11 @@ class GamesController extends AbstractController
         $form=$this->createForm(GamesFormType::class, $g);
         $form->add("Update", SubmitType::class);
         $form->handleRequest($request);
-        if ($form->isSubmitted()){
+        if ($form->isSubmitted() && $form->isValid()){
             $g=$form->getData();
+            $file =$form["img"]->getData();
+            $file->move("C:\\xampp\\htdocs\\TrophyHunter\\public\\BackAssets\\images\\GameImgs",$file->getClientOriginalName());
+            $g->setImg("BackAssets\\images\\GameImgs\\".$file->getClientOriginalName());
             $mng->flush();
             return $this->redirectToRoute("displayGames");
         }
@@ -82,8 +89,11 @@ class GamesController extends AbstractController
     {
         $rep=$this->getDoctrine()->getRepository(Games::class);
 
-        $this->getDoctrine()->getManager()->remove($rep->find($id));
-        return $this->redirectToRoute("displayGames");
+        $mng=$this->getDoctrine()->getManager();
+        $mng->remove($rep->find($id));
+        $mng->flush();
+
+       return $this->redirectToRoute("displayGames");
     }
     /**
      * @Route("/GamesTrophies/{id}", name="GamesTrophies")

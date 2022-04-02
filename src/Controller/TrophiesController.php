@@ -42,7 +42,7 @@ class TrophiesController extends AbstractController
         $form=$this->createForm(TrophiesFormType::class,$t);
         $form->add("Add_Trophy", SubmitType::class);
         $form->handleRequest($request);
-        if ($form->isSubmitted()){
+        if ($form->isSubmitted() && $form->isValid()){
             $mng->persist($g=$form->getData());
             $mng->flush();
             return $this->redirectToRoute("displayTrophies");
@@ -62,7 +62,7 @@ class TrophiesController extends AbstractController
         $form = $this->createForm(TrophiesFormType::class, $t);
         $form->add("Update_Trophy", SubmitType::class);
         $form->handleRequest($request);
-        if ($form->isSubmitted()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $g = $form->getData();
             $mng->flush();
             return $this->redirectToRoute("displayTrophies");
@@ -72,20 +72,14 @@ class TrophiesController extends AbstractController
         ]);
     }
     /**
-     * @Route("/deleteTrophies" ,name="deleteTrophies")
+     * @Route("/deleteTrophies/{id}" ,name="deleteTrophies")
      */
-    public function delete()
+    public function delete($id , Request $request)
     {
         $rep=$this->getDoctrine()->getRepository(Trophies::class);
         $mng=$this->getDoctrine()->getManager();
-        if (isset($_POST["check[]"])){
-            $check=$_POST["check[]"];
-            foreach ($check as $c)
-                $mng->remove($rep->find($c));
+        if ($request->isXmlHttpRequest()){
         }
-        return $this->render("trophies/displayTrophies.html.twig", [
-            "trophies"=> $rep->findAll()
-        ]);
     }
 
 }

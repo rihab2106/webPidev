@@ -1,9 +1,17 @@
-{% extends "back/table-datatable.html.twig" %}
+{% extends "back/BackBase.html.twig" %}
 
 
-{% block body %}
-    <a href="{{ path('addCat') }}"><input type="button" value="Add Category"></a>
-    <table class="table">
+{% block content %}
+    <div class="card">
+        <div class="card-body font-20">
+
+    <a href="{{ path('addCat') }}">
+
+        <button class="btn btn-light px-5" ><i class="bx bx-add-to-queue"> </i>
+            Add Category
+        </button></a>
+            <br>
+    <table class="table mb-0 table-striped">
         <tr >
         <th>Id</th>
         <th>Category</th>
@@ -15,14 +23,16 @@
             <td>{{ c.category }}</td>
             <td>
                 <a href="{{ path('updateCat', {'id': c.idCategory}) }}">
-                    <i class="carousel-control-next-icon"></i>
+                    <i class="lni lni-cog"></i>
                 </a>
                 <a href="{{ path('deleteCat', {'id': c.idCategory}) }}">
-                <i class="carousel-control-prev-icon"></i>
+                <i class="lni lni-trash"></i>
                 </a>
             </td>
         </tr>
         {% endfor %}
     </table>
+    </div>
+    </div>
 {% endblock %}
 
