@@ -1,0 +1,39 @@
+{% extends 'back/BackBase.html.twig' %}
+
+{% block title %}News{% endblock %}
+
+{% block content %}
+    <h1>News Section</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>IdNews</th>
+                <th>Headline</th>
+                <th>Content</th>
+                <th>Img</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for news in news %}
+            <tr>
+                <td>{{ news.idNews }}</td>
+                <td>{{ news.headline }}</td>
+                <td>{{ news.content }}</td>
+                <td>{{ news.img }}</td>
+                <td>
+                    
+                    <a href="{{ path('app_news_edit', {'idNews': news.idNews}) }}">Edit or Delete</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_news_new') }}">Create new</a>
+{% endblock %}

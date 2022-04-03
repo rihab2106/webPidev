@@ -2,84 +2,57 @@
 
 namespace App\Entity;
 
-use App\Repository\CategoryRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use ApiPlatform\Core\Annotation\ApiResource;
+
+use Symfony\Component\Validator\Constraints as Assert;
+
 /**
- * @ApiResource
- * @ORM\Entity(repositoryClass=CategoryRepository::class)
+ * Category
+ *
+ * @ORM\Table(name="category")
+ * @ORM\Entity
  */
 class Category
 {
     /**
+     * @var int
+     *
+     * @ORM\Column(name="ID_CATEGORY", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $id;
+    private $idCategory;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @var string|null
+     *
+     * @ORM\Column(name="CATEGORY", type="string", length=30, nullable=true)
+     * @Assert\NotBlank
+     * @Assert\Regex(pattern="/[a-zA-Z]+/")
      */
-    private $type;
+    private $category;
 
-    /**
-     * 
-     * @ORM\OneToMany(targetEntity=Product::class, mappedBy="category")
-     */
-    private $products;
-
-    public function __construct()
+    public function __toString()
     {
-        $this->products = new ArrayCollection();
+        return $this->category;
     }
 
-    public function getId(): ?int
+    public function getIdCategory(): ?int
     {
-        return $this->id;
+        return $this->idCategory;
     }
 
-    public function getType(): ?string
+    public function getCategory(): ?string
     {
-        return $this->type;
+        return $this->category;
     }
 
-    public function setType(string $type): self
+    public function setCategory(?string $category): self
     {
-        $this->type = $type;
+        $this->category = $category;
 
         return $this;
     }
 
-    /**
-     * @return Collection<int, Product>
-     */
-    public function getProducts(): Collection
-    {
-        return $this->products;
-    }
 
-    public function addProduct(Product $product): self
-    {
-        if (!$this->products->contains($product)) {
-            $this->products[] = $product;
-            $product->setCategory($this);
-        }
-
-        return $this;
-    }
-
-    public function removeProduct(Product $product): self
-    {
-        if ($this->products->removeElement($product)) {
-            // set the owning side to null (unless already changed)
-            if ($product->getCategory() === $this) {
-                $product->setCategory(null);
-            }
-        }
-
-        return $this;
-    }
 }
