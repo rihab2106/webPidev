@@ -78,8 +78,11 @@ class TrophiesController extends AbstractController
     {
         $rep=$this->getDoctrine()->getRepository(Trophies::class);
         $mng=$this->getDoctrine()->getManager();
-        if ($request->isXmlHttpRequest()){
-        }
+        $mng->remove($rep->find($id));
+        $mng->flush();
+        return $this->render("trophies/displayTrophies.html.twig", [
+            "trophies"=> $rep->findAll()
+        ]);
     }
 
 }
