@@ -10,8 +10,10 @@
                     <h5 class="mb-0 text-white">ADD Product</h5>
                 </div>
                 <hr/>
+                {{ form_start(form,{attr:{novalidate:'invalid'}}) }}
                 {{ form(form) }}
             </div>
         </div>
     </div>
+    {{ include('product/_form.html.twig') }}
 {% endblock %}

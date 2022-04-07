@@ -4,6 +4,7 @@ namespace App\Entity;
 use Symfony\Component\HttpFoundation\File\File;
 use Doctrine\ORM\Mapping as ORM;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\Validator\Constraints as Assert;
 
 
 /**
@@ -26,35 +27,45 @@ class Product
 
     /**
      * @var string|null
+     * @Assert\NotBlank(message=" Title shouldn't be empty")
+     * @Assert\Length(
+     *      min = 7,
+     *      minMessage=" title should contain at least 7 letters"
      *
+     *     )
      * @ORM\Column(name="PROD_NAME", type="string", length=100, nullable=true)
      */
     private $prodName;
 
     /**
      * @var string
-     *
+     * @Assert\NotBlank(message="Description shouldn't be empty")
+     * @Assert\Length(
+     *      min = 10,
+     *      max = 250,
+     *      minMessage = "must be  >=10 ",
+     *      maxMessage = "must be  <=350" )
      * @ORM\Column(name="Description", type="string", length=1000, nullable=false)
      */
     private $description;
 
     /**
      * @var float|null
-     *
+     * @Assert\NotBlank(message="price shouldn't be empty")
      * @ORM\Column(name="PRICE", type="float", precision=8, scale=2, nullable=true)
      */
     private $price;
 
     /**
      * @var float|null
-     *
+     *@Assert\NotBlank(message="discount shouldn't be empty")
      * @ORM\Column(name="DISCOUNT", type="float", precision=10, scale=0, nullable=true)
      */
     private $discount;
 
     /**
      * @var int
-     *
+     *@Assert\NotBlank(message="Quantity shouldn't be empty")
      * @ORM\Column(name="Quantity", type="integer", nullable=false)
      */
     private $quantity;

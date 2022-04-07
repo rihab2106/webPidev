@@ -20,6 +20,7 @@ class ProductController extends AbstractController
      */
     public function index(EntityManagerInterface $entityManager): Response
     {
+
         $products = $entityManager
             ->getRepository(Product::class)
             ->findAll();

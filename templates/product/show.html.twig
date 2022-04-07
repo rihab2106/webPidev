@@ -1,42 +1,20 @@
-<!DOCTYPE html>
+{% extends 'back/BackBase.html.twig' %}
 
-<title>Product</title>
-
-{% block body %}
-    <h1>Product</h1>
-
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>IdProduct</th>
-                <td>{{ product.idProduct }}</td>
-            </tr>
-            <tr>
-                <th>ProdName</th>
-                <td>{{ product.prodName }}</td>
-            </tr>
-            <tr>
-                <th>Description</th>
-                <td>{{ product.description }}</td>
-            </tr>
-            <tr>
-                <th>Price</th>
-                <td>{{ product.price }}</td>
-            </tr>
-            <tr>
-                <th>Discount</th>
-                <td>{{ product.discount }}</td>
-            </tr>
-            <tr>
-                <th>Quantity</th>
-                <td>{{ product.quantity }}</td>
-            </tr>
-            <tr>
-                <th>Image</th>
-                <td>{{ product.image }}</td>
-            </tr>
-        </tbody>
-    </table>
+{% block content %}
+    <div class="card border-top border-0 border-4 border-white">
+        <div class="card-body">
+            <div class="border p-4 rounded">
+                <div class="card-title d-flex align-items-center">
+                    <div><i class="bx bxs-user me-1 font-22 text-white"></i>
+                    </div>
+                    <h5 class="mb-0 text-white">show Product</h5>
+                </div>
+                <hr/>
+                {{ form(form) }}
+            </div>
+        </div>
+    </div>
+    {{ include('product/_form.html.twig') }}
 
     <a href="{{ path('app_product_index') }}">back to list</a>
 
