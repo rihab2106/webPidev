@@ -3,8 +3,7 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>
-			{% block title %}Welcome!
-			{% endblock %}
+			Trophy Hunter
 		</title>
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 
@@ -63,7 +62,7 @@
 	<body>
 		{{ include('home/header.html.twig') }}
         
-		{% block body %}{% endblock %}
+		{% block content %}{% endblock %}
 		{#{{ include('home/home.html.twig') }}#}
 		{{ include('home/footer.html.twig') }}
 		{% block javascripts %}
@@ -131,5 +130,7 @@
 
 
 		{% endblock %}
+
+
 	</body>
 </html>

@@ -1,0 +1,118 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+    <div class="nk-main">
+
+        <div class="container">
+
+            <div class="card" style="background-color: #303e47">
+                <div class="card-body">
+                    <div class="card-title">
+                        <h5 class="mb-0">Categories</h5>
+                    </div>
+                    <hr>
+                    <div class="row row-cols-auto g-3">
+                        {% for c in cat %}
+                            <div class="col">
+                                <!-- Button trigger modal -->
+                                <a href="{{ path('filterGames', {'id': c.idCategory }) }}"
+                                   class="nk-btn nk-btn-rounded nk-btn-color-dark-3 nk-btn-hover-color-info">
+
+                                        {{ c.category }}
+
+                                </a>
+                                <!-- Modal -->
+
+                            </div>
+                        {% endfor %}
+
+                        <!--end row-->
+                    </div>
+                </div>
+            </div>
+            {# <div class="row row-cols-1 row-cols-md-1 row-cols-lg-3 row-cols-xl-3">
+        {% for g in games %}
+            <div class="col">
+                <div class="card">
+                    {% if g.img is not empty %}
+                        <img src="{{ asset(g.img) }}" class="card-img-top" alt="{{ g.img }}">
+                    {% else %}
+                        <img src="{{ asset('BackAssets/images/GameImgs/wp7489322.jpg') }}" class="card-img-top" alt="{{ g.name }}       ">
+                    {% endif %}
+                    <div class="card-body">
+                        <h5 class="card-title">{{ g.name }}</h5>
+                        <p class="card-text">{{ g.description|slice(0,200) }} </p>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">{{ "Category : " ~ g.category }}</li>
+                        <li class="list-group-item">{{ "Rate : "~ g.rate|round(2,'floor')}}</li>
+
+                    </ul>
+                    <div class="card-body"><a href="{{ path('updateGames', {'id': g.idGame }) }}" class="card-link">Update</a>
+                        <a href="{{ path('deleteGames', {'id': g.idGame}) }}" class="card-link" style="color: darkred">Delete</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div> #}
+            <div class="nk-news-box">
+                <div class="nk-news-box-list">
+                    <div class="nano has-scrollbar">
+                        <div class="nano-content" tabindex="0" style="right: -17px;">
+                            {% for g in games %}
+                                <div class="nk-news-box-item">
+                                    <div class="nk-news-box-item-img">
+                                        <img src="{{ asset('BackAssets/images/GameImgs/elden-ring.jpg') }}"
+                                             alt="{{ g.name }}">
+                                    </div>
+                                    <img src="{{ asset('BackAssets/images/GameImgs/elden-ring.jpg') }}"
+                                         alt="{{ g.name }}"
+                                         class="nk-news-box-item-full-img">
+                                    <h3 class="nk-news-box-item-title">{{ g.name }}</h3>
+
+                                    <span class="nk-news-box-item-categories">
+                            <span class="bg-main-4">{{ g.category.category }}</span>
+                        </span>
+
+                                    <div class="nk-news-box-item-text">
+                                        <p>{{ g.description|slice(0,200) }}</p>
+                                    </div>
+                                    <a href="{{ path('displayGamesTro', {'id': g.idGame}) }}"
+                                       class="nk-news-box-item-url">Trophies</a>
+
+                                </div>
+                            {% endfor %}
+                        </div>
+                        <div class="nano-pane">
+                            <div class="nano-slider" style="height: 199px; transform: translate(0px, 121.272px);"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="nk-news-box-each-info">
+                    <div class="nano has-scrollbar">
+                        <div class="nano-content" tabindex="0" style="right: -17px;">
+                            <!-- There will be inserted info about selected news-->
+                            <div class="nk-news-box-item-image">
+
+                            </div>
+                            <h3 class="nk-news-box-item-title"></h3>
+                            <div class="nk-news-box-item-text">
+                                <p></p>
+                            </div>
+                            <a href="blog-article.html" class="nk-news-box-item-more">Trophies</a>
+
+                        </div>
+                        <div class="nano-pane">
+                            <div class="nano-slider" style="height: 311px; transform: translate(0px, 39.2327px);"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block title %}
+
+{% endblock %}
+

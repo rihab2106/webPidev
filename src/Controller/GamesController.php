@@ -29,12 +29,21 @@ class GamesController extends AbstractController
      */
     public function display()
     {
-        $rep=$this->getDoctrine()->getRepository(Games::class);
-        $repCat=$this->getDoctrine()->getRepository(Category::class);
-        return $this->render("games/displayGames.html.twig", [
-            "cat"=>$repCat->findAll(),
-            "games"=> $rep->findAll()
-        ]);
+        $rep = $this->getDoctrine()->getRepository(Games::class);
+        $repCat = $this->getDoctrine()->getRepository(Category::class);
+        if (1<0) {
+
+            return $this->render("games/displayGames.html.twig", [
+                "cat" => $repCat->findAll(),
+                "games" => $rep->findAll()
+            ]);
+        }
+        else {
+            return $this->render("games/FrontDisplayGames.html.twig", [
+                "cat" => $repCat->findAll(),
+                "games"=> $rep->findAll()
+            ]);
+        }
     }
     /**
      * @Route("/addGames", name="addGames")
@@ -111,13 +120,21 @@ class GamesController extends AbstractController
      */
     public function filter($id)
     {
-        $rep=$this->getDoctrine()->getRepository(Games::class);
-        $repCat=$this->getDoctrine()->getRepository(Category::class);
-        return $this->render("games/displayGames.html.twig", [
-            "cat"=>$repCat->findAll(),
-            "games"=> $rep->filterbyCat($id)
-        ]);
+        $rep = $this->getDoctrine()->getRepository(Games::class);
+        $repCat = $this->getDoctrine()->getRepository(Category::class);
+        if (1<0) {
+            return $this->render("games/displayGames.html.twig", [
+                "cat" => $repCat->findAll(),
+                "games" => $rep->filterbyCat($id)
+            ]);
+        }
+        else
+            return $this->render("games/displayGames.html.twig", [
+                "cat" => $repCat->findAll(),
+                "games" => $rep->filterbyCat($id)
+            ]);
     }
+
 
 
 

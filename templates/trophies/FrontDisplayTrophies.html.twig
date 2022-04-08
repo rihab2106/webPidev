@@ -1,0 +1,100 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+    <div class="nk-main">
+        <div class="container">
+            <div class="nk-gap-1"></div>
+            <ul class="nk-breadcrumbs">
+
+
+                <li><a href="index.html">Home</a></li>
+
+
+                <li>
+                    <svg class="svg-inline--fa fa-angle-right fa-w-8" aria-hidden="true" data-prefix="fa"
+                         data-icon="angle-right" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512"
+                         data-fa-i2svg="">
+                        <path fill="currentColor"
+                              d="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9 0l-22.6-22.6c-9.4-9.4-9.4-24.6 0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1 34z"></path>
+                    </svg><!-- <span class="fa fa-angle-right"></span> --></li>
+
+                <li><span>Game</span></li>
+
+            </ul>
+        </div>
+        <div class="nk-gap-1"></div>
+        <div class="container">
+            <div class="row vertical-gap">
+                <div class="col-lg-4">
+                    <!-- START: Headings -->
+                    <h3 class="text-main-1">{{ game.name }}</h3>
+                    <div class="nk-gap"></div>
+                    <img src="{{ asset(game.img) }}" style="height: 200px; size: portrait">
+                    <!-- END: Headings -->
+                </div>
+                <div class="col-lg-8">
+                    <!-- START: Paragraphs -->
+                    <h3 class="text-main-1">Description</h3>
+                    <div class="nk-gap"></div>
+                    <p  class="lead text-white"><strong>{{ game.name }}</strong> {{ "- " ~ game.description}} </p>
+                    <p class="text-white"><strong>Rate</strong> {{ game.rate|round }}</p>
+                    <!-- END: Paragraphs -->
+                </div>
+            </div>
+            <div class="nk-accordion" id="accordion-1" role="tablist" aria-multiselectable="true">
+                <div class="nk-gap-2"></div>
+                {% for t in trophies %}
+                    <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="accordion-1-1-heading">
+                            <a class="collapsed" data-toggle="collapse" data-parent="#accordion-1" href="#accordion-1-1"
+                               aria-expanded="true" aria-controls="accordion-1-1">
+                                {{ t.title }}
+                                <svg class="svg-inline--fa fa-angle-down fa-w-10 panel-heading-arrow" aria-hidden="true"
+                                     data-prefix="fa" data-icon="angle-down" role="img"
+                                     xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" data-fa-i2svg="">
+                                    <path fill="currentColor"
+                                          d="M143 352.3L7 216.3c-9.4-9.4-9.4-24.6 0-33.9l22.6-22.6c9.4-9.4 24.6-9.4 33.9 0l96.4 96.4 96.4-96.4c9.4-9.4 24.6-9.4 33.9 0l22.6 22.6c9.4 9.4 9.4 24.6 0 33.9l-136 136c-9.2 9.4-24.4 9.4-33.8 0z"></path>
+                                </svg><!-- <span class="panel-heading-arrow fa fa-angle-down"></span> -->
+                            </a>
+                        </div>
+                        <div id="accordion-1-1" class="panel-collapse collapse" role="tabpanel"
+                             aria-labelledby="accordion-1-1-heading">
+                            <p>{{ "Description: "~ t.description }}</p>
+                            <p>{{ "Difficulity: "~ t.difficulity }}</p>
+                            <p>{{ "Platform: "~ t.platform }}</p>
+
+                        </div>
+                    </div>
+
+                {% endfor %}
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="accordion-1-1-heading">
+                        <a class="collapsed" data-toggle="collapse" data-parent="#accordion-1" href="#accordion-1-1"
+                           aria-expanded="true" aria-controls="accordion-1-1">
+                            Collapsible 1
+                            <svg class="svg-inline--fa fa-angle-down fa-w-10 panel-heading-arrow" aria-hidden="true"
+                                 data-prefix="fa" data-icon="angle-down" role="img" xmlns="http://www.w3.org/2000/svg"
+                                 viewBox="0 0 320 512" data-fa-i2svg="">
+                                <path fill="currentColor"
+                                      d="M143 352.3L7 216.3c-9.4-9.4-9.4-24.6 0-33.9l22.6-22.6c9.4-9.4 24.6-9.4 33.9 0l96.4 96.4 96.4-96.4c9.4-9.4 24.6-9.4 33.9 0l22.6 22.6c9.4 9.4 9.4 24.6 0 33.9l-136 136c-9.2 9.4-24.4 9.4-33.8 0z"></path>
+                            </svg><!-- <span class="panel-heading-arrow fa fa-angle-down"></span> -->
+                        </a>
+                    </div>
+                    <div id="accordion-1-1" class="panel-collapse collapse" role="tabpanel"
+                         aria-labelledby="accordion-1-1-heading">
+                        <p>I have related the substance of several conversations I had with my master during the
+                            greatest part of the time I had the, for brevity sake, omitted much moredown.</p>
+                        <p>And she went on planning to herself how she would manage it. 'They must go by the carrier'
+                            she thought; and how funny it'll seem And she went on planning to herself how</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{#    <img class="nk-page-background-top" src="{{ asset(game.img) }}" alt="">#}
+{% endblock %}
+
+{% block body %}
+
+{% endblock %}
+
