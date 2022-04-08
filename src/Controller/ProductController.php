@@ -43,7 +43,7 @@ class ProductController extends AbstractController
             $em = $this->getDoctrine()->getManager();
             $em->persist($product);
             $em->flush();
-            return $this->redirectToRoute('app_product_new');
+            return $this->redirectToRoute('app_product_index');
         }
 
         return $this->render('product/new.html.twig', [
