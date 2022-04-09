@@ -28,7 +28,7 @@ class Category
      *
      * @ORM\Column(name="CATEGORY", type="string", length=30, nullable=true)
      * @Assert\NotBlank
-     * @Assert\Regex(pattern="/[a-zA-Z]+/")
+     * @Assert\Regex(pattern="/^[a-zA-Z]+$/")
      */
     private $category;
 

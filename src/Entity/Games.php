@@ -27,6 +27,7 @@ class Games
      * @var string|null
      *
      * @ORM\Column(name="NAME", type="string", length=100, nullable=true)
+     * @Assert\NotBlank()
      */
     private $name;
 
@@ -44,6 +45,7 @@ class Games
      * @ORM\Column(name="RATE", type="decimal", precision=8, scale=4, nullable=true)
      * @Assert\GreaterThanOrEqual(value="0")
      * @Assert\LessThanOrEqual(value="100")
+     * @Assert\NotBlank()
      */
     private $rate;
 

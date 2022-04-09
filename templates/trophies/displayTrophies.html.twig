@@ -104,7 +104,11 @@
                             <td>{{ t.description }}</td>
                             <td>{{ t.platform }}</td>
                             <td>{{ t.difficulity }}</td>
-                            <td>{{ t.idGame.name }}</td>
+                            {% if t.idGame.name is defined %}
+                            <td> {{t.idGame.name }}</td>
+                            {% else  %}
+                                <td>'''No Game'''</td>
+                                {% endif %}
                             <td><a href="{{ path('deleteTrophies', {'id': t.idTrophy}) }}"><i class="lni lni-trash"></i></a> </td>
                             <td><a href="{{ path('updateTrophies', {'id': t.idTrophy}) }}"><i class="lni lni-cog"></i></a> </td>
                         </tr>

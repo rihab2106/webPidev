@@ -42,14 +42,13 @@ class CategoryController extends AbstractController
         $mng=$this->getDoctrine()->getManager();
         $c=new Category();
        $form=$this->createForm(CategoryFormType::class,$c);
-       $form->add("Add", SubmitType::class);
+       $form->add("Add", SubmitType::class, ["attr"=> ["class"=> "btn btn-dark px-5"]]);
        $form->handleRequest($request);
        if ($form->isSubmitted() && $form->isValid()){
            $c=$form->getData();
-
            $mng->persist($c);
            $mng->flush();
-           $this->redirectToRoute("displayCat");
+           return $this->redirectToRoute("displayCat");
        }
        return $this->render("category/addCat.html.twig", [
            "fo"=>$form->createView()
@@ -65,7 +64,7 @@ class CategoryController extends AbstractController
         $mng=$this->getDoctrine()->getManager();
         $c=$rep->find($id);
         $form=$this->createForm(CategoryFormType::class,$c);
-        $form->add("Update",SubmitType::class);
+        $form->add("Update",SubmitType::class,["attr"=> ["class"=> "btn btn-dark px-5"]]);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()){
             $c=$form->getData();

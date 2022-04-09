@@ -80,9 +80,7 @@ class TrophiesController extends AbstractController
         $mng=$this->getDoctrine()->getManager();
         $mng->remove($rep->find($id));
         $mng->flush();
-        return $this->render("trophies/displayTrophies.html.twig", [
-            "trophies"=> $rep->findAll()
-        ]);
+        return $this->redirectToRoute("displayTrophies");
     }
     /**
      * @Route("/displayGamesTro/{id}", name="displayGamesTro")

@@ -62,10 +62,10 @@
                             {% for g in games %}
                                 <div class="nk-news-box-item">
                                     <div class="nk-news-box-item-img">
-                                        <img src="{{ asset('BackAssets/images/GameImgs/elden-ring.jpg') }}"
+                                        <img src="{{ asset(g.img) }}"
                                              alt="{{ g.name }}">
                                     </div>
-                                    <img src="{{ asset('BackAssets/images/GameImgs/elden-ring.jpg') }}"
+                                    <img src="{{ asset(g.img) }}"
                                          alt="{{ g.name }}"
                                          class="nk-news-box-item-full-img">
                                     <h3 class="nk-news-box-item-title">{{ g.name }}</h3>
@@ -76,9 +76,9 @@
 
                                     <div class="nk-news-box-item-text">
                                         <p>{{ g.description|slice(0,200) }}</p>
+                                        <a href="{{ path('displayGamesTro', {'id': g.idGame}) }}"
+                                           class="nk-news-box-item-url">Trophies</a>
                                     </div>
-                                    <a href="{{ path('displayGamesTro', {'id': g.idGame}) }}"
-                                       class="nk-news-box-item-url">Trophies</a>
 
                                 </div>
                             {% endfor %}
@@ -99,7 +99,7 @@
                             <div class="nk-news-box-item-text">
                                 <p></p>
                             </div>
-                            <a href="blog-article.html" class="nk-news-box-item-more">Trophies</a>
+
 
                         </div>
                         <div class="nano-pane">

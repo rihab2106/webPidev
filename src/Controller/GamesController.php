@@ -31,7 +31,7 @@ class GamesController extends AbstractController
     {
         $rep = $this->getDoctrine()->getRepository(Games::class);
         $repCat = $this->getDoctrine()->getRepository(Category::class);
-        if (1<0) {
+        if (false) {
 
             return $this->render("games/displayGames.html.twig", [
                 "cat" => $repCat->findAll(),
