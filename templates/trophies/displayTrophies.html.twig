@@ -1,0 +1,137 @@
+{% extends 'back/BackBase.html.twig' %}
+
+{% block body %}
+    <a href="" class="btn btn-danger" id="deleteTrophy">Delete</a>
+
+    <form action="{{ path('deleteTrophies') }}" method="post">
+        <table class="table" contenteditable="false">
+    </form>
+    <tr>
+        <th>
+            <input type="checkbox" id="checkAll"> Check All
+
+        </th>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Platform</th>
+        <th>Difficulty</th>
+        <th>Edit</th>
+    </tr>
+    {% for t in trophies %}
+        <tr>
+            <td>
+
+                <input type="checkbox" name="check[]" value="{{ t.idTrophy }}">
+
+            </td>
+            <td>
+                {{ t.title }}
+            </td>
+            <td>{{ t.description }}</td>
+            <td>{{ t.platform }}</td>
+            <td>{{ t.difficulity }}</td>
+            <td>
+            </td>
+        </tr>
+    {% endfor %}
+    </table>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+        $("#checkAll").click(function () {
+            $('input:checkbox').not(this).prop('checked', this.checked)
+        });
+        $("tr:odd").css("background-color", "rgba(34,128,234,0.85)");
+
+    </script>
+{% endblock %}
+{% block content %}
+    {#<script>
+
+        $("#checkAll").click(function () {
+            $('input:checkbox').not(this).prop('checked', this.checked)
+        });
+        $("#delete").click(function() {
+            $.ajax({
+                url: "/deleteTrophies",
+                method: "POST",
+                dataType: "json",
+                data: {"trophies": {{ trophies }}}
+                async: true,
+                success: function (data, status){
+                    {% set trophies=data %}
+                },
+                error: function(xhr, textStatus, errorThrown) {
+                    alert('Ajax request failed.');
+                }
+            })
+        })
+    </script>#}
+    <div class="card font-18" >
+        <div class="card-body">
+
+            <div class="table-responsive">
+{#
+                   <a href="{{ path('deleteTrophies') }}" id="delete"><button class="btn btn-light buttons-copy buttons-html5"
+                            type="submit"><span>Delete</span></button>
+                       </a>#}
+                <a href="{{ path('addTrophies') }}" ><button class="btn btn-light buttons-copy buttons-html5">
+                        <span>Add Trophy</span></button>
+                       </a>
+                <hr>
+                <table id="example2" class="table table-striped table-bordered">
+                    <div  id="example2_wrapper" class="dataTables_wrapper dt-bootstrap5">
+                    <thead>
+                    <tr>
+                        <th aria-hidden="true">
+                            <label>Check All</label>
+                            <input type="checkbox" id="CAU">
+
+                        </th>
+                        <th>Title</th>
+                        <th>Description</th>
+                        <th>Difficulty</th>
+                        <th>Platform</th>
+                        <th>Game</th>
+                        <th>Delete </th>
+                        <th>Edit</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for t in trophies %}
+                        <tr>
+                            <td><input type="checkbox" name="check[]" value="{{ t.idTrophy }}"></td>
+                            <td>{{ t.title }}</td>
+                            <td>{{ t.description }}</td>
+                            <td>{{ t.platform }}</td>
+                            <td>{{ t.difficulity }}</td>
+                            <td>{{ t.idGame.name }}</td>
+                            <td><a href="{{ path('deleteTrophies', {'id': t.idTrophy}) }}"><i class="lni lni-trash"></i></a> </td>
+                            <td><a href="{{ path('updateTrophies', {'id': t.idTrophy}) }}"><i class="lni lni-cog"></i></a> </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                    <tfoot>
+                    <tr>
+                        <th>
+                            <input type="checkbox" id="CheckAll">
+                            Check All
+                        </th>
+                        <th>Title</th>
+                        <th>Description</th>
+                        <th>Difficulty</th>
+                        <th>Platform</th>
+                        <th>Game</th>
+                        <th>Delete </th>
+                        <th>Edit</th>
+                    </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+        </div>
+    </div>
+{% endblock %}
+{% block title %}
+
+{% endblock %}
+

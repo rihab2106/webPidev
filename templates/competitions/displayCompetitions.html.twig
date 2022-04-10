@@ -1,0 +1,114 @@
+{% extends 'back/BackBase.html.twig' %}
+
+{% block body %}
+    <a href="" class="btn btn-danger" id="deleteTrophy">Delete</a>
+
+    <form action="{{ path('deleteCompetitions') }}" method="post">
+        <table class="table" contenteditable="false">
+
+    <tr>
+        <th>
+            <input type="checkbox" id="checkAll"> Check All
+
+        </th>
+        <th>Id Competition</th>
+        <th>Game Name</th>
+        <th>Date of Competition</th>
+        <th>Edit</th>
+    </tr>
+    {% for c in competitions %}
+        <tr>
+            <td>
+
+                <input type="checkbox" name="check[]" value="{{ c.idCompetion }}">
+
+            </td>
+            <td>{{ c.gameName }}</td>
+            <td>{{ c.dateofcomp }}</td>
+            <td></td>
+        </tr>
+    {% endfor %}
+    </table>
+    </form>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+        $("#checkAll").click(function () {
+            $('input:checkbox').not(this).prop('checked', this.checked)
+        });
+        $("tr:odd").css("background-color", "rgba(34,128,234,0.85)");
+
+    </script>
+{% endblock %}
+{% block content %}
+    {#<script>
+
+        $("#checkAll").click(function () {
+            $('input:checkbox').not(this).prop('checked', this.checked)
+        });
+        $("#delete").click(function() {
+            $.ajax({
+                url: "/deleteTrophies",
+                method: "POST",
+                dataType: "json",
+                data: {"trophies": {{ trophies }}}
+                async: true,
+                success: function (data, status){
+                    {% set trophies=data %}
+                },
+                error: function(xhr, textStatus, errorThrown) {
+                    alert('Ajax request failed.');
+                }
+            })
+        })
+    </script>#}
+    <div class="card font-18" >
+        <div class="card-body">
+
+            <div class="table-responsive">
+                {#
+                <a href="{{ path('deleteCompetitions') }}" id="delete"><button class="btn btn-light buttons-copy buttons-html5"
+                         type="submit"><span>Delete</span></button>
+                    </a>#}
+                <a href="{{ path('addCompetitions') }}" ><button class="btn btn-light buttons-copy buttons-html5">
+                        <span>Add Competitions</span></button>
+                </a>
+                <hr>
+                <table id="example2" class="table table-striped table-bordered">
+                    <div  id="example2_wrapper" class="dataTables_wrapper dt-bootstrap5">
+                        <thead>
+                        <tr>
+
+
+                            <th>Id Competition</th>
+                            <th>Game Name</th>
+                            <th>Date of Competition</th>
+                            <th>Delete</th>
+                            <th>Edit</th>
+
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for c in competitions %}
+                            <tr>
+
+                                <td>{{ c.idCompetion }}</td>
+                                <td>{{ c.gameName }}</td>
+                                <td>{{ c.dateofcomp|date }}</td>
+
+                                <td><a href="{{ path('deleteCompetitions', {'id': c.idCompetion}) }}"><i class="lni lni-trash"></i></a></td>
+                               <td> <a href="{{ path('updateCompetitions', {'id': c.idCompetion}) }}"><i class="lni lni-cog"></i></a> </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+
+                    </div>
+                </table>
+            </div>
+        </div>
+    </div>
+    </div>
+{% endblock %}
+{% block title %}
+
+{% endblock %}
+
