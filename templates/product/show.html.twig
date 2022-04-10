@@ -10,15 +10,15 @@
                     <h5 class="mb-0 text-white">show Product</h5>
                 </div>
                 <hr/>
-                {{ form(form) }}
+
             </div>
         </div>
     </div>
-    {{ include('product/_form.html.twig') }}
+{#    {{ include('product/_form.html.twig') }}#}
 
-    <a href="{{ path('app_product_index') }}">back to list</a>
+{#    <a href="{{ path('app_product_index') }}">back to list</a>#}
 
-    <a href="{{ path('app_product_edit', {'idProduct': product.idProduct}) }}">edit</a>
+{#    <a href="{{ path('app_product_edit', {'idProduct': product.idProduct}) }}">edit</a>#}
 
-    {{ include('product/_delete_form.html.twig') }}
+{#    {{ include('product/_delete_form.html.twig') }}#}
 {% endblock %}

@@ -62,6 +62,8 @@ class ProductController extends AbstractController
         ]);
     }
 
+
+
     /**
      * @Route("/{idProduct}/edit", name="app_product_edit", methods={"GET", "POST"})
      */
@@ -83,15 +85,16 @@ class ProductController extends AbstractController
     }
 
     /**
-     * @Route("/{idProduct}", name="app_product_delete", methods={"POST"})
+     * @Route("/{idProduct}", name="app_product_delete", methods={"DELETE"})
      */
-    public function delete(Request $request, Product $product, EntityManagerInterface $entityManager): Response
+    public function delete(Request $request, Product $product): Response
     {
         if ($this->isCsrfTokenValid('delete'.$product->getIdProduct(), $request->request->get('_token'))) {
+            $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($product);
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('app_product_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_product_index');
     }
 }

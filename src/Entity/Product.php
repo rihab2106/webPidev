@@ -67,13 +67,14 @@ class Product
      * @var int
      *@Assert\NotBlank(message="Quantity shouldn't be empty")
      * @ORM\Column(name="Quantity", type="integer", nullable=false)
+     * @Assert\GreaterThan(0)
      */
     private $quantity;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="Image", type="string", length=1000, nullable=false)
+     * @ORM\Column(name="Image", type="string", length=1000,nullable=true)
      * @var string
      */
     private $image;
@@ -158,7 +159,7 @@ class Product
 
         return $this;
     }
-    public function setImageFile(File $image = null)
+    public function setImageFile(?File $image = null)
     {
         $this->imageFile = $image;
 
@@ -181,7 +182,7 @@ class Product
         return $this->image;
     }
 
-    public function setImage(string $image): self
+    public function setImage(?string $image): self
     {
         $this->image = $image;
 
