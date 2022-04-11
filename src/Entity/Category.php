@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
+use Symfony\Component\Validator\Constraints as Assert;
+
 /**
  * Category
  *
@@ -17,7 +19,7 @@ class Category
      *
      * @ORM\Column(name="ID_CATEGORY", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $idCategory;
 
@@ -25,8 +27,15 @@ class Category
      * @var string|null
      *
      * @ORM\Column(name="CATEGORY", type="string", length=30, nullable=true)
+     * @Assert\NotBlank
+     * @Assert\Regex(pattern="/^[a-zA-Z]+$/")
      */
     private $category;
+
+    public function __toString()
+    {
+        return $this->category;
+    }
 
     public function getIdCategory(): ?int
     {
@@ -43,11 +52,6 @@ class Category
         $this->category = $category;
 
         return $this;
-    }
-
-    public function __toString()
-    {
-       return $this->category;
     }
 
 

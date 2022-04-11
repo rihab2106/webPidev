@@ -11,8 +11,9 @@
                     <h5 class="mb-0 text-white">ADD Product</h5>
                 </div>
                 <hr/>
-                {{ form_start(form,{attr:{novalidate:'invalid'}}) }}
-                {{ form_widget(form) }}
+
+
+{{ form_widget(form) }}
 
             </div>
         </div>
@@ -23,9 +24,12 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="border border-3 p-4 rounded">
+                {{ form_start(form,{attr:{novalidate:'invalid'}}) }}
                 <div class="mb-3">
-                    <label for="inputProductTitle" class="form-label">Product Title</label>
-                    <input type="email" class="form-control" id="inputProductTitle" placeholder="Enter product title">
+                    {{ form_label(form.prodName) }}
+
+                    {{ form_widget(form.prodName,{'attr':{'class':'form-control'}}) }}
+
                 </div>
                 <div class="mb-3">
                     <label for="inputProductDescription" class="form-label">Description</label>

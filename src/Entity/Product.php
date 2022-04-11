@@ -34,6 +34,7 @@ class Product
      *
      *     )
      * @ORM\Column(name="PROD_NAME", type="string", length=100, nullable=true)
+     * @Assert\Regex(pattern="/^[a-zA-Z]+$/")
      */
     private $prodName;
 

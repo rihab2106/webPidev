@@ -10,10 +10,11 @@
                 <div class="was-validated">
 
 
-                  {{ form_start(fo) }}
+                {#  {{ form_start(fo) }}
                     {{ form_label(fo.category,"Category") }}
                     {{ form_widget(fo.category, {'attr': {'class': "form-control is-invalid", "required": "true"}}) }}
-                    {{ form_end(fo) }}
+                    {{ form_end(fo) }}#}
+                    {{ form(fo) }}
 
                 </div>
             </div>
