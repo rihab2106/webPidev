@@ -30,6 +30,7 @@ class ProductController extends AbstractController
         ]);
     }
 
+
     /**
      * @Route("/new", name="app_product_new")
      */
