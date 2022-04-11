@@ -35,8 +35,8 @@
 
     </script>
 {% endblock %}
-{% block content %}
-    {#<script>
+{#{% block content %}
+    #}{#<script>
 
         $("#checkAll").click(function () {
             $('input:checkbox').not(this).prop('checked', this.checked)
@@ -56,15 +56,15 @@
                 }
             })
         })
-    </script>#}
+    </script>#}{#
     <div class="card font-18" >
         <div class="card-body">
 
             <div class="table-responsive">
-                {#
+                #}{#
                 <a href="{{ path('deleteCompetitions') }}" id="delete"><button class="btn btn-light buttons-copy buttons-html5"
                          type="submit"><span>Delete</span></button>
-                    </a>#}
+                    </a>#}{#
                 <a href="{{ path('addTeamsFront') }}" ><button class="btn btn-light buttons-copy buttons-html5">
                         <span>Add Teams</span></button>
                 </a>
@@ -105,7 +105,28 @@
         </div>
     </div>
     </div>
+{% endblock %}#}
+{% block content %}
+    <a href="{{ path('addTeamsFront') }}">
+        <button class="nk-btn nk-btn-rounded nk-btn-color-dark-3 nk-btn-hover-color-info">Add team</button></a>
+    {% for t in  teams %}
+    <div class="nk-team">
+        <div class="nk-team-logo">
+            <img src="assets/images/team-1-lg.jpg" alt="">
+        </div>
+        <div class="nk-team-cont">
+            <h3 class="h5 mb-20"><span class="text-main-1">Team:</span> {{ t.teamName }}</h3>
+            <h4 class="h6 mb-5" >Game Name: {{ t.idCompetion.gameName }}</h4>
+            <a href="{{ path('deleteTeamsFront', {'id': t.idTeam}) }}"><button class="nk-btn nk-btn-rounded nk-btn-color-dark-3 nk-btn-hover-color-info">Delete</button></a>
+            <a href="{{ path('updateTeamsFront', {'id': t.idTeam}) }}">
+                <button class="nk-btn nk-btn-rounded nk-btn-color-dark-3 nk-btn-hover-color-info">Modify</button></a>
+            <div class="nk-team-photo" style="background-image: url('assets/images/team-photo.png');"></div>
+        </div>
+    </div>
+    {% endfor %}
 {% endblock %}
+
+
 {% block title %}
 
 {% endblock %}

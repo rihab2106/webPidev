@@ -61,15 +61,15 @@
             })
         })
     </script>#}
-    <div class="card font-18" >
-        <div class="card-body">
+    <div class="" >
+        <div class="nk-main">
 
-            <div class="table-responsive">
+            <div class="nk-table">
                 {#
                 <a href="{{ path('deleteCompetitions') }}" id="delete"><button class="btn btn-light buttons-copy buttons-html5"
                          type="submit"><span>Delete</span></button>
                     </a>#}
-                <a href="{{ path('addCompetitionsFront') }}" ><button class="btn btn-light buttons-copy buttons-html5">
+                <a href="{{ path('addCompetitionsFront') }}" ><button class="nk-btn nk-btn-rounded nk-btn-color-dark-3 nk-btn-hover-color-info">
                         <span>Add Competitions</span></button>
                 </a>
                 <hr>
@@ -95,8 +95,10 @@
                                 <td>{{ c.gameName }}</td>
                                 <td>{{ c.dateofcomp|date }}</td>
 
-                                <td><a href="{{ path('deleteCompetitionsFront', {'id': c.idCompetion}) }}"><button>Delete</button></a></td>
-                                <td> <a href="{{ path('updateCompetitionsFront', {'id': c.idCompetion}) }}"><button>Modify</button></a> </td>
+                                <td><a href="{{ path('deleteCompetitionsFront', {'id': c.idCompetion}) }}">
+                                        <button CLASS="nk-btn nk-btn-rounded nk-btn-color-dark-3 nk-btn-hover-color-info">Delete</button></a></td>
+                                <td> <a href="{{ path('updateCompetitionsFront', {'id': c.idCompetion}) }}">
+                                        <button CLASS="nk-btn nk-btn-rounded nk-btn-color-dark-3 nk-btn-hover-color-info">Modify</button></a> </td>
                             </tr>
                         {% endfor %}
                         </tbody>
