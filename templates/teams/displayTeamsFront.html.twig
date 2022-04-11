@@ -115,8 +115,8 @@
             <img src="assets/images/team-1-lg.jpg" alt="">
         </div>
         <div class="nk-team-cont">
-            <h3 class="h5 mb-20"><span class="text-main-1">Team:</span> {{ t.teamName }}</h3>
-            <h4 class="h6 mb-5" >Game Name: {{ t.idCompetion.gameName }}</h4>
+            <h3 class="h5 mb-20"><span class="text-main-1">Team Name :</span> {{ t.teamName }}</h3>
+            <h4 class="h6 mb-5" ><span class="text-main-1">Game Name :</span>  {{ t.idCompetion.gameName }}</h4>
             <a href="{{ path('deleteTeamsFront', {'id': t.idTeam}) }}"><button class="nk-btn nk-btn-rounded nk-btn-color-dark-3 nk-btn-hover-color-info">Delete</button></a>
             <a href="{{ path('updateTeamsFront', {'id': t.idTeam}) }}">
                 <button class="nk-btn nk-btn-rounded nk-btn-color-dark-3 nk-btn-hover-color-info">Modify</button></a>
