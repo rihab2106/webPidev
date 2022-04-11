@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Competitions
@@ -25,6 +26,7 @@ class Competitions
      * @var string|null
      *
      * @ORM\Column(name="GAME_NAME", type="string", length=30, nullable=true, options={"default"="NULL"})
+     * @Assert\NotBlank()
      */
     private $gameName;
 

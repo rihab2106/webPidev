@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Teams
@@ -27,8 +28,9 @@ class Teams
      * @var string|null
      *
      * @ORM\Column(name="TEAM_NAME", type="string", length=50, nullable=true, options={"default"="NULL"})
+     * @Assert\NotBlank()
      */
-    private $teamName = 'NULL';
+    private $teamName ;
 
     /**
      * @var \Competitions
