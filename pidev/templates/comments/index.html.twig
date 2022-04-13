@@ -1,0 +1,39 @@
+{% extends 'back/BackBase.html.twig' %}
+
+{% block title %}All Comments{% endblock %}
+
+{% block content %}
+    <h1>Comments</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>IdComment</th>
+                <th>Comment</th>
+                <th>Likes</th>
+                <th>Dislikes</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for comment in comments %}
+            <tr>
+                <td>{{ comment.idComment }}</td>
+                <td>{{ comment.comment }}</td>
+                <td>{{ comment.likes }}</td>
+                <td>{{ comment.dislikes }}</td>
+                <td>
+                    <a href="{{ path('app_comments_show', {'idComment': comment.idComment}) }}">Display ||</a>
+                    <a href="{{ path('app_comments_edit', {'idComment': comment.idComment}) }}">Update or Delete</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('add_comment') }}">Create new</a>
+{% endblock %}
