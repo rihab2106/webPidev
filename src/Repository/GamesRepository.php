@@ -81,4 +81,13 @@ class GamesRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
+
+    public function findByName($name="")
+    {
+        return $this->createQueryBuilder("g")
+            ->where("g.name like :name")
+            ->setParameter("name",$name."%")
+            ->getQuery()
+            ->getResult();
+    }
 }

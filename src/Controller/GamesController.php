@@ -6,12 +6,23 @@ use App\Entity\Category;
 use App\Entity\Games;
 use App\Entity\Trophies;
 use App\Form\GamesFormType;
+
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\HttpClient\Exception\ClientException;
+use Symfony\Component\HttpClient\HttpClient;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Serializer;
+use Symfony\Component\VarDumper\VarDumper;
+use Symfony\Contracts\HttpClient\HttpClientInterface;
+use Symfony\UX\Chartjs\Builder\ChartBuilderInterface;
+use Symfony\UX\Chartjs\Model\Chart;
 
 class GamesController extends AbstractController
 {
@@ -27,15 +38,28 @@ class GamesController extends AbstractController
     /**
      * @Route("/displayGames", name="displayGames")
      */
-    public function display()
+    public function display(Request $request)
     {
         $rep = $this->getDoctrine()->getRepository(Games::class);
         $repCat = $this->getDoctrine()->getRepository(Category::class);
-        if (false) {
+        $form=$this->createForm(FormType::class);
+        $form->add("name", TextType::class)
+            ->add("search", SubmitType::class);
+        $form->handleRequest($request);
+        if ($form->isSubmitted()){
+            return $this->render("games/displayGames.html.twig", [
+                "cat" => $repCat->findAll(),
+
+            "games" => $rep->findByName($form->getData()["name"]),
+                "search"=> $form->createView()
+            ]);
+        }
+        if (true) {
 
             return $this->render("games/displayGames.html.twig", [
                 "cat" => $repCat->findAll(),
-                "games" => $rep->findAll()
+                "games" => $rep->findAll(),
+                "search"=>$form->createView()
             ]);
         }
         else {
@@ -133,6 +157,86 @@ class GamesController extends AbstractController
                 "cat" => $repCat->findAll(),
                 "games" => $rep->filterbyCat($id)
             ]);
+    }
+    /**
+     * @Route("/admin/stat", name="Gamestat")
+     */
+    public function stat(ChartBuilderInterface $chartBuilder)
+    {
+        $chart = $chartBuilder->createChart(Chart::TYPE_LINE);
+
+        $chart->setData([
+            'labels' => ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+            'datasets' => [
+                [
+                    'label' => 'My First dataset',
+                    'backgroundColor' => 'rgb(255, 99, 132)',
+                    'borderColor' => 'rgb(255, 99, 132)',
+                    'data' => [0, 10, 5, 2, 20, 30, 45],
+                ],
+            ],
+        ]);
+
+        $chart->setOptions([
+            'scales' => [
+                'y' => [
+                    'suggestedMin' => 0,
+                    'suggestedMax' => 100,
+                ],
+            ],
+        ]);
+
+        return $this->render('games/stat.html.twig', [
+            'chart' => $chart,
+        ]);
+    }
+    /**
+     * @Route("/admin/fetchOnline/{id}", name="fetchOnline")
+     */
+    public function fetchOnline($id,HttpClientInterface $client)
+    {
+        $game=new Games();
+        $game=$this->getDoctrine()->getRepository(Games::class)->find($id);
+        $name=$game->getName();
+        $res=$client->request("GET","https://rawg-video-games-database.p.rapidapi.com/games/".
+            $name."?key=0b1f1156cb1546dabef544af6d565b4b",[
+            "headers"=>[
+                "x-rapidapi-host"=> "rawg-video-games-database.p.rapidapi.com",
+                "x-rapidapi-key"=> "64097372bemsh474baf260df44b5p187695jsn0d1f86c219e8"
+            ]
+        ]);
+        $cont=$res->getContent();
+        $obj=json_decode($cont);
+        $game->setDescription($obj->{"description"});
+        $game->setRate($obj->{"metacritic"});
+        $game->setName($obj->{"slug"});
+        $this->getDoctrine()->getManager()->flush();
+        return $this->redirectToRoute("displayGames");
+
+
+    }
+
+    /**
+     * @Route("/admin/translate/{id}", name="translate")
+     */
+    public function translate($id,HttpClientInterface $client)
+    {
+        $game=new Games();
+        $game=$this->getDoctrine()->getRepository(Games::class)->find($id);
+
+        $res=$client->request("POST","https://api.nlpcloud.io/v1/opus-mt-en-fr/translation",[
+            "headers"=>[
+                "Authorization"=> "Token 7b152b2c977a6b885aebc85b8b508f60a6298da6"
+            ],
+            "body"=> ["text"=>"hello there "]
+        ]);
+        $cont=$res->getContent();
+        $obj=json_decode($cont);
+        $game->setDescription($obj->{"translation_text"});
+        $this->getDoctrine()->getManager()->flush();
+        return $this->redirectToRoute("displayGames");
+
+
     }
 
 

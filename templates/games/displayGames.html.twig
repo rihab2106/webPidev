@@ -55,26 +55,40 @@
         <button type="button" class="btn btn-light"><i class="bx bx-plus me-0"></i>
         </button>
     </a>
+    <div class="input-group">
+        {{ form_start(search) }}
+        {{ form_widget(search.name, {"attr": {"class":"form-control" }}) }}
+        </button>
+        {{ form_end(search) }}
+    </div>
     <div class="row row-cols-1 row-cols-md-1 row-cols-lg-3 row-cols-xl-3">
         {% for g in games %}
             <div class="col">
                 <div class="card">
+
+                    <a href="{{ path("displayGamesTroAdmin", {"id": g.idGame }) }}">
                     {% if g.img is not empty %}
                         <img src="{{ asset(g.img) }}" class="card-img-top" alt="{{ g.img }}">
                     {% else %}
                         <img src="{{ asset('BackAssets/images/GameImgs/wp7489322.jpg') }}" class="card-img-top" alt="{{ g.name }}       ">
                     {% endif %}
+                    </a>
                     <div class="card-body">
                         <h5 class="card-title">{{ g.name }}</h5>
-                        <p class="card-text">{{ g.description|slice(0,200) }} </p>
+                        <p class="card-text">{{ g.description|raw }} </p>
                     </div>
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item">{{ "Category : " ~ g.category }}</li>
                         <li class="list-group-item">{{ "Rate : "~ g.rate|round(2,'floor')}}</li>
 
                     </ul>
-                    <div class="card-body"><a href="{{ path('updateGames', {'id': g.idGame }) }}" class="card-link">Update</a>
-                        <a href="{{ path('deleteGames', {'id': g.idGame}) }}" class="card-link" style="color: darkred">Delete</a>
+                    <div class="card-body"><a href="{{ path('updateGames', {'id': g.idGame }) }}" class="card-link">
+                            <button class="btn btn-light">Update</button></a>
+                        <a href="{{ path('deleteGames', {'id': g.idGame}) }}" class="card-link" style="color: darkred">
+                            <button class="btn btn-warning">Delete</button></a>
+                        <a href="{{ path('fetchOnline', {'id': g.idGame}) }}" class="card-link" style="color: darkred">
+                            <button class="btn btn-warning">LookUp</button></a>
+                        <a href="{{ path('translate', {'id': g.idGame }) }}"><button class="btn btn-dark"><i class="bx bx-text"></i></button></a>
                     </div>
                 </div>
             </div>

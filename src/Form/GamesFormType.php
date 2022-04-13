@@ -24,7 +24,8 @@ class GamesFormType extends AbstractType
             ->add('description')
             ->add('rate')
             ->add('img', FileType::class, [
-                "data_class"=>null
+                "data_class"=>null,
+                "attr"=>["class"=> "form-control"]
             ])
             ->add('Category', EntityType::class,[
                     "class" => Category::class

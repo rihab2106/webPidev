@@ -1,10 +1,14 @@
 {% extends "back/BackBase.html.twig" %}
+
 {% block content %}
     <div class="card">
         <div class="card-body">
             <div class="p-4 border rounded">
                 <div class="was-validated">
-                        {{ form(form) }}
+{#                        {{ form(form) }}#}
+                    {{ form_start(form) }}
+                    {{ form_errors(form, {"attr": {"class":"text-white"}}) }}
+                    {{ form_end(form) }}
 
                 </div>
             </div>

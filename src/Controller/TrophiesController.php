@@ -96,6 +96,20 @@ class TrophiesController extends AbstractController
             "game"=> $game
         ]);
     }
+    /**
+     * @Route("/admin/displayGamesTro/{id}", name="displayGamesTroAdmin")
+     */
+    public function displayGamesTrophiesAdmin($id)
+    {
+        $rep=$this->getDoctrine()->getRepository(Trophies::class);
+        $repGame=$this->getDoctrine()->getRepository(Games::class);
+        $game=$repGame->find($id);
+        $trophies=$rep->findBy(["idGame"=> $game]);
+        return $this->render("trophies/AdminDisplayTrophies.html.twig", [
+            "trophies"=> $trophies,
+            "game"=> $game
+        ]);
+    }
 
 
 }
