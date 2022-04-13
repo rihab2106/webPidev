@@ -75,7 +75,7 @@
                     <div class="nk-gap-2"></div>
                     <div class="nk-product-price">{{~p.price }}</div>
                     <div class="nk-gap-1"></div>
-                    <a href="#" class="nk-btn nk-btn-rounded nk-btn-color-dark-3 nk-btn-hover-color-main-1">Add to Cart</a>
+                    <a href="{{ path('cart_add',{'idProduct': p.idProduct}) }}" class="nk-btn nk-btn-rounded nk-btn-color-dark-3 nk-btn-hover-color-main-1">Add to Cart</a>
                 </div>
             </div>
         </div>

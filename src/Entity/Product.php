@@ -11,7 +11,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * Product
  *
  * @ORM\Table(name="product", indexes={@ORM\Index(name="fk_Category", columns={"ID_CATEGORY"})})
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\ProductRepository")
  * @Vich\Uploadable
  */
 class Product
@@ -34,7 +34,6 @@ class Product
      *
      *     )
      * @ORM\Column(name="PROD_NAME", type="string", length=100, nullable=true)
-     * @Assert\Regex(pattern="/^[a-zA-Z]+$/")
      */
     private $prodName;
 
