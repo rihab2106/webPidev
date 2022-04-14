@@ -9,6 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Twilio\Rest\Client;
 
 /**
  * @Route("/product")
@@ -44,6 +45,8 @@ class ProductController extends AbstractController
             $em = $this->getDoctrine()->getManager();
             $em->persist($product);
             $em->flush();
+
+
             return $this->redirectToRoute('app_product_index');
         }
 
@@ -97,5 +100,16 @@ class ProductController extends AbstractController
         }
 
         return $this->redirectToRoute('app_product_index');
+    }
+    /**
+     * @Route("/displayp/{id}", name="app_product_displayp")
+     */
+    public function displayById($idProduct)
+    {
+
+        $repp=$this->getDoctrine()->getRepository(Product::class);
+        return $this->render("product/display.html.twig", [
+            "trophies"=> $repp->findBy(["idProduct"=> $repp->find($idProduct)])
+        ]);
     }
 }

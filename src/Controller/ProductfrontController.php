@@ -11,7 +11,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class TestController extends AbstractController
+class ProductfrontController extends AbstractController
 {
     /**
      * @Route("/test", name="app_test")
@@ -19,7 +19,7 @@ class TestController extends AbstractController
     public function index(): Response
     {
         return $this->render('test/index.html.twig', [
-            'controller_name' => 'TestController',
+            'controller_name' => 'ProductfrontController',
         ]);
     }
     /**
@@ -34,6 +34,15 @@ class TestController extends AbstractController
 
         return $this->render('product/display.html.twig', [
             'products' => $products,
+        ]);
+    }
+    /**
+     * @Route("/{idProduct}", name="app_productfront_show", methods={"GET"})
+     */
+    public function show(Product $product): Response
+    {
+        return $this->render('product/show.html.twig', [
+            'product' => $product,
         ]);
     }
 

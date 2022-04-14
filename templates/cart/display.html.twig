@@ -2,7 +2,74 @@
 
 {% block content %}
 
+    <!-- START: Login Modal -->
+    <div class="nk-modal modal fade" id="modalpayment" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span class="ion-android-close"></span>
+                    </button>
 
+                    <h4 class="mb-0"><span class="text-main-1">Billing </span> Details</h4>
+
+                    <div class="nk-gap-1"></div>
+
+                    <form action="#" class="nk-form text-white">
+                        <div class="row vertical-gap">
+                            <div class="col-md-12">
+                                Use Your Confidential :
+                                CREDIT CARD NUMBER:
+                                <div class="nk-gap"></div>
+                                <input type="email" value="" name="email" class=" form-control" placeholder="Email">
+
+
+
+                            </div>
+                            <div class="col-md-6">
+                                CVC:
+                                <div class="nk-gap"></div>
+                                <input type="password" value="" name="password" class="required form-control" placeholder="Password">
+                                                                Use Your Confidential :
+                                EXPIRATION:
+                                <div class="nk-gap"></div>
+                                <input type="password" value="" name="password" class="required form-control" placeholder="Password">
+
+
+                            </div>
+                            <div class="col-md-6">
+                                Or social account:
+
+                                <div class="nk-gap"></div>
+
+                                <ul class="nk-social-links-2">
+                                    <li><a class="nk-social-facebook" href="#"><span class="fab fa-facebook"></span></a></li>
+                                    <li><a class="nk-social-google-plus" href="#"><span class="fab fa-google-plus"></span></a></li>
+                                    <li><a class="nk-social-twitter" href="#"><span class="fab fa-twitter"></span></a></li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="nk-gap-1"></div>
+                        <div class="row vertical-gap">
+                            <div class="col-md-6">
+                                <a href="#" class="nk-btn nk-btn-rounded nk-btn-color-white nk-btn-block">Sign In</a>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mnt-5">
+                                    <small><a href="#"></a></small>
+                                </div>
+                                <div class="mnt-5">
+                                    <small><a href="#"> </a></small>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END: Login Modal -->
 {#<style>#}
 {#    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }#}
 {#    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }#}
@@ -177,7 +244,8 @@
             </div>
 
             <div class="nk-gap-2"></div>
-            <a class="nk-btn nk-btn-rounded nk-btn-color-main-1 float-right" href="store-checkout.html">Proceed to Checkout</a>
+            <a class="nk-btn nk-btn-rounded nk-btn-color-main-1 float-right" href="#" data-toggle="modal" data-target="#modalpayment"> Proceed To Checkout<path fill="currentColor" d="M256 0c88.366 0 160 71.634 160 160s-71.634 160-160 160S96 248.366 96 160 167.634 0 256 0zm183.283 333.821l-71.313-17.828c-74.923 53.89-165.738 41.864-223.94 0l-71.313 17.828C29.981 344.505 0 382.903 0 426.955V464c0 26.51 21.49 48 48 48h416c26.51 0 48-21.49 48-48v-37.045c0-44.052-29.981-82.45-72.717-93.134z"></path></svg></a>
+
             <div class="clearfix"></div>
             {% else %}
                 <div class="css-map4tx" data-component="CartMainContentAndSidebarLayout">
