@@ -13,6 +13,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 /**
  * @Route("/comments")
@@ -57,30 +58,78 @@ class CommentsController extends AbstractController
         $comment = new Comments();
         $defaultData = ['likes' => 0, 'dislikes' => 0, 'idNews' => $request->query->get('news')];
 
-        $form = $this->createFormBuilder($defaultData)
+        /* $form = $this->createFormBuilder($defaultData)
             ->add('comment', TextType::class)
-            ->getForm();
-
+            ->getForm(); */
+            $form=$this->createForm(CommentsType::class,$comment);
+        $form->add("Add",SubmitType::class);
         $form->handleRequest($request);
 
         /*  $form = $this->createForm(CommentsType::class, $comment);
         $form->handleRequest($request); */
+       
         if ($form->isSubmitted() && $form->isValid()) {
             $arr = $form->getData();
-            $comment->setComment($arr['comment']);
+           /*  $comment->setComment($arr['comment']);
             $comment->setLikes($arr['likes']);
-            $comment->setDislikes($arr['dislikes']);
-            $comment->setIdNews($rep);
+            $comment->setDislikes($arr['dislikes']);*/
+            $comment->setIdNews($rep); 
+            $comment->setLikes(0); 
+            $comment->setDislikes(0); 
             $entityManager->persist($comment);
             $entityManager->flush();
 
             return $this->redirectToRoute('app_news_show', [
 
-                'idNews'=>$arr['idNews']
+                'idNews'=>$request->query->get('news')
             ], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('comments/new.html.twig', [
+            'comment' => $comment,
+            'form' => $form->createView(),
+        ]);
+    }
+
+
+
+     /**
+     * @Route("/addcommentuser", name="add_comment_user", methods={"GET", "POST"})
+     */
+    public function newusercom(Request $request, EntityManagerInterface $entityManager): Response
+    {
+        $rep = $this->getDoctrine()->getRepository(News::class)->find($request->query->get('news'));
+        $comment = new Comments();
+        $defaultData = ['likes' => 0, 'dislikes' => 0, 'idNews' => $request->query->get('news')];
+
+        /* $form = $this->createFormBuilder($defaultData)
+            ->add('comment', TextType::class)
+            ->getForm(); */
+            $form=$this->createForm(CommentsType::class,$comment);
+        $form->add("Add",SubmitType::class);
+        $form->handleRequest($request);
+
+        /*  $form = $this->createForm(CommentsType::class, $comment);
+        $form->handleRequest($request); */
+       
+        if ($form->isSubmitted() && $form->isValid()) {
+            $arr = $form->getData();
+           /*  $comment->setComment($arr['comment']);
+            $comment->setLikes($arr['likes']);
+            $comment->setDislikes($arr['dislikes']);*/
+            $comment->setIdNews($rep); 
+            $comment->setLikes(0); 
+            $comment->setDislikes(0); 
+            $entityManager->persist($comment);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('app_news_show_user', [
+
+                'idNews'=>$request->query->get('news')
+            ], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->render('comments/newusercom.html.twig', [
             'comment' => $comment,
             'form' => $form->createView(),
         ]);
@@ -128,4 +177,6 @@ class CommentsController extends AbstractController
 
         return $this->redirectToRoute('app_comments_index', [], Response::HTTP_SEE_OTHER);
     }
+
+    
 }

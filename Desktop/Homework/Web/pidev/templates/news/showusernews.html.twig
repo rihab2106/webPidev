@@ -1,0 +1,68 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Comments
+{% endblock %}
+
+{% block body %}
+	<h1>News And Comments</h1>
+
+	<table class="table">
+		<tbody>
+			<tr>
+				
+				<td><img class="img-fluid" width="400" height="200" src="{{ asset(news.img) }}" alt="ma loadetsh"></td>
+			</tr>
+			<tr>
+				<th>Headline</th>
+				<td>{{ news.headline }}</td>
+			</tr>
+			<tr>
+				<th>Content</th>
+				<td>{{ news.content }}</td>
+			</tr>
+			
+		</tbody>
+	</table>
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Comment</th>
+				<th>Likes</th>
+				<th>Dislikes</th>
+				
+
+			</tr>
+		</thead>
+
+
+		<tbody>
+			
+
+            <button>
+            <a href="{{ path('add_comment_user', {'news': news.idNews}) }}">Add a Comment</a>
+            </button>
+
+			<button>
+            <a href="{{ path('app_news_index_suer', {'news': news.idNews}) }}">Return to News</a>
+            </button>
+
+
+			{% for c in com %}
+				<tr>
+
+					<td>{{ c.comment }}</td>
+					<td>{{ c.likes }}</td>
+					<td>{{ c.dislikes }}</td>
+					
+				</tr>
+			</a>
+		</tbody>
+
+	</td>
+
+
+</tr>{% else %}
+
+<tr>
+	<td colspan="5">no records found</td>
+</tr>{% endfor %}{% endblock %}

@@ -31,6 +31,22 @@ class NewsController extends AbstractController
         ]);
     }
 
+
+
+    /**
+     * @Route("/newss", name="app_news_index_suer", methods={"GET"})
+     */
+    public function indexuser(EntityManagerInterface $entityManager): Response
+    {
+        $news = $entityManager
+            ->getRepository(News::class)
+            ->findAll();
+
+        return $this->render('news/indexuser.html.twig', [
+            'news' => $news,
+        ]);
+    }
+
     /**
      * @Route("/new", name="app_news_new", methods={"GET", "POST"})
      */
@@ -41,6 +57,10 @@ class NewsController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $n=$form->getData();
+            $file =$form["img"]->getData();
+            $file->move("C:\Users\Ayoub\Desktop\Homework\Web\pidev\public\assets\images",$file->getClientOriginalName());
+            $n->setImg("public\\assets\\images\\".$file->getClientOriginalName());
             $entityManager->persist($news);
             $entityManager->flush();
 
@@ -60,6 +80,19 @@ class NewsController extends AbstractController
     {
         $rep=$this->getDoctrine()->getRepository(Comments::class);
         return $this->render('news/show.html.twig', [
+            'news' => $news,
+            'idNews'=>$news->getIdNews(),
+            'com' => $rep->findBy(['idNews'=> $news])
+        ]);
+    }
+
+    /**
+     * @Route("/commentsuser/{idNews}", name="app_news_show_user", methods={"GET"})
+     */
+    public function showusernews(News $news): Response
+    {
+        $rep=$this->getDoctrine()->getRepository(Comments::class);
+        return $this->render('news/showusernews.html.twig', [
             'news' => $news,
             'idNews'=>$news->getIdNews(),
             'com' => $rep->findBy(['idNews'=> $news])

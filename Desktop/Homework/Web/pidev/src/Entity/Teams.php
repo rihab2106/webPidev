@@ -22,42 +22,47 @@ class Teams
     private $idTeam;
 
     /**
+     * @var int|null
+     *
+     * @ORM\Column(name="ID_COMPETION", type="integer", nullable=true)
+     */
+    private $idCompetion;
+
+    /**
      * @var string|null
      *
      * @ORM\Column(name="TEAM_NAME", type="string", length=50, nullable=true)
      */
     private $teamName;
 
-    /**
-     * @var string|null
-     *
-     * @ORM\Column(name="CREATOR", type="string", length=50, nullable=true)
-     */
-    private $creator;
-
-    /**
-     * @var \Competitions
-     *
-     * @ORM\ManyToOne(targetEntity="Competitions")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="ID_COMPETION", referencedColumnName="ID_COMPETION")
-     * })
-     */
-    private $idCompetion;
-
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     *
-     * @ORM\ManyToMany(targetEntity="Users", mappedBy="idTeam")
-     */
-    private $idUser;
-
-    /**
-     * Constructor
-     */
-    public function __construct()
+    public function getIdTeam(): ?int
     {
-        $this->idUser = new \Doctrine\Common\Collections\ArrayCollection();
+        return $this->idTeam;
     }
+
+    public function getIdCompetion(): ?int
+    {
+        return $this->idCompetion;
+    }
+
+    public function setIdCompetion(?int $idCompetion): self
+    {
+        $this->idCompetion = $idCompetion;
+
+        return $this;
+    }
+
+    public function getTeamName(): ?string
+    {
+        return $this->teamName;
+    }
+
+    public function setTeamName(?string $teamName): self
+    {
+        $this->teamName = $teamName;
+
+        return $this;
+    }
+
 
 }

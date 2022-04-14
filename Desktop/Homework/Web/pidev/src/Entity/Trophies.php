@@ -3,7 +3,6 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Trophies
@@ -23,6 +22,13 @@ class Trophies
     private $idTrophy;
 
     /**
+     * @var int|null
+     *
+     * @ORM\Column(name="ID_GAME", type="integer", nullable=true)
+     */
+    private $idGame;
+
+    /**
      * @var string|null
      *
      * @ORM\Column(name="TITLE", type="string", length=30, nullable=true)
@@ -35,7 +41,6 @@ class Trophies
      * @ORM\Column(name="DESCRIPTION", type="string", length=1000, nullable=true)
      */
     private $description;
-
 
     /**
      * @var string|null
@@ -51,19 +56,21 @@ class Trophies
      */
     private $difficulity;
 
-    /**
-     * @var ?Games
-     *
-     * @ORM\ManyToOne(targetEntity="Games")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="ID_GAME", referencedColumnName="ID_GAME")
-     * })
-     */
-    private $idGame;
-
     public function getIdTrophy(): ?int
     {
         return $this->idTrophy;
+    }
+
+    public function getIdGame(): ?int
+    {
+        return $this->idGame;
+    }
+
+    public function setIdGame(?int $idGame): self
+    {
+        $this->idGame = $idGame;
+
+        return $this;
     }
 
     public function getTitle(): ?string
@@ -110,18 +117,6 @@ class Trophies
     public function setDifficulity(?string $difficulity): self
     {
         $this->difficulity = $difficulity;
-
-        return $this;
-    }
-
-    public function getIdGame(): ?Games
-    {
-        return $this->idGame;
-    }
-
-    public function setIdGame(?Games $idGame): self
-    {
-        $this->idGame = $idGame;
 
         return $this;
     }

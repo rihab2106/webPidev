@@ -3,14 +3,13 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
-
 
 /**
  * News
  *
  * @ORM\Table(name="news")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\NewsRepository")
+ * 
  */
 class News
 {
@@ -25,21 +24,21 @@ class News
 
     /**
      * @var string|null
-     *@Assert\NotBlank
+     *
      * @ORM\Column(name="HEADLINE", type="string", length=100, nullable=true)
      */
     private $headline;
 
     /**
      * @var string|null
-     *@Assert\NotBlank
+     *
      * @ORM\Column(name="CONTENT", type="text", length=65535, nullable=true)
      */
     private $content;
 
     /**
      * @var string|null
-     *@Assert\NotBlank
+     *
      * @ORM\Column(name="IMG", type="string", length=200, nullable=true)
      */
     private $img;
@@ -84,7 +83,9 @@ class News
 
         return $this;
     }
-    public function __toString() {
+
+    public function __toString(): string
+    {
         return $this->idNews;
     }
 

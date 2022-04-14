@@ -22,6 +22,13 @@ class Cart
     private $idCart;
 
     /**
+     * @var int|null
+     *
+     * @ORM\Column(name="ID_USER", type="integer", nullable=true)
+     */
+    private $idUser;
+
+    /**
      * @var float|null
      *
      * @ORM\Column(name="SUM", type="float", precision=8, scale=2, nullable=true)
@@ -35,15 +42,46 @@ class Cart
      */
     private $discount;
 
-    /**
-     * @var \Users
-     *
-     * @ORM\ManyToOne(targetEntity="Users")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="ID_USER", referencedColumnName="ID_USER")
-     * })
-     */
-    private $idUser;
+    public function getIdCart(): ?int
+    {
+        return $this->idCart;
+    }
+
+    public function getIdUser(): ?int
+    {
+        return $this->idUser;
+    }
+
+    public function setIdUser(?int $idUser): self
+    {
+        $this->idUser = $idUser;
+
+        return $this;
+    }
+
+    public function getSum(): ?float
+    {
+        return $this->sum;
+    }
+
+    public function setSum(?float $sum): self
+    {
+        $this->sum = $sum;
+
+        return $this;
+    }
+
+    public function getDiscount(): ?float
+    {
+        return $this->discount;
+    }
+
+    public function setDiscount(?float $discount): self
+    {
+        $this->discount = $discount;
+
+        return $this;
+    }
 
 
 }

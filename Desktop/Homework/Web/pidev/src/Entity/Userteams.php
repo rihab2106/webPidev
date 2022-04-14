@@ -7,46 +7,52 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Userteams
  *
- * @ORM\Table(name="userteams", indexes={@ORM\Index(name="FK_USERTEAM_REFERENCE_GAMES", columns={"ID_GAME"}), @ORM\Index(name="FK_USERTEAM_REFERENCE_USERS", columns={"ID_USER"}), @ORM\Index(name="IDX_B1661E8AB1446B03", columns={"ID_TEAM"})})
+ * @ORM\Table(name="userteams", indexes={@ORM\Index(name="FK_USERTEAM_REFERENCE_GAMES", columns={"ID_GAME"}), @ORM\Index(name="FK_USERTEAM_REFERENCE_USERS", columns={"ID_USER"})})
  * @ORM\Entity
  */
 class Userteams
 {
     /**
-     * @var \Teams
+     * @var int
      *
+     * @ORM\Column(name="ID_TEAM", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="NONE")
-     * @ORM\OneToOne(targetEntity="Teams")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="ID_TEAM", referencedColumnName="ID_TEAM")
-     * })
      */
     private $idTeam;
 
     /**
-     * @var \Games
+     * @var int
      *
+     * @ORM\Column(name="ID_USER", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="NONE")
-     * @ORM\OneToOne(targetEntity="Games")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="ID_GAME", referencedColumnName="ID_GAME")
-     * })
+     */
+    private $idUser;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="ID_GAME", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="NONE")
      */
     private $idGame;
 
-    /**
-     * @var \Users
-     *
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
-     * @ORM\OneToOne(targetEntity="Users")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="ID_USER", referencedColumnName="ID_USER")
-     * })
-     */
-    private $idUser;
+    public function getIdTeam(): ?int
+    {
+        return $this->idTeam;
+    }
+
+    public function getIdUser(): ?int
+    {
+        return $this->idUser;
+    }
+
+    public function getIdGame(): ?int
+    {
+        return $this->idGame;
+    }
 
 
 }

@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Competitions
  *
- * @ORM\Table(name="competitions", indexes={@ORM\Index(name="FK_COMPETIT_REFERENCE_GAMES", columns={"ID_GAME"})})
+ * @ORM\Table(name="competitions")
  * @ORM\Entity
  */
 class Competitions
@@ -22,13 +22,6 @@ class Competitions
     private $idCompetion;
 
     /**
-     * @var \DateTime|null
-     *
-     * @ORM\Column(name="BEGIN", type="date", nullable=true)
-     */
-    private $begin;
-
-    /**
      * @var string|null
      *
      * @ORM\Column(name="GAME_NAME", type="string", length=30, nullable=true)
@@ -36,14 +29,40 @@ class Competitions
     private $gameName;
 
     /**
-     * @var \Games
+     * @var \DateTime|null
      *
-     * @ORM\ManyToOne(targetEntity="Games")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="ID_GAME", referencedColumnName="ID_GAME")
-     * })
+     * @ORM\Column(name="DATEOFCOMP", type="date", nullable=true)
      */
-    private $idGame;
+    private $dateofcomp;
+
+    public function getIdCompetion(): ?int
+    {
+        return $this->idCompetion;
+    }
+
+    public function getGameName(): ?string
+    {
+        return $this->gameName;
+    }
+
+    public function setGameName(?string $gameName): self
+    {
+        $this->gameName = $gameName;
+
+        return $this;
+    }
+
+    public function getDateofcomp(): ?\DateTimeInterface
+    {
+        return $this->dateofcomp;
+    }
+
+    public function setDateofcomp(?\DateTimeInterface $dateofcomp): self
+    {
+        $this->dateofcomp = $dateofcomp;
+
+        return $this;
+    }
 
 
 }

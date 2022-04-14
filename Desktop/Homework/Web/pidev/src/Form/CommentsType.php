@@ -13,9 +13,7 @@ class CommentsType extends AbstractType
     {
         $builder
             ->add('comment')
-            ->add('likes')
-            ->add('dislikes')
-            ->add('idNews')
+           
         ;
     }
 

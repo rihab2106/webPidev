@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Users
  *
- * @ORM\Table(name="users", indexes={@ORM\Index(name="FK_USERS_REFERENCE_GROUPS", columns={"ID_GROUP"})})
+ * @ORM\Table(name="users")
  * @ORM\Entity
  */
 class Users
@@ -27,13 +27,6 @@ class Users
      * @ORM\Column(name="FULL_NAME", type="string", length=100, nullable=true)
      */
     private $fullName;
-
-    /**
-     * @var string|null
-     *
-     * @ORM\Column(name="IMG", type="string", length=100, nullable=true)
-     */
-    private $img;
 
     /**
      * @var string|null
@@ -63,37 +56,70 @@ class Users
      */
     private $privilege;
 
-    /**
-     * @var \Groups
-     *
-     * @ORM\ManyToOne(targetEntity="Groups")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="ID_GROUP", referencedColumnName="ID_GROUP")
-     * })
-     */
-    private $idGroup;
-
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     *
-     * @ORM\ManyToMany(targetEntity="Teams", inversedBy="idUser")
-     * @ORM\JoinTable(name="members",
-     *   joinColumns={
-     *     @ORM\JoinColumn(name="ID_USER", referencedColumnName="ID_USER")
-     *   },
-     *   inverseJoinColumns={
-     *     @ORM\JoinColumn(name="ID_TEAM", referencedColumnName="ID_TEAM")
-     *   }
-     * )
-     */
-    private $idTeam;
-
-    /**
-     * Constructor
-     */
-    public function __construct()
+    public function getIdUser(): ?int
     {
-        $this->idTeam = new \Doctrine\Common\Collections\ArrayCollection();
+        return $this->idUser;
     }
+
+    public function getFullName(): ?string
+    {
+        return $this->fullName;
+    }
+
+    public function setFullName(?string $fullName): self
+    {
+        $this->fullName = $fullName;
+
+        return $this;
+    }
+
+    public function getEmail(): ?string
+    {
+        return $this->email;
+    }
+
+    public function setEmail(?string $email): self
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
+    public function getPassword(): ?string
+    {
+        return $this->password;
+    }
+
+    public function setPassword(?string $password): self
+    {
+        $this->password = $password;
+
+        return $this;
+    }
+
+    public function getIsactive(): ?bool
+    {
+        return $this->isactive;
+    }
+
+    public function setIsactive(?bool $isactive): self
+    {
+        $this->isactive = $isactive;
+
+        return $this;
+    }
+
+    public function getPrivilege(): ?bool
+    {
+        return $this->privilege;
+    }
+
+    public function setPrivilege(?bool $privilege): self
+    {
+        $this->privilege = $privilege;
+
+        return $this;
+    }
+
 
 }

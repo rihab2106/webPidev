@@ -22,6 +22,20 @@ class Tutorials
     private $idTutorial;
 
     /**
+     * @var int|null
+     *
+     * @ORM\Column(name="ID_USER", type="integer", nullable=true)
+     */
+    private $idUser;
+
+    /**
+     * @var int|null
+     *
+     * @ORM\Column(name="ID_TROPHY", type="integer", nullable=true)
+     */
+    private $idTrophy;
+
+    /**
      * @var string|null
      *
      * @ORM\Column(name="PATH", type="string", length=200, nullable=true)
@@ -35,25 +49,58 @@ class Tutorials
      */
     private $content;
 
-    /**
-     * @var \Users
-     *
-     * @ORM\ManyToOne(targetEntity="Users")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="ID_USER", referencedColumnName="ID_USER")
-     * })
-     */
-    private $idUser;
+    public function getIdTutorial(): ?int
+    {
+        return $this->idTutorial;
+    }
 
-    /**
-     * @var \Trophies
-     *
-     * @ORM\ManyToOne(targetEntity="Trophies")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="ID_TROPHY", referencedColumnName="ID_TROPHY")
-     * })
-     */
-    private $idTrophy;
+    public function getIdUser(): ?int
+    {
+        return $this->idUser;
+    }
+
+    public function setIdUser(?int $idUser): self
+    {
+        $this->idUser = $idUser;
+
+        return $this;
+    }
+
+    public function getIdTrophy(): ?int
+    {
+        return $this->idTrophy;
+    }
+
+    public function setIdTrophy(?int $idTrophy): self
+    {
+        $this->idTrophy = $idTrophy;
+
+        return $this;
+    }
+
+    public function getPath(): ?string
+    {
+        return $this->path;
+    }
+
+    public function setPath(?string $path): self
+    {
+        $this->path = $path;
+
+        return $this;
+    }
+
+    public function getContent(): ?string
+    {
+        return $this->content;
+    }
+
+    public function setContent(?string $content): self
+    {
+        $this->content = $content;
+
+        return $this;
+    }
 
 
 }
