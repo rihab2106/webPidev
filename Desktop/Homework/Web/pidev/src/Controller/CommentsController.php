@@ -6,7 +6,9 @@ use Twig\Template;
 use App\Entity\News;
 use App\Entity\Comments;
 use App\Form\CommentsType;
+use App\Repository\CommentsRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\Persistence\ObjectManager;
 use PHPUnit\Framework\MockObject\Method;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -99,6 +101,7 @@ class CommentsController extends AbstractController
     public function newusercom(Request $request, EntityManagerInterface $entityManager): Response
     {
         $rep = $this->getDoctrine()->getRepository(News::class)->find($request->query->get('news'));
+
         $comment = new Comments();
         $defaultData = ['likes' => 0, 'dislikes' => 0, 'idNews' => $request->query->get('news')];
 
@@ -165,6 +168,9 @@ class CommentsController extends AbstractController
         ]);
     }
 
+
+   
+
     /**
      * @Route("/{idComment}", name="app_comments_delete", methods={"POST"})
      */
@@ -176,6 +182,25 @@ class CommentsController extends AbstractController
         }
 
         return $this->redirectToRoute('app_comments_index', [], Response::HTTP_SEE_OTHER);
+    }
+   /**
+    *@Route("/{idComment}/like/" , name="salem_sahbi",methods={"GET"})
+    * @param EntityManagerInterface $entityManager
+    * @param Request $request
+    * @return void
+    */
+    public function addlike(EntityManagerInterface $entityManager, Request $request,$idComment)
+    {   
+        
+        $commentid = array('idComment'=>$idComment);
+        
+        $rep = $this->getDoctrine()->getRepository(Comments::class)->find(($commentid["idComment"]));
+        $rep->setLikes($rep->getLikes()+1);
+        $entityManager->flush();
+        return $this->redirectToRoute('app_news_show_user', [
+            'idComment'=>$idComment,
+            'idNews'=>$request->query->get('idNews')
+        ], Response::HTTP_SEE_OTHER);
     }
 
     

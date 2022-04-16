@@ -2,15 +2,17 @@
 
 namespace App\Controller;
 
-use App\Entity\Comments;
 use App\Entity\News;
 use App\Form\NewsType;
-use Doctrine\ORM\EntityManagerInterface;
+use App\Entity\Comments;
 use Doctrine\ORM\Mapping\Id;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Repository\CommentsRepository;
+use Doctrine\Persistence\ObjectManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
  * @Route("/news")
@@ -147,6 +149,7 @@ class NewsController extends AbstractController
         
 
     }
+ 
 
 
 

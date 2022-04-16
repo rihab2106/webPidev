@@ -4,6 +4,11 @@
 {% endblock %}
 
 {% block body %}
+<style>
+
+#likebutton { color: #00FF00; }
+
+</style>
 	<h1>News And Comments</h1>
 
 	<table class="table">
@@ -21,6 +26,7 @@
 				<td>{{ news.content }}</td>
 			</tr>
 			
+			
 		</tbody>
 	</table>
 	<table class="table">
@@ -28,7 +34,8 @@
 			<tr>
 				<th>Comment</th>
 				<th>Likes</th>
-				<th>Dislikes</th>
+				
+				
 				
 
 			</tr>
@@ -49,10 +56,13 @@
 
 			{% for c in com %}
 				<tr>
-
+                    <td style="display:none;" >{{c.idComment}}</td>
 					<td>{{ c.comment }}</td>
-					<td>{{ c.likes }}</td>
-					<td>{{ c.dislikes }}</td>
+				    
+					<td><a href="{{ path('salem_sahbi', {'idComment': c.idComment,'idNews':news.idNews}) }}"><button class="btn btn-primary"><i class="far fa-thumbs-up"></i>Like<span class="js-likes">({{ c.likes }})</span></button> </a></td>
+				
+				    <td>
+			
 					
 				</tr>
 			</a>

@@ -585,6 +585,9 @@
     "theseer/tokenizer": {
         "version": "1.2.1"
     },
+    "thingengineer/mysqli-database-class": {
+        "version": "dev-master"
+    },
     "twig/extra-bundle": {
         "version": "v3.3.8"
     },
