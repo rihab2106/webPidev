@@ -2,13 +2,9 @@
 
 {% block title %}Users index{% endblock %}
 
-{% block body %}
+{% block content %}
     <h1>Users accounts</h1>
-    {% if app.user %}
-        <div class="mb-3">
-            You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
-        </div>
-    {% endif %}
+
     <table class="table">
         <thead>
             <tr>
@@ -36,8 +32,8 @@
                 <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
 
                 <td>
-                    <a href="{{ path('app_users_show', {'id': user.id}) }}">show</a>
-                    <a href="{{ path('app_users_edit', {'id': user.id}) }}">edit</a>
+                    <a href="{{ path('backanduser_show', {'id': user.id}) }}">show</a>
+                    <a href="{{ path('backanduser_edit', {'id': user.id}) }}">edit</a>
                 </td>
             </tr>
         {% else %}
@@ -48,5 +44,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_users_new') }}">Create new</a>
+    <a href="{{ path('backanduser_new') }}">Create new</a>
 {% endblock %}

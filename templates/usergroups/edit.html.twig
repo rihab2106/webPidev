@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit UserGroups{% endblock %}
+
+{% block body %}
+    <h1>Edit UserGroups</h1>
+
+    {{ include('usergroups/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_usergroups_index') }}">back to list</a>
+
+    {{ include('usergroups/_delete_form.html.twig') }}
+{% endblock %}

@@ -93,7 +93,8 @@
                 </a>
                 <ul>
 
-                    <li><a href="{{ path('app_users_new') }}" ><i class="bx bx-category    "></i>Add</a></li>
+                    //<li><a href="{{ path('app_user_new') }}" ><i class="bx bx-category   "></i>Add</a></li>//
+                    drop
 
 
                 </ul>
@@ -509,8 +510,8 @@
                     <a class="d-flex align-items-center nav-link dropdown-toggle dropdown-toggle-nocaret" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         <img src="https://via.placeholder.com/110x110" class="user-img" alt="user avatar">
                         <div class="user-info ps-3">
-                            <p class="user-name mb-0">Leonardo (aka King)</p>
-                            <p class="designattion mb-0">A slacker</p>
+                            <p class="user-name mb-0">{{ app.user.username }}</p>
+                            <p class="designattion mb-0">ADMIN</p>
                         </div>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end">
@@ -527,7 +528,7 @@
                         <li>
                             <div class="dropdown-divider mb-0"></div>
                         </li>
-                        <li><a class="dropdown-item" href="javascript:;"><i class='bx bx-log-out-circle'></i><span>Logout</span></a>
+                        <li><a class="dropdown-item" href="javascript:;"><i class='bx bx-log-out-circle'></i><span><a href="{{ path('app_logout') }}">Logout</a></span></a>
                         </li>
                     </ul>
                 </div>
