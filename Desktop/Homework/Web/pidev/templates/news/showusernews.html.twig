@@ -11,6 +11,9 @@
 </style>
 	<h1>News And Comments</h1>
 
+   <pre>
+	   {{ app.session.get('like') }}
+   </pre>
 	<table class="table">
 		<tbody>
 			<tr>
@@ -44,7 +47,7 @@
 
 		<tbody>
 			
-
+            
             <button>
             <a href="{{ path('add_comment_user', {'news': news.idNews}) }}">Add a Comment</a>
             </button>
@@ -53,14 +56,28 @@
             <a href="{{ path('app_news_index_suer', {'news': news.idNews}) }}">Return to News</a>
             </button>
 
-
+         
 			{% for c in com %}
 				<tr>
                     <td style="display:none;" >{{c.idComment}}</td>
 					<td>{{ c.comment }}</td>
 				    
-					<td><a href="{{ path('salem_sahbi', {'idComment': c.idComment,'idNews':news.idNews}) }}"><button class="btn btn-primary"><i class="far fa-thumbs-up"></i>Like<span class="js-likes">({{ c.likes }})</span></button> </a></td>
-				
+					<td><a href="{{ path('salem_sahbi', {'idComment': c.idComment,'idNews':news.idNews}) }}" class="btn btn-link js-like">
+					<button class="btn btn-primary">
+					{% if app.session.get('like')=="159" %}
+					<i class="fa-solid fa-thumbs-up"></i>
+					Like<span class="js-likes">({{ c.likes }})
+					{% else %}
+					<i class="fa-solid fa-thumbs-down"></i>
+				    Dislike<span class="js-likes">({{ c.likes }})
+					{% endif %}
+					
+					</button> </a></td>
+				    
+					
+					
+					</a>
+					
 				    <td>
 			
 					
@@ -76,3 +93,24 @@
 <tr>
 	<td colspan="5">no records found</td>
 </tr>{% endfor %}{% endblock %}
+{% block javascripts %}
+	{# <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+	<script>
+	function onClickBtnLike(event){
+        event.preventDefault();
+		const url= this.href;
+		axios.get(url).then(function(response){
+           console.log(response);
+
+		})
+
+	}
+	document.querySelectorAll('a.js-like').forEach(function(link){
+             
+			 link.addEventListener('click', onClickBtnLike);
+
+	})
+	
+	</script> #}
+{% endblock %}

@@ -12,6 +12,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
@@ -39,7 +40,9 @@ class NewsController extends AbstractController
      * @Route("/newss", name="app_news_index_suer", methods={"GET"})
      */
     public function indexuser(EntityManagerInterface $entityManager): Response
-    {
+    {   $session=new Session();
+        $session->start();
+        $session->set("like","159");
         $news = $entityManager
             ->getRepository(News::class)
             ->findAll();
@@ -92,7 +95,7 @@ class NewsController extends AbstractController
      * @Route("/commentsuser/{idNews}", name="app_news_show_user", methods={"GET"})
      */
     public function showusernews(News $news): Response
-    {
+    {   
         $rep=$this->getDoctrine()->getRepository(Comments::class);
         return $this->render('news/showusernews.html.twig', [
             'news' => $news,

@@ -6,16 +6,18 @@ use Twig\Template;
 use App\Entity\News;
 use App\Entity\Comments;
 use App\Form\CommentsType;
+use App\Controller\NewsController;
 use App\Repository\CommentsRepository;
-use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ObjectManager;
+use Doctrine\ORM\EntityManagerInterface;
 use PHPUnit\Framework\MockObject\Method;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
  * @Route("/comments")
@@ -191,16 +193,42 @@ class CommentsController extends AbstractController
     */
     public function addlike(EntityManagerInterface $entityManager, Request $request,$idComment)
     {   
+        $ses=new Session();
+        
+        
+
+        /* 
+        $ses->get('like');
+        $like = $this->get('session')->get('like');
+        $like=$this->get('session')->set("like",5);
+         */
+        
         
         $commentid = array('idComment'=>$idComment);
         
         $rep = $this->getDoctrine()->getRepository(Comments::class)->find(($commentid["idComment"]));
-        $rep->setLikes($rep->getLikes()+1);
+        if ($ses->get('like')=="159")
+        {
+            $rep->setLikes($rep->getLikes()+1);
+            $ses->set("like","10");
+        }
+        else 
+        {
+            $rep->setLikes($rep->getLikes()-1);
+            $ses->set("like","159");
+        }
+        
         $entityManager->flush();
+        
         return $this->redirectToRoute('app_news_show_user', [
             'idComment'=>$idComment,
-            'idNews'=>$request->query->get('idNews')
+            'idNews'=>$request->query->get('idNews'),
+            'ses'=>$ses
         ], Response::HTTP_SEE_OTHER);
+
+        
+
+
     }
 
     
