@@ -3,8 +3,11 @@
 namespace App\Controller;
 use App\Entity\Product;
 use App\Form\ProductType;
+use App\Repository\ProductRepository;
+use Doctrine\DBAL\Types\TextType;
 use Doctrine\ORM\EntityManagerInterface;
 
+use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\HttpFoundation\Request;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -45,6 +48,26 @@ class ProductfrontController extends AbstractController
             'product' => $product,
         ]);
     }
+    /**
+     * @Route("/search", name="app_product_search")
+     */
+    public function searchbyname(Request $request)
+    {
+        $em=$this->getDoctrine()->getManager();
+        $product = $em->getRepository(Product::class);
+        $repCat = $this->getDoctrine()->getRepository(Category::class);
+        $form=$this->createForm(FormType::class);
+        $form->add("prodName",TextType::class)
+            ->add("search",submitType::class);
+        $form ->handleRequest($request);
+        if($form->isSubmitted()){
+            return $this->render("product/display.html.twig",[
+                "cat" => $repCat->findAll(),
+                "product" => $product->findByName($form->getData()["prodName"]),
+                "search"=>$form->createView()
+            ]);
+        }
 
+    }
 
 }

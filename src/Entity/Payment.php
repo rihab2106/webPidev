@@ -4,11 +4,12 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\HttpFoundation\File\File;
 /**
  * Payment
  *
  * @ORM\Table(name="payment")
- * @ORM\Entity(repositoryClass="App\Repository\TransactionRepository")
+ * @ORM\Entity
  */
 class Payment
 {
@@ -22,37 +23,34 @@ class Payment
     private $idPayment;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="cardnumber", type="integer", nullable=false)
+     * @var string
+     *@Assert\NotBlank(message=" Title shouldn't be empty")
+     * @ORM\Column(name="cardnumber", type="string")
      * @Assert\Length(
-     *     min = 14,
+     *     min = 16,
      *     max = 16)
-     * @Assert\Type(
-     *     type="integer",
-     *     message="The value {{ value }} is not a valid credit number."
-     * )
+     *
      */
+
     private $cardnumber;
 
     /**
      * @var int
-     *
-     * @ORM\Column(name="cvv", type="integer", nullable=false)
+     *@Assert\NotBlank(message=" Title shouldn't be empty")
+     * @ORM\Column(name="cvv", type="integer")
      * @Assert\Length(
-     *     min = 3,
-     *     max = 4)
+     *     min=3,
+     *     max = 3)
      * @Assert\Type(
      *     type="integer",
-     *     message="The value {{ value }} is not a valid CVV."
-     * )
+     *     message="The value {{ value }} is not a valid CVV.")
      */
     private $cvv;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="expiration", type="string", length=8, nullable=false)
+     *@Assert\NotBlank(message=" Title shouldn't be empty")
+     * @ORM\Column(name="expiration", type="string", length=800)
      * @Assert\Length(
      *     min = 4,
      *     max = 4)
@@ -63,8 +61,8 @@ class Payment
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="Nameincard", type="string", length=255, nullable=false)
+     *@Assert\NotBlank(message=" Title shouldn't be empty")
+     * @ORM\Column(name="Nameincard", type="string", length=255)
      */
     private $nameincard;
 

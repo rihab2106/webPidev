@@ -1,7 +1,6 @@
 {% extends 'home/front_base.html.twig' %}
 
 {% block content %}
-
     <!-- START: Login Modal -->
     <div class="nk-modal modal fade" id="modalpayment" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-sm" role="document">
@@ -11,26 +10,26 @@
                         <span class="ion-android-close"></span>
                     </button>
 
-                    <h4 class="mb-0"><span class="text-main-1">Billing </span> Details</h4>
+                    <h4 class="mb-0"><span class="text-main-1">Product</span> Details</h4>
 
                     <div class="nk-gap-1"></div>
 
                     <form action="#" class="nk-form text-white">
                         <div class="row vertical-gap">
                             <div class="col-md-12">
-                                Use Your Confidential :
-                                CREDIT CARD NUMBER:
+
                                 <div class="nk-gap"></div>
-                                <input type="email" value="" name="email" class=" form-control" placeholder="Email">
+
 
 
 
                             </div>
+
                             <div class="col-md-6">
                                 CVC:
                                 <div class="nk-gap"></div>
                                 <input type="password" value="" name="password" class="required form-control" placeholder="Password">
-                                                                Use Your Confidential :
+                                Use Your Confidential :
                                 EXPIRATION:
                                 <div class="nk-gap"></div>
                                 <input type="password" value="" name="password" class="required form-control" placeholder="Password">
@@ -70,6 +69,7 @@
         </div>
     </div>
     <!-- END: Login Modal -->
+
 {#<style>#}
 {#    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }#}
 {#    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }#}
@@ -104,6 +104,15 @@
         </ul>
     </div>
     <div class="nk-gap-1"></div>
+    {#this#}
+    <div class="nk-info-box text-success">
+        <div class="nk-info-box-icon">
+            <i class="ion-checkmark-round"></i>
+        </div>
+        <h3>Success!</h3>
+        <em>Hath days lesser meat signs very. Fruit second can't moved seas meat two. Grass face isn't forth firmament dry. Don't.</em>
+    </div>
+{#    this#}
 {#    container cartdata#}
     <div class="container">
         <div class="nk-store nk-store-cart">
@@ -125,7 +134,8 @@
 
                 <h2 class="nk-post-title h4">
 {#                <a href="store-product.html">However, I have reason</a>#}
-                    {{~item.Product.prodName }}
+                    <a  href="#" data-toggle="modal" data-target="#modalpayment"> {{~item.Product.prodName }}<path fill="currentColor" d="M256 0c88.366 0 160 71.634 160 160s-71.634 160-160 160S96 248.366 96 160 167.634 0 256 0zm183.283 333.821l-71.313-17.828c-74.923 53.89-165.738 41.864-223.94 0l-71.313 17.828C29.981 344.505 0 382.903 0 426.955V464c0 26.51 21.49 48 48 48h416c26.51 0 48-21.49 48-48v-37.045c0-44.052-29.981-82.45-72.717-93.134z"></path></a>
+
                 </h2>
                 </td>
                 <td class="nk-product-cart-price">
@@ -244,7 +254,7 @@
             </div>
 
             <div class="nk-gap-2"></div>
-            <a class="nk-btn nk-btn-rounded nk-btn-color-main-1 float-right" href="#" data-toggle="modal" data-target="#modalpayment"> Proceed To Checkout<path fill="currentColor" d="M256 0c88.366 0 160 71.634 160 160s-71.634 160-160 160S96 248.366 96 160 167.634 0 256 0zm183.283 333.821l-71.313-17.828c-74.923 53.89-165.738 41.864-223.94 0l-71.313 17.828C29.981 344.505 0 382.903 0 426.955V464c0 26.51 21.49 48 48 48h416c26.51 0 48-21.49 48-48v-37.045c0-44.052-29.981-82.45-72.717-93.134z"></path></svg></a>
+            <a class="nk-btn nk-btn-rounded nk-btn-color-main-1 float-right" href="{{ path('app_payment_new') }}" > Proceed To Checkout<path fill="currentColor" d="M256 0c88.366 0 160 71.634 160 160s-71.634 160-160 160S96 248.366 96 160 167.634 0 256 0zm183.283 333.821l-71.313-17.828c-74.923 53.89-165.738 41.864-223.94 0l-71.313 17.828C29.981 344.505 0 382.903 0 426.955V464c0 26.51 21.49 48 48 48h416c26.51 0 48-21.49 48-48v-37.045c0-44.052-29.981-82.45-72.717-93.134z"></path></a>
 
             <div class="clearfix"></div>
             {% else %}

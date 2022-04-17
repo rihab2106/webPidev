@@ -26,22 +26,24 @@ class PaymentController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="app_payment_new", methods={"GET", "POST"})
+     * @Route("/new", name="app_payment_new")
      */
-    public function new(Request $request, TransactionRepository $transactionRepository): Response
+    public function new(Request $request): Response
     {
         $payment = new Payment();
         $form = $this->createForm(PaymentType::class, $payment);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $transactionRepository->add($payment);
-            return $this->redirectToRoute('app_payment_index', [], Response::HTTP_SEE_OTHER);
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($payment);
+            $em->flush();
+            return $this->redirectToRoute('app_payment_new');
         }
 
         return $this->render('payment/new.html.twig', [
-            'payment' => $payment,
-            'form' => $form->createView(),
+
+            'formpay' => $form->createView(),
         ]);
     }
 

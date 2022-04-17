@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Payment;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -16,6 +17,7 @@ class PaymentType extends AbstractType
             ->add('cvv')
             ->add('expiration')
             ->add('nameincard')
+            ->add('Place order',SubmitType::class)
         ;
     }
 
