@@ -27,7 +27,7 @@ class Games
      * @var string|null
      *
      * @ORM\Column(name="NAME", type="string", length=100, nullable=true)
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(message="You must write a name")
      */
     private $name;
 
@@ -35,7 +35,7 @@ class Games
      * @var string|null
      *
      * @ORM\Column(name="DESCRIPTION", type="text", length=65535, nullable=true)
-     * @Assert\NotBlank
+     * @Assert\NotBlank(message="You must write a description")
      */
     private $description;
 
@@ -45,7 +45,8 @@ class Games
      * @ORM\Column(name="RATE", type="decimal", precision=8, scale=4, nullable=true)
      * @Assert\GreaterThanOrEqual(value="0")
      * @Assert\LessThanOrEqual(value="100")
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(message="You must write a rate")
+     *
      */
     private $rate;
 
@@ -53,7 +54,7 @@ class Games
      * @var string|null
      *
      * @ORM\Column(name="img", type="string", length=1000, nullable=true)
-     * @Assert\Image()
+     * @Assert\Image(mimeTypes={"image/jpeg", "image/png"}, mimeTypesMessage="Please upload a valid image")
      */
     private $img;
 

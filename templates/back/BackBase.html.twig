@@ -83,6 +83,7 @@
                     <li><a href="{{ path('displayCat') }}" ><i class="bx bx-category    "></i>Categories</a></li>
                     <li><a href="{{ path('displayGames') }}" ><i class="bx bxs-game"></i>Display All Games</a></li>
                     <li><a href="{{ path('displayTrophies') }}" ><i class="bx bx-trophy"></i>Trophies</a></li>
+                    <li><a href="{{ path('Gamestat') }}" ><i class="bx bx-stats"></i>Statistics</a></li>
 
                 </ul>
             </li>
@@ -1586,6 +1587,8 @@
     new PerfectScrollbar('.product-list');
     new PerfectScrollbar('.customers-list');
 </script>
+{% block script %}
+{% endblock %}
 </body>
 
 </html>

@@ -27,7 +27,8 @@ class Category
      * @var string|null
      *
      * @ORM\Column(name="CATEGORY", type="string", length=30, nullable=true)
-     * @Assert\NotBlank
+     * @Assert\NotBlank(message="You must enter a category")
+     *
      * @Assert\Regex(pattern="/^[a-zA-Z]+$/")
      */
     private $category;

@@ -75,7 +75,7 @@
                     </a>
                     <div class="card-body">
                         <h5 class="card-title">{{ g.name }}</h5>
-                        <p class="card-text">{{ g.description|raw }} </p>
+                        <p class="card-text">{{ g.description|raw}} </p>
                     </div>
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item">{{ "Category : " ~ g.category }}</li>
@@ -88,12 +88,32 @@
                             <button class="btn btn-warning">Delete</button></a>
                         <a href="{{ path('fetchOnline', {'id': g.idGame}) }}" class="card-link" style="color: darkred">
                             <button class="btn btn-warning">LookUp</button></a>
-                        <a href="{{ path('translate', {'id': g.idGame }) }}"><button class="btn btn-dark"><i class="bx bx-text"></i></button></a>
+                        <a href="{{ path('translate', {'id': g.idGame
+                        }) }}"><button class="btn btn-dark"><i class="bx bx-text"></i></button></a>
                     </div>
                 </div>
             </div>
         {% endfor %}
     </div>
+    <nav class="Page navigation example">
+        <ul class="pagination">
+           {{ knp_pagination_render(games) }}
+        </ul>
+    </nav>
+    <p>Click on the chat button.</p>
+    <script>
+        var botmanWidget = {
+            frameEndpoint: '{{ path("chatframe") }}',
+            chatServer: '{{ path("msg") }}',
+            introMessage: 'Hello, I am a Chatbot',
+            title: 'My Chatbot',
+            mainColor: '#456765',
+            bubbleBackground: '#ff76f4',
+            aboutText: ''
+        };
+    </script>
+    <script src='https://cdn.jsdelivr.net/npm/botman-web-widget@0/build/js/widget.js'></script>
+
 {% endblock %}
 
 {% block title %}

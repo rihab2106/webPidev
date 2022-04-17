@@ -26,7 +26,8 @@ class Trophies
      * @var string|null
      *
      * @ORM\Column(name="TITLE", type="string", length=30, nullable=true)
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(message="You must enter a title")
+     *
      */
     private $title;
 
@@ -34,7 +35,7 @@ class Trophies
      * @var string|null
      *
      * @ORM\Column(name="DESCRIPTION", type="string", length=1000, nullable=true)
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(message="You must enter a description")
      */
     private $description;
 
@@ -43,7 +44,7 @@ class Trophies
      * @var string|null
      *
      * @ORM\Column(name="PLATFORM", type="string", length=20, nullable=true)
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(message="You must enter a platform")
      */
     private $platform;
 
@@ -51,7 +52,7 @@ class Trophies
      * @var string|null
      *
      * @ORM\Column(name="DIFFICULITY", type="string", length=20, nullable=true)
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(message="You must enter a difficulty")
      */
     private $difficulity;
 

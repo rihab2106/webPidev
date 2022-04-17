@@ -1,12 +1,115 @@
-{#{% extends 'back/BackBase.html.twig' %}#}
+{% extends 'back/BackBase.html.twig' %}
 
-{#{% block content %}#}
-{{ encore_entry_link_tags('app') }}
-{{ encore_entry_script_tags('app') }}
+{% block content %}
+  {#  {{ encore_entry_link_tags('app') }}
+    {{ encore_entry_script_tags('app') }}
 
-{{ render_chart(chart,{"id": "chart2"}) }}
-{#{% endblock %}#}
 
+
+        {{ render_chart(chart) }}#}
+
+    <div class="card">
+        <div class="card-body">
+            <div id="chart44"></div>
+        </div>
+    </div>
+
+
+{% endblock %}
+{% block script %}
+    <script type="application/javascript">
+        let trophies={{ trophies|json_encode }};
+        let ve=[],ee=[],m=[],h=[],vh=[];
+        let game=[]
+        let a=0,b=0,c=0,d=0,e=0;
+        {% for g in games %}
+        game.push("{{ g.name }}")
+        a=0;b=0;c=0;d=0;e=0;
+        {% for t in trophies|filter(t => g.idGame is same as t.idGame.idGame) %}
+        {% if t.difficulity is same as "Very Easy" %}
+        a++;
+        {% elseif t.difficulity is same as "Easy" %}
+        b++;
+        {% elseif t.difficulity is same as "Medium" %}
+        c++;
+        {% elseif t.difficulity is same as "Hard" %}
+        d++;
+        {% elseif t.difficulity is same as "Very Hard" %}
+        e++;
+        {% endif %}
+        {% endfor %}
+        ve.push(a);
+        ee.push(b);
+        m.push(c);
+        h.push(d);
+        vh.push(e);
+        {% endfor %}
+
+
+        e = {
+            series: [{
+                name: "Very Easy",
+                data: ve
+            }, {
+                name: "Easy",
+                data: ee
+            }, {
+                name: "Medium",
+                data: m
+            }, {
+                name: "Hard",
+                data: h
+            }, {
+                name: "Very Hard",
+                data: vh
+            }],
+            chart: {
+                foreColor: "#9ba7b2",
+                type: "bar",
+                height: 300,
+                toolbar: {
+                    show: !1
+                }
+            },
+            plotOptions: {
+                bar: {
+                    horizontal: !1,
+                    columnWidth: "55%",
+                    endingShape: "rounded"
+                }
+            },
+            grid: {
+                borderColor: 'rgba(255, 255, 255, 0.12)',
+                show: true,
+            },
+            dataLabels: {
+                enabled: !1
+            },
+            stroke: {
+                show: !0,
+                width: 2,
+                colors: ["transparent"]
+            },
+            colors: ["rgba(255, 255, 255, 0.60)", "#fff", "rgba(255, 255, 255, 0.25)"],
+            xaxis: {
+                categories: game
+            },
+            fill: {
+                opacity: 1
+            },
+            tooltip: {
+                theme: "dark",
+                y: {
+                    formatter: function(e) {
+                        return e
+                    }
+                }
+            }
+        };
+        new ApexCharts(document.querySelector("#chart44"), e).render();
+
+    </script>
+{% endblock %}
 {% block title %}
 
 {% endblock %}
