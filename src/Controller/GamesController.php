@@ -58,10 +58,15 @@ class GamesController extends AbstractController
             ->add("search", SubmitType::class);
         $form->handleRequest($request);
         if ($form->isSubmitted()){
+            $games=$paginator->paginate(
+                $rep->findByName($form["name"]->getData()),
+                $request->query->getInt('page', 1),
+                $request->query->getInt('limit', 2)
+            );
             return $this->render("games/displayGames.html.twig", [
                 "cat" => $repCat->findAll(),
 
-            "games" => $rep->findByName($form->getData()["name"]),
+            "games" => $games,
                 "search"=> $form->createView()
             ]);
         }
@@ -170,21 +175,40 @@ class GamesController extends AbstractController
     /**
      * @Route("/filterGames/{id}", name="filterGames")
      */
-    public function filter($id)
+    public function filter($id, PaginatorInterface $paginator, Request $request)
     {
         $rep = $this->getDoctrine()->getRepository(Games::class);
         $repCat = $this->getDoctrine()->getRepository(Category::class);
-        if (1<0) {
+        $games=$paginator->paginate(
+            $rep->filterbyCat($repCat->find($id)),
+            $request->query->getInt('page', 1),
+            $request->query->getInt('limit', 2)
+        );
+        $form=$this->createForm(FormType::class);
+        $form->add("name", TextType::class)
+            ->add("search", SubmitType::class);
+        $form->handleRequest($request);
+        if ($form->isSubmitted()){
+            $games=$paginator->paginate(
+                $rep->findByName($form["name"]->getData()),
+                $request->query->getInt('page', 1),
+                $request->query->getInt('limit', 2)
+            );
             return $this->render("games/displayGames.html.twig", [
                 "cat" => $repCat->findAll(),
-                "games" => $rep->filterbyCat($id)
+
+                "games" => $games,
+                "search"=> $form->createView()
             ]);
         }
-        else
+        if (true) {
+
             return $this->render("games/displayGames.html.twig", [
                 "cat" => $repCat->findAll(),
-                "games" => $rep->filterbyCat($id)
+                "games" => $games,
+                "search"=>$form->createView()
             ]);
+        }
     }
     /**
      * @Route("/admin/stat", name="Gamestat")
@@ -326,6 +350,7 @@ class GamesController extends AbstractController
         //create new file
 
     }
+
 
 
 
