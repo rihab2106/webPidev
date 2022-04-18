@@ -11,13 +11,12 @@ use Symfony\Component\Validator\Constraints as Assert;
  * Teams
  *
  * @ORM\Table(name="teams", indexes={@ORM\Index(name="FK_TEAMS_REFERENCE_COMPETIT", columns={"ID_COMPETION"})})
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\TeamsRepository")
  */
 class Teams
 {
     /**
      * @var int
-     *
      * @ORM\Column(name="ID_TEAM", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")

@@ -1,0 +1,38 @@
+{% block body %}
+
+    <h1>Teams List</h1> <hr>
+
+
+
+    <table border="1" id="teams" class="table table-striped" style="border: 1px solid; width: 100% !important; border-collapse: collapse;">
+        <thead>
+        <tr>
+            <th class="my-thead-style" style="width: 20%;">Id Team</th>
+            <th class="my-thead-style" style="width: 20%;">Game Name</th>
+            <th class="my-thead-style" style="width: 20%;">Team Name</th>
+
+
+        </tr>
+
+
+        </thead>
+        <tbody class="trial_body">
+
+        {% for t in teams %}
+            <tr>
+                {!! $pdf['trhtml'] !!}
+                <td>{{ t.idTeam }}</td>
+                <td>{{ t.idCompetion.gameName}}</td>
+                <td>{{ t.teamName}}</td>
+
+            </tr>
+        {% endfor %}
+
+
+
+
+
+
+        </tbody>
+    </table>
+{% endblock %}

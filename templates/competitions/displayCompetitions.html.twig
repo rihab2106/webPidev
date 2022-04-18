@@ -61,6 +61,13 @@
             })
         })
     </script>#}
+
+    <div class="input-group">
+        {{ form_start(search) }}
+        {{ form_widget(search.gameName, {"attr": {"class":"form-control" }}) }}
+        </button>
+        {{ form_end(search) }}
+    </div>
     <div class="card font-18" >
         <div class="card-body">
 

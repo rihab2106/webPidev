@@ -5,6 +5,8 @@ namespace App\Controller;
 use App\Entity\Competitions;
 use App\Entity\Teams;
 use App\Form\CompetitionsFormType;
+use Symfony\Component\Form\Extension\Core\Type\FormType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -26,11 +28,27 @@ class CompetitionsController extends AbstractController
     /**
      * @Route("/displayCompetitions", name="displayCompetitions")
      */
-    public function display()
+    public function display(Request $request)
     {
         $rep=$this->getDoctrine()->getRepository(Competitions::class);
+
+
+        $form=$this->createForm(FormType::class);
+        $form->add("gameName", TextType::class)
+            ->add("search", SubmitType::class);
+        $form->handleRequest($request);
+        if ($form->isSubmitted()){
+            return $this->render("competitions/displayCompetitions.html.twig", [
+
+
+                "competitions" => $rep->findByName($form->getData()["gameName"]),
+                "search"=> $form->createView()
+            ]);
+        }
+
         return $this->render('competitions/displayCompetitions.html.twig', [
-            'competitions' => $rep->findAll()
+            'competitions' => $rep->findAll(),
+            "search"=> $form->createView()
         ]);
     }
 
@@ -43,6 +61,7 @@ class CompetitionsController extends AbstractController
         return $this->render('competitions/displayCompetitionsFront.html.twig', [
             'competitions' => $rep->findAll()
         ]);
+
     }
 
 

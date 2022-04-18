@@ -57,6 +57,9 @@
             })
         })
     </script>#}
+
+
+
     <div class="card font-18" >
         <div class="card-body">
 
@@ -67,6 +70,9 @@
                     </a>#}
                 <a href="{{ path('addTeams') }}" ><button class="btn btn-light buttons-copy buttons-html5">
                         <span>Add Teams</span></button>
+                </a>
+                <a href="{{ path('pdff') }}" ><button class="btn btn-light buttons-copy buttons-html5">
+                        <span>Download</span></button>
                 </a>
                 <hr>
                 <table id="example2" class="table table-striped table-bordered">
@@ -91,10 +97,10 @@
                                 <td>{{ t.idTeam }}</td>
                                 <td>{{ t.idCompetion.gameName}}</td>
                                 <td>{{ t.teamName}}</td>
-
-
                                 <td><a href="{{ path('deleteTeams', {'id': t.idTeam}) }}"><i class="lni lni-trash"></i></a> </td>
                                 <td><a href="{{ path('updateTeams', {'id': t.idTeam}) }}"><i class="lni lni-cog"></i></a> </td>
+
+
                             </tr>
                         {% endfor %}
                         </tbody>
