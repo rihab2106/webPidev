@@ -112,7 +112,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
         if (isset($cre["roles"])) {
             if (strcmp($cre["roles"][0], "ROLE_ADMIN") == 0)
                 return new RedirectResponse($this->urlGenerator->generate('backanduser_index'));
-            return new RedirectResponse($this->urlGenerator->generate('app_profile', ["email"=> $cre["email"]]));
+            return new RedirectResponse($this->urlGenerator->generate('app_groups_index'));
         }
     }
 

@@ -4,7 +4,9 @@ namespace App\Controller;
 
 use App\Entity\Users;
 use App\Form\UsersType;
+use App\Form\ProfileType;
 use App\Repository\UsersRepository;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -71,7 +73,7 @@ class UsersController extends AbstractController
      */
     public function editProfile(Request $request, Users $user, UserPasswordEncoderInterface $userPasswordEncoder, UsersRepository $userRepository): Response
     {
-        $form = $this->createForm(UsersType::class, $user);
+        $form = $this->createForm(ProfileType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -128,4 +130,36 @@ class UsersController extends AbstractController
 
         return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
     }
+    /**
+     * Creates a new ActionItem entity.
+     *
+     * @Route("/search", name="ajax_search")
+     *@Method("GET")
+     */
+    public function searchAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $requestString = $request->get('q');
+
+        $user=  $em->getRepository(Users::class)->findEntitiesByString($requestString);
+
+        if(!$user) {
+            $result['user']['error'] = "any user found";
+        } else {
+            $result['user'] = $this->getRealEntities($user);
+        }
+
+        return new Response(json_encode($result));
+    }
+
+    public function getRealEntities($user){
+
+        foreach ($user as $user){
+            $realEntities[$user->getId()] = $user->getFULLNAME();
+        }
+
+        return $realEntities;
+    }
+
 }

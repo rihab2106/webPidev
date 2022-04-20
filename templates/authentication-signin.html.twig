@@ -36,12 +36,48 @@
 								<div class="border p-4 rounded">
 									<div class="text-center">
 										<h3 class="">Sign in</h3>
-										<p>Don't have an account yet? <a href="href="{{ path('app_register') }}">Sign up here</a>
+										<p>Don't have an account yet? <a href="{{ path('app_register') }}">Sign up here</a>
 
 
 										</p>
 									</div>
+									<form method="post" >
+										{% if error %}
+											<div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+										{% endif %}
 
+
+
+
+										<label for="inputEmail">Email</label>
+										<input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
+										<label for="inputPassword">Password</label>
+										<input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
+
+										<input type="hidden" name="_csrf_token"
+											   value="{{ csrf_token('authenticate') }}"
+										>
+
+										{#
+										Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
+                                        See https://symfony.com/doc/current/security/remember_me.html
+
+                                        <div class="checkbox mb-3">
+                                            <label>
+                                                <input type="checkbox" name="_remember_me"> Remember me
+                                            </label>
+                                        </div>
+										#}
+
+										<button class="btn btn-lg btn-primary" type="submit">
+											Sign in
+										</button>
+
+
+
+
+
+									</form>
 
 										</form>
 									</div>

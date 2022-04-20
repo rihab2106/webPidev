@@ -90,4 +90,16 @@ class UsersRepository extends ServiceEntityRepository implements PasswordUpgrade
         ;
     }
     */
+
+    public function findEntitiesByString($str){
+        return $this->getEntityManager()
+            ->createQuery(
+                'SELECT q
+                FROM App\Entity\Users q
+                WHERE q.fullName LIKE :str'
+            )
+            ->setParameter('str', '%'.$str.'%')
+            ->getResult();
+    }
+
 }

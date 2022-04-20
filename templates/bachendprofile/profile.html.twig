@@ -1,7 +1,7 @@
-{% extends 'base.html.twig' %}
+{% extends 'BackBase.html.twig' %}
 {% block title %}User{% endblock %}
 
-{% block body %}
+{% block content %}
     <h1>Profile</h1>
 
     <table class="table">
@@ -17,6 +17,10 @@
 
 
 
+        <tr>
+            <th>Email</th>
+            <td>{{ user.email }}</td>
+        </tr>
 
 
 
@@ -32,11 +36,11 @@
 
 
 
-        <button class="btn btn-lg btn-primary mt-5  " >
-            <a href="{{ path('app_profile_edit', {'email': user.email }) }}" class="btn btn-primary btn-lg ">Edit</a>
-        </button>
     <button class="btn btn-lg btn-primary mt-5  " >
-        <a href="{{ path('app_groups_index') }}" class="btn btn-primary btn-lg ">Back</a>
+        <a href="{{ path('backend_profile_edit', {'email': user.email }) }}" class="btn btn-primary btn-lg ">Edit</a>
+    </button>
+    <button class="btn btn-lg btn-primary mt-5  " >
+        <a href="{{ path('backanduser_index') }}" class="btn btn-primary btn-lg ">Back</a>
     </button>
 
 
