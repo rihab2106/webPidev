@@ -1,6 +1,9 @@
 {% extends 'back/BackBase.html.twig' %}
 
 {% block body %}
+
+
+
     <a href="" class="btn btn-danger" id="deleteTrophy">Delete</a>
 
     <form action="{{ path('deleteCompetitions') }}" method="post">
@@ -16,6 +19,7 @@
         <th>Date of Competition</th>
         <th>Edit</th>
     </tr>
+
     {% for c in competitions %}
         <tr>
             <td>
@@ -28,6 +32,7 @@
             <td></td>
         </tr>
     {% endfor %}
+
     </table>
     </form>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -38,6 +43,7 @@
         $("tr:odd").css("background-color", "rgba(34,128,234,0.85)");
 
     </script>
+
 {% endblock %}
 {% block content %}
     {#<script>
@@ -62,11 +68,13 @@
         })
     </script>#}
 
-    <div class="input-group">
-        {{ form_start(search) }}
-        {{ form_widget(search.gameName, {"attr": {"class":"form-control" }}) }}
-        </button>
-        {{ form_end(search) }}
+
+
+    <div>
+        <p style="100px" > <input  id="myInput"  type="text" placeholder="search">
+            <img src="https://img.icons8.com/nolan/344/google-web-search.png
+" style="width:50px;height:50px;"/></a>
+
     </div>
     <div class="card font-18" >
         <div class="card-body">
@@ -95,6 +103,7 @@
                         </tr>
                         </thead>
                         <tbody>
+                        <tbody id="myTable">
                         {% for c in competitions %}
                             <tr>
 
@@ -107,13 +116,25 @@
                             </tr>
                         {% endfor %}
                         </tbody>
-
+                        <tbody id="search">
                     </div>
                 </table>
             </div>
         </div>
     </div>
     </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js
+"></script>
+    <script>
+        $(document).ready(function(){
+            $("#myInput").on("keyup", function() {
+                var value = $(this).val().toLowerCase();
+                $("#myTable tr").filter(function() {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+        });
+    </script>
 {% endblock %}
 {% block title %}
 

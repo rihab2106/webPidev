@@ -65,6 +65,8 @@ class TeamsController extends AbstractController
             $mng->persist($c);
             $mng->flush();
 
+
+
             $mail=[];
 
 
@@ -105,6 +107,11 @@ class TeamsController extends AbstractController
             $c = $formf->getData();
             $mng->persist($c);
             $mng->flush();
+
+            $this->addFlash(
+                'info','Added successfuly!'
+            );
+
             return $this->redirectToRoute("displayTeamsFront");
 
         }

@@ -1,6 +1,11 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+    {% for message in app.flashes('info') %}
+        <div class="alert alert-success">
+            {{message}}
+        </div>
+    {%endfor %}
     <a href="" class="btn btn-danger" id="deleteTrophy">Delete</a>
 
     <form action="{{ path('deleteTeamsFront') }}" method="post">

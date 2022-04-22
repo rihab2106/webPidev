@@ -58,7 +58,12 @@
         })
     </script>#}
 
+    <div>
+        <p style="100px" > <input  id="myInput"  type="text" placeholder="search">
+            <img src="https://img.icons8.com/nolan/344/google-web-search.png
+" style="width:50px;height:50px;"/></a>
 
+    </div>
 
     <div class="card font-18" >
         <div class="card-body">
@@ -90,6 +95,7 @@
                         </tr>
                         </thead>
                         <tbody>
+                        <tbody id="myTable">
                         {% for t in teams %}
                             <tr>
 
@@ -104,13 +110,26 @@
                             </tr>
                         {% endfor %}
                         </tbody>
-
+                        <tbody id="search">
                     </div>
                 </table>
             </div>
         </div>
     </div>
     </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js
+"></script>
+
+    <script>
+        $(document).ready(function(){
+            $("#myInput").on("keyup", function() {
+                var value = $(this).val().toLowerCase();
+                $("#myTable tr").filter(function() {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+        });
+    </script>
 {% endblock %}
 {% block title %}
 
