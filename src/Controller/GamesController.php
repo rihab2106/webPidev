@@ -12,8 +12,12 @@ use BotMan\BotMan\BotManFactory;
 use BotMan\BotMan\Drivers\DriverManager;
 use BotMan\BotMan\Middleware\ApiAi;
 use Knp\Component\Pager\PaginatorInterface;
+use MartinGeorgiev\SocialPost\Message;
 use Symfony\Bundle\FrameworkBundle\Client;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\DependencyInjection\ContainerAwareInterface;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -42,7 +46,7 @@ class GamesController extends AbstractController
         ]);
     }
     /**
-     * @Route("/displayGames", name="displayGames")
+     * @Route("/admin/displayGames", name="displayGames")
      */
     public function display(Request $request, PaginatorInterface $paginator)
     {
@@ -70,20 +74,31 @@ class GamesController extends AbstractController
                 "search"=> $form->createView()
             ]);
         }
-        if (true) {
+
 
             return $this->render("games/displayGames.html.twig", [
                 "cat" => $repCat->findAll(),
                 "games" => $games,
                 "search"=>$form->createView()
             ]);
-        }
-        else {
-            return $this->render("games/FrontDisplayGames.html.twig", [
-                "cat" => $repCat->findAll(),
-                "games"=> $rep->findAll()
-            ]);
-        }
+
+
+    }
+    /**
+     * @Route("/displayGames", name="displayGamesFront")
+     */
+    public function displayFront(Request $request, PaginatorInterface $paginator){
+        $rep = $this->getDoctrine()->getRepository(Games::class);
+        $repCat = $this->getDoctrine()->getRepository(Category::class);
+        $games=$paginator->paginate(
+            $rep->findAll(),
+            $request->query->getInt('page', 1),
+            $request->query->getInt('limit', 2)
+        );
+        return $this->render("games/FrontDisplayGames.html.twig", [
+            "cat" => $repCat->findAll(),
+            "games"=> $games
+        ]);
     }
     /**
      * @Route("/addGames", name="addGames")
@@ -109,9 +124,9 @@ class GamesController extends AbstractController
             $g->setImg("BackAssets\\images\\GameImgs\\".$file->getClientOriginalName());
             $mng->persist($g);
             $mng->flush();
+            $this->SendNotifDiscord($client, $g);
             return $this->redirectToRoute("displayGames");
         }
-
         return $this->render("games/addGames.html.twig", [
             "form"=> $form->createView(),
             "fact"=>$ff[0]->{"fact"}
@@ -262,15 +277,30 @@ class GamesController extends AbstractController
         $game=new Games();
         $game=$this->getDoctrine()->getRepository(Games::class)->find($id);
 
-        $res=$client->request("POST","https://api.nlpcloud.io/v1/opus-mt-en-fr/translation",[
+        /*$res=$client->request("POST","https://api.nlpcloud.io/v1/opus-mt-en-fr/translation",[
             "headers"=>[
                 "Authorization"=> "Token c9cb714f93d7e4caf20485a6d314f08b1ad7a9f3"
             ],
             "body"=>["text"=>"hello there "]
-        ]);
+        ]);*/
+        $res=$client->request("POST", "https://api.openai.com/v1/engines/text-davinci-002/completions", [
+            "headers"=>[
+                "Authorization"=> "Bearer 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",
+                "Content-Type"=> "application/json"
+            ],
+            "json"=>[
+                "prompt"=> "Translate this into 1. French\n\n".$game->getDescription()."\n\n",
+                "temperature"=> 0.3,
+                "max_tokens"=> 100,
+                "top_p"=> 1,
+                "frequency_penalty"=> 0,
+                "presence_penalty"=> 0,
+
+        ]]);
+
         $cont=$res->getContent();
         $obj=json_decode($cont);
-        $game->setDescription($obj->{"translation_text"});
+        $game->setDescription($obj->{"choices"}[0]->{"text"});
         $this->getDoctrine()->getManager()->flush();
         return $this->redirectToRoute("displayGames");
 
@@ -351,8 +381,39 @@ class GamesController extends AbstractController
 
     }
 
+    /**
+     * @Route("/socialMedia/{msg}", name="socialMedia")
+     */
+    public function socialMedia($msg,ContainerInterface $container)
+    {
 
+        $message=new Message($msg);
+        $container->get('social_post')->publish($message);
+        return new Response();
+    }
 
+    public function SendNotifDiscord(HttpClientInterface $cleint, Games $game)
+    {
+        $res=$cleint->request("POST",
+            "https://discord.com/api/webhooks/967451845586997298/3NEZm2o2PbUnAXBIsheukfBaQ-BmB-0hJmn5_nmu78o6n22BgVsFkXMTdKVrF7_owFfr", [
+                'json' => [
+                    "username" => "Bot",
+                    'content' => "New game added: ".$game->getName(),
+                    "embeds" => [
+                        [
+                            "title" => "New game added",
+                            "description" => $game->getDescription(),
+                            "color" => "0x00ff00",
+                            "image" => [
+                                "url" => $game->getImg()
+                            ]
+                        ]
+                    ]
+                ]
+
+            ]);
+
+    }
 
 
 }

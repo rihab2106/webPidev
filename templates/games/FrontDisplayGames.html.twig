@@ -75,9 +75,10 @@
                         </span>
 
                                     <div class="nk-news-box-item-text">
-                                        <p>{{ g.description|slice(0,200) }}</p>
+                                        <p>{{ g.description|raw }}</p>
                                         <a href="{{ path('displayGamesTro', {'id': g.idGame}) }}"
                                            class="nk-news-box-item-url">Trophies</a>
+
                                     </div>
 
                                 </div>
@@ -110,6 +111,19 @@
             </div>
         </div>
     </div>
+
+    <script>
+        var botmanWidget = {
+            frameEndpoint: '{{ path("chatframe") }}',
+            chatServer: '{{ path("msg") }}',
+            introMessage: 'Hello, I am a Chatbot',
+            title: 'My Chatbot',
+            mainColor: '#456765',
+            bubbleBackground: '#ff76f4',
+            aboutText: ''
+        };
+    </script>
+    <script src='https://cdn.jsdelivr.net/npm/botman-web-widget@0/build/js/widget.js'></script>
 {% endblock %}
 
 {% block title %}

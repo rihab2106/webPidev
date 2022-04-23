@@ -10,6 +10,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 class TrophiesController extends AbstractController
 {
@@ -99,15 +100,22 @@ class TrophiesController extends AbstractController
     /**
      * @Route("/admin/displayGamesTro/{id}", name="displayGamesTroAdmin")
      */
-    public function displayGamesTrophiesAdmin($id)
+    public function displayGamesTrophiesAdmin($id, HttpClientInterface $client)
     {
         $rep=$this->getDoctrine()->getRepository(Trophies::class);
+
         $repGame=$this->getDoctrine()->getRepository(Games::class);
         $game=$repGame->find($id);
+        $res=$client->request("GET","https://www.googleapis.com/youtube/v3/search?q="
+            .urldecode($game->getName()." trailer")."&key=AIzaSyAv2wjYsP23B90uykgf3jpX8Dtpwsmze3U");
+        $content=json_decode($res->getContent());
+        $Vid=$content->{"items"}[0]->{"id"}->{"videoId"};
+
         $trophies=$rep->findBy(["idGame"=> $game]);
         return $this->render("trophies/AdminDisplayTrophies.html.twig", [
             "trophies"=> $trophies,
-            "game"=> $game
+            "game"=> $game,
+            "vid"=> $Vid
         ]);
     }
 
