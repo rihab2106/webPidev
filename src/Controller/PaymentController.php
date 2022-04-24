@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Controller;
+use App\Repository\ProductRepository;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use App\Entity\Payment;
 use App\Entity\Product;
@@ -34,19 +36,36 @@ class PaymentController extends AbstractController
     /**
      * @Route("/checkout", name="app_payment_check", methods={"GET"})
      */
-    public function checkout( $stripeSK): Response
+    public function checkout( $stripeSK,SessionInterface $sessionc, ProductRepository $ProductRepository): Response
     {
+        $cart = $sessionc->get('cart',[]);
+        $completecart= [];
+        foreach ($cart as $idProduct => $quantity){
+            $completecart[]= [
+                'Product'=> $ProductRepository->find($idProduct),
+                'quantity'=>$quantity
+            ];
+        }
+        $total =0.0;
+        foreach ($completecart as $item) {
+            $totalproduct =$item['Product']->getPrice()+($item['Product']->getPrice() * (($item['Product']->getDiscount())/100));
+             $total +=round($totalproduct, 2);
+
+        }
+        $cartcontroller = new CartController();
 
         Stripe::setApiKey($stripeSK);
+
         $session = Session::create([
             'payment_method_types' =>['card'],
             'line_items' => [[
                 'price_data' => [
                     'currency' => 'usd',
                     'product_data' => [
-                        'name' => 'T-shirt',
+                        'name' => 'Your Games are ready',
                     ],
-                    'unit_amount' => 2000,
+
+                    'unit_amount' => $total*100,
                 ],
                 'quantity' => 1,
             ]],
