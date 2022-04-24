@@ -1,9 +1,11 @@
 <?php
 
 namespace App\Controller;
+use App\Data\SearchInfo;
 use App\Entity\Category;
 use App\Entity\Product;
 use App\Form\ProductType;
+use App\Form\SearchForm;
 use App\Repository\ProductRepository;
 use ContainerB5MtGwC\PaginatorInterface_82dac15;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -34,36 +36,28 @@ class ProductfrontController extends AbstractController
      */
     public function display(ProductRepository $productRepository,EntityManagerInterface $entityManager,PaginatorInterface $paginator,Request $request): Response
     {
-       $product = new Product();
-       $form =$this->createFormBuilder($product)
-           ->add('prodName',TextType::class,array('attr'=>array('class'=>'form-control')))->getForm();
-       $form->handleRequest($request);
-       if($form->isSubmitted() ){
-           $term =$product->getProdName();
-           $allprod =$productRepository->search($term);
 
-
-       }else{
-           $allprod =$productRepository->findAll();
-       }
-
-
-
-        $repCat = $this->getDoctrine()->getRepository(Category::class);
-        $prod = $entityManager->getRepository(Product::class)->findAll();
-        $products = $paginator->paginate(
-            $prod,
-             /* query NOT result */
-            $request->query->getInt('page', 1), /*page number*/
-            4 /*limit per page*/
-        );
-
+          $data = new SearchInfo();
+          $data->page=$request->get('page',1);
+          $form =$this->createForm(SearchForm::class,$data);
+          $form->handleRequest($request);
+          $products =$productRepository->search($data);
+//        $repCat = $this->getDoctrine()->getRepository(Category::class);
+//        $prod = $entityManager->getRepository(Product::class)->findAll();
+//        $products = $paginator->paginate(
+//            $prod,
+//             /* query NOT result */
+//            $request->query->getInt('page', 1), /*page number*/
+//            4 /*limit per page*/
+//        );
+//
 
 
         return $this->render('product/display.html.twig', [
             'products' => $products,
 
-             "form"=>$form->createView()
+             'form'=>$form->createView()
+
 
 
 

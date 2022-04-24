@@ -106,42 +106,51 @@ Additional Classes:
 
             <!-- START: Products Filter -->
             <div class="nk-gap-2"></div>
+            {{ form_start(form) }}
             <div class="row vertical-gap">
+
                 <div class="col-lg-8">
                     <div class="row vertical-gap">
                         <div class="col-md-4">
-                            <select class="form-control">
-                                <option value="" disabled selected>Select Platform</option>
-                                <option value="ps4">PS4</option>
-                                <option value="xbox">Xbox 1</option>
-                                <option value="pc">PC</option>
-                            </select>
+                                {{ form_row(form.categories) }}
                         </div>
+                        <div class="col-md-3">
+                            {{ form_row(form.min) }}
+                        </div>
+                        <div class="col-md-3">
+                            {{ form_row(form.max) }}
+                        </div>
+                        <div class="col-md-3">
+                            {{ form_row(form.q) }}
+                        </div>
+
+                       <button type="submit" class="btn btn-danger  w-100">Filter</button>
                         <div class="col-md-8">
-                            <div class="nk-input-slider-inline">
-                                <div class="nk-input-slider">
-                                    <div class="nk-input-slider-content text-white">
-                                        PRICE:
-                                        <strong class="text-main-1">€ <span class="nk-input-slider-value-0"></span></strong>
-                                        -
-                                        <strong class="text-main-1">€ <span class="nk-input-slider-value-1"></span></strong>
-                                    </div>
-                                    <div class="nk-input-slider-input">
-                                        <input
-                                                type="text"
-                                                name="price-filter"
-                                                data-slider-min="0"
-                                                data-slider-max="1800"
-                                                data-slider-step="1"
-                                                data-slider-value="[200, 1200]"
-                                                data-slider-tooltip="hide"
-                                        >
-                                    </div>
-                                </div>
-                                <div>
-                                    <a href="#" class="nk-btn nk-btn-rounded nk-btn-color-white">Apply</a>
-                                </div>
-                            </div>
+{#                            <div class="nk-input-slider-inline">#}
+{#                                <div class="nk-input-slider">#}
+{#                                    <div class="nk-input-slider-content text-white">#}
+{#                                        PRICE:#}
+{#                                        <strong class="text-main-1">€ <span class="nk-input-slider-value-0"></span></strong>#}
+{#                                        -#}
+{#                                        <strong class="text-main-1">€ <span class="nk-input-slider-value-1"></span></strong>#}
+{#                                    </div>#}
+{#                                    <div class="nk-input-slider-input">#}
+{#                                        <input#}
+{#                                                type="text"#}
+{#                                                name="price-filter"#}
+{#                                                data-slider-min="0"#}
+{#                                                data-slider-max="1800"#}
+{#                                                data-slider-step="1"#}
+{#                                                data-slider-value="[200, 1200]"#}
+{#                                                data-slider-tooltip="hide"#}
+{#                                        >#}
+{#                                    </div>#}
+{#                                </div>#}
+
+{#                                <div>#}
+{#                                    <a href="#" class="nk-btn nk-btn-rounded nk-btn-color-white">Apply</a>#}
+{#                                </div>#}
+{#                            </div>#}
                         </div>
                     </div>
                 </div>
@@ -150,17 +159,18 @@ Additional Classes:
                     <form action="#" class="nk-form" novalidate="novalidate">
                         <div class="input-group">
 
-                            {{ form_start(form) }}
-                            {{ form_widget(form) }}
-                            <button class="btn">{{ button_label|default('search something') }}</button>
-                            {{ form_end(form) }}
+
+
+
 {#                            {{ form_start(search) }}#}
 {#                            {{ form_widget(search.name, {"attr": {"class":"form-control" }}) }}#}
 {#                                <button class="nk-btn nk-btn-color-main-1"><span class="ion-search"></span></button>{{ form_end(search) }}#}
                         </div>
                     </form>
                 </div>
+
             </div>
+            {{ form_end(form) }}
             <!-- END: Products Filter -->
 
             <div class="nk-gap-2"></div>
@@ -196,11 +206,13 @@ Additional Classes:
                         </a>
                         <div class="nk-product-cont">
                             <a href="{{ path('app_productfront_show', {"idProduct": p.idProduct}) }}"><h4  class="card-title cursor-pointer">{{~p.prodName }}</h4></a>
-
+                            <span class="nk-post-categories">
+            <span class="bg-warning">{{"Category:  "~p.idCategory }}</span>
+        </span>
                             <div class="nk-gap-1"></div>
                             <div class="nk-product-rating" data-rating="4.5"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fas fa-star-half"></i></div>
                             <div class="nk-gap-1"></div>
-{#                            {{~p.Description }}#}
+
 
                             <div class="nk-gap-2"><span class="me-2 text-decoration-line-through text-secondary">{{ "Available: "~p.Quantity }}</span></div>
 
@@ -218,10 +230,10 @@ Additional Classes:
 
             <!-- START: Pagination -->
             <div class="nk-gap-3 " ></div>
-            <div class="nk-pagination-current" >{{ knp_pagination_render(products) }}</div>
+            <div class="mt-4 ">{{ knp_pagination_render(products) }}</div>
 
             <div class="nk-pagination nk-pagination-center">
-                <a href="#"   class="nk-pagination-prev">
+                <a href=""   class="nk-pagination-prev">
 
                 </a>
                 <nav>

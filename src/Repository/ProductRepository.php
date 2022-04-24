@@ -2,12 +2,14 @@
 
 namespace App\Repository;
 
+use App\Data\SearchInfo;
 use App\Entity\Product;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
 use Doctrine\ORM\Query;
 use Doctrine\Persistence\ManagerRegistry;
+use Knp\Component\Pager\PaginatorInterface;
 
 /**
  * @method Product|null find($id, $lockMode = null, $lockVersion = null)
@@ -17,9 +19,10 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class ProductRepository extends ServiceEntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
+    public function __construct(ManagerRegistry $registry,PaginatorInterface $paginator)
     {
         parent::__construct($registry, Product::class);
+        $this->paginator=$paginator;
     }
 
     /**
@@ -99,11 +102,38 @@ class ProductRepository extends ServiceEntityRepository
         return $this->findAllVisibleQuery()->getQuery();
     }
 
-public function search($term)
+    /**
+     * @return \Knp\Component\Pager\Pagination\PaginationInterface
+     */
+public function search(SearchInfo $search): \Knp\Component\Pager\Pagination\PaginationInterface
 {
-    return $this->createQueryBuilder('Product')
-        ->andWhere('Product.prodName LIKE :prod')
-        ->setParameter('prod', '%' .$term. '%')
-        ->getQuery()
-        ->execute();
+    $query=$this
+        ->createQueryBuilder('p')
+        ->select('c','p')
+       ->join('p.idCategory','c');
+
+    if(!empty($search->q)){
+        $query=$query
+            ->andWhere('p.prodName LIKE :q')
+            ->setParameter('q',"%{$search->q}%");
+    }
+   if(!empty($search->min)){
+       $query=$query
+           ->andWhere('p.price >= :min')
+           ->setParameter('min',$search->min);
+   }
+    if(!empty($search->max)){
+        $query=$query
+            ->andWhere('p.price <= :max')
+            ->setParameter('max',$search->max);
+    }
+    if(!empty($search->categories)){
+        $query=$query
+            ->andWhere('c.idCategory IN (:categories)')
+            ->setParameter('categories',$search->categories);
+    }
+    $query =$query->getQuery();
+    return $this->paginator->paginate(
+        $query,$search->page,4
+    );
 }}
