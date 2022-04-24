@@ -24,6 +24,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpClient\Exception\ClientException;
 use Symfony\Component\HttpClient\HttpClient;
 use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -55,7 +56,7 @@ class GamesController extends AbstractController
         $games=$paginator->paginate(
             $rep->findAll(),
             $request->query->getInt('page', 1),
-            $request->query->getInt('limit', 2)
+            $request->query->getInt('limit', 5)
         );
         $form=$this->createForm(FormType::class);
         $form->add("name", TextType::class)
@@ -124,7 +125,7 @@ class GamesController extends AbstractController
             $g->setImg("BackAssets\\images\\GameImgs\\".$file->getClientOriginalName());
             $mng->persist($g);
             $mng->flush();
-            $this->SendNotifDiscord($client, $g);
+
             return $this->redirectToRoute("displayGames");
         }
         return $this->render("games/addGames.html.twig", [
@@ -264,6 +265,7 @@ class GamesController extends AbstractController
         fclose($fp);
         $game->setImg("BackAssets\\images\\GameImgs\\".$obj->{"slug"}.".jpg");
         $this->getDoctrine()->getManager()->flush();
+        $this->SendNotifDiscord($client, $game, $img_url);
         return $this->redirectToRoute("displayGames");
 
 
@@ -291,7 +293,7 @@ class GamesController extends AbstractController
             "json"=>[
                 "prompt"=> "Translate this into 1. French\n\n".$game->getDescription()."\n\n",
                 "temperature"=> 0.3,
-                "max_tokens"=> 100,
+                "max_tokens"=> 1000,
                 "top_p"=> 1,
                 "frequency_penalty"=> 0,
                 "presence_penalty"=> 0,
@@ -302,10 +304,15 @@ class GamesController extends AbstractController
         $obj=json_decode($cont);
         $game->setDescription($obj->{"choices"}[0]->{"text"});
         $this->getDoctrine()->getManager()->flush();
-        return $this->redirectToRoute("displayGames");
+        //return $this->redirectToRoute("displayGames");
+        $data=new JsonResponse();
+        $data->headers->set('Content-Type', 'application/json');
+        $data->setData($game->getDescription());
+        return $data;
 
 
     }
+
     /**
      * @Route("/admin/msg",name="msg")
      */
@@ -314,7 +321,7 @@ class GamesController extends AbstractController
         DriverManager::loadDriver(\BotMan\Drivers\Web\WebDriver::class);
         $config=[];
         $botman = BotManFactory::create($config);
-        $botman->hears("(hello|h|hel)",function(BotMan $botman){
+        $botman->hears("(hello|h|hel|hi)",function(BotMan $botman){
             $botman->reply("Well, hello there!\n What can I do for you?");
         });
         $botman->hears("remove game {name}",function(BotMan $botman,$name){
@@ -366,8 +373,9 @@ class GamesController extends AbstractController
             }
         });
         $botman->fallback(function($bot){
-            $bot->reply("Sorry, I don't understand you");
+            $bot->randomReply(["Sorry, I don't understand you", "Sorry, I don't know what you mean", "I missed the part where that's my problem"]);
         });
+
         $botman->listen();
         return new Response();
     }
@@ -392,7 +400,7 @@ class GamesController extends AbstractController
         return new Response();
     }
 
-    public function SendNotifDiscord(HttpClientInterface $cleint, Games $game)
+    public function SendNotifDiscord(HttpClientInterface $cleint, Games $game, String $img)
     {
         $res=$cleint->request("POST",
             "https://discord.com/api/webhooks/967451845586997298/3NEZm2o2PbUnAXBIsheukfBaQ-BmB-0hJmn5_nmu78o6n22BgVsFkXMTdKVrF7_owFfr", [
@@ -401,13 +409,30 @@ class GamesController extends AbstractController
                     'content' => "New game added: ".$game->getName(),
                     "embeds" => [
                         [
-                            "title" => "New game added",
-                            "description" => $game->getDescription(),
-                            "color" => "0x00ff00",
+                            "title" => "New game has been added",
+                           "description" => "Check out the latest games added to our website",
+                           "color" => 0x00ff00,
                             "image" => [
-                                "url" => $game->getImg()
+                                "url" => $img
+                            ],
+                            "fields"=> [
+                                [
+                                    "name" => "Name",
+                                    "value" => $game->getName(),
+                                    "inline" => true
+                                ],
+                                [
+                                    "name" => "Description",
+                                    "value" => $game->getDescription(),
+                                    "inline" => true
+                                ],
+                                [
+                                    "name" => "Rate",
+                                    "value" => $game->getRate(),
+                                    "inline" => true
+                                ]
                             ]
-                        ]
+                            ]
                     ]
                 ]
 

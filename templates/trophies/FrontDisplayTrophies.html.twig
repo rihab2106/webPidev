@@ -29,19 +29,19 @@
                     <!-- START: Headings -->
                     <h3 class="text-main-1">{{ game.name }}</h3>
                     <div class="nk-gap"></div>
-                    <img src="{{ asset(game.img) }}" style="height: 200px; size: portrait">
+                    <img src="{{ asset(game.img) }}" style="height: 200px; size: portrait; max-width: 300px; aspect-ratio: auto">
                     <!-- END: Headings -->
                 </div>
                 <div class="col-lg-8">
                     <!-- START: Paragraphs -->
                     <h3 class="text-main-1">Description</h3>
                     <div class="nk-gap"></div>
-                    <p  class="lead text-white"><strong>{{ game.name }}</strong> {{ "- " ~ game.description|raw}} </p>
+                    <p  class="lead text-white"><strong>{{ game.name }}</strong> {{ game.description|raw}} </p>
                     <p class="text-white"><strong>Rate</strong> {{ game.rate|round }}</p>
                     <!-- END: Paragraphs -->
                 </div>
             </div>
-            <div class="nk-accordion" id="accordion-1" role="tablist" aria-multiselectable="true">
+            {#<div class="nk-accordion" id="accordion-1" role="tablist" aria-multiselectable="true">
                 <div class="nk-gap-2"></div>
                 {% for t in trophies %}
                     <div class="panel panel-default">
@@ -67,11 +67,35 @@
                     </div>
 
                 {% endfor %}
-
+                <button class="accordion">Section 1</button>
+                <div class="panel">
+                    <p>Lorem ipsum...</p>
+                </div>
+            </div>#}
+            <div class="row vertical-gap">
+            {% for t in trophies %}
+            <div class="col-lg-4">
+                <div class="nk-feature-2">
+                    <div class="nk-feature-icon">
+                        <span class="ion-trophy"></span>
+                    </div>
+                    <div class="nk-feature-cont text-center">
+                        <h3 class="nk-feature-title">{{ t.title~" #"~t.idTrophy }}</h3>
+                        <div class="nk-gap-1"></div>
+                        <p>{{ "Description: "~ t.description|raw }}</p>
+                        <p>{{ "Difficulity: "~ t.difficulity }}</p>
+                        <p>{{ "Platform: "~ t.platform }}</p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
             </div>
         </div>
     </div>
 {#    <img class="nk-page-background-top" src="{{ asset(game.img) }}" alt="">#}
+
+{% endblock %}
+{% block javascripts %}
     <script>
         $(document).ready(function () {
             $('#accordion-11').on('show.bs.collapse', function (e) {
@@ -81,10 +105,6 @@
                 $(e.target).prev('.panel-heading').removeClass('active');
             });
         });
+
     </script>
 {% endblock %}
-
-{% block body %}
-
-{% endblock %}
-

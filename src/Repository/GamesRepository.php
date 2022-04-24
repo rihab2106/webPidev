@@ -85,7 +85,7 @@ class GamesRepository extends ServiceEntityRepository
     public function findByName($name="")
     {
         return $this->createQueryBuilder("g")
-            ->where("g.name like :name")
+            ->where("upper(g.name) like upper(:name)")
             ->setParameter("name",$name."%")
             ->getQuery()
             ->getResult();

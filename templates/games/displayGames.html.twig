@@ -70,12 +70,19 @@
                     {% if g.img is not empty %}
                         <img src="{{ asset(g.img) }}" class="card-img-top" alt="{{ g.img }}">
                     {% else %}
-                        <img src="{{ asset('BackAssets/images/GameImgs/wp7489322.jpg') }}" class="card-img-top" alt="{{ g.name }}       ">
+                        <img src="{{ asset('BackAssets/images/GameImgs/wp7489322.jpg') }}" class="card-img-top" alt="{{ g.name }}">
                     {% endif %}
                     </a>
                     <div class="card-body">
                         <h5 class="card-title">{{ g.name }}</h5>
-                        <p class="card-text">{{ g.description|raw}} </p>
+                       {# {% if g.description|length >200 %}
+                        <p class="card-text" id="id{{g.idGame}}">{{ g.description|raw|slice(0,200)}} </p>
+                            <button class="btn btn-default" onclick="showMore({{g.idGame}}, {{g.description|raw}})" >
+                                <i class="bx bx-arrow-to-bottom"></i></button>
+                        {%else %}
+                            <p class="card-text" id="id{{g.idGame}}">{{ g.description|raw}}</p>
+                            {%endif%}#}
+                        <p class="card-text" id="id{{g.idGame}}">{{ g.description|raw}}</p>
                     </div>
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item">{{ "Category : " ~ g.category }}</li>
@@ -88,8 +95,9 @@
                             <button class="btn btn-warning">Delete</button></a>
                         <a href="{{ path('fetchOnline', {'id': g.idGame}) }}" class="card-link" style="color: darkred">
                             <button class="btn btn-warning">LookUp</button></a>
-                        <a href="{{ path('translate', {'id': g.idGame
-                        }) }}"><button class="btn btn-dark"><i class="bx bx-text"></i></button></a>
+                        {#<a href="{{ path('translate', {'id': g.idGame
+                        }) }}"><button class="btn btn-dark"><i class="bx bx-text"></i></button></a>#}
+                        <button class="btn btn-dark" name="translate" onclick="trans({{ g.idGame }})"><i class="bx bx-text"></i></button>
                     </div>
                 </div>
             </div>
@@ -116,7 +124,25 @@
 
 {% endblock %}
 
-{% block title %}
+{% block script%}
+    <script>
+        function trans(id) {
+                $.ajax({
+                    url: "/TrophyHunter/public/admin/translate/"+id,
+                    type: "GET",
+                    data: {},
+                    success: function (data) {
+                        if ("1. Je ne comprends pas."!==data)
+                       $('#id'+id).empty().html(data);
+                    }
+                });
 
-{% endblock %}
+        }
+       /* function showMore(id, description) {
+            console.log(description);
+            $('#id'+id).empty().text(description);
+        }*/
+
+    </script>
+{% endblock%}
 
