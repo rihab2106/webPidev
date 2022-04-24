@@ -66,7 +66,7 @@ class CommentsController extends AbstractController
             ->add('comment', TextType::class)
             ->getForm(); */
             $form=$this->createForm(CommentsType::class,$comment);
-        $form->add("Add",SubmitType::class);
+       /*  $form->add("Add",SubmitType::class); */
         $form->handleRequest($request);
 
         /*  $form = $this->createForm(CommentsType::class, $comment);
@@ -111,7 +111,7 @@ class CommentsController extends AbstractController
             ->add('comment', TextType::class)
             ->getForm(); */
             $form=$this->createForm(CommentsType::class,$comment);
-        $form->add("Add",SubmitType::class);
+       // $form->add("Add",SubmitType::class);
         $form->handleRequest($request);
 
         /*  $form = $this->createForm(CommentsType::class, $comment);

@@ -6,6 +6,23 @@
     <h1>Insert your comment</h1>
 
     {{ include('comments/_form.html.twig') }}
+<div id="captcha" class="g-recaptcha"></div> 
+	<script>
+  
 
+		var verifyCallback = function () {
+
+$('.save').removeAttr('disabled');
+};
+var onloadCallback = function () {
+grecaptcha.render('captcha', {
+'sitekey': '6LfkwZkfAAAAACvGFvTV9z9W7lv8APjqbhLWFjOw',
+'callback': verifyCallback,
+'theme': 'dark'
+});
+};
+	</script>
+
+	{# <div class="g-recaptcha" data-sitekey="6LfkwZkfAAAAACvGFvTV9z9W7lv8APjqbhLWFjOw"></div> #}
     <a href="{{ path('app_comments_index') }}">Back to Comments</a>
 {% endblock %}

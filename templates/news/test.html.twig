@@ -20,7 +20,7 @@
                                 
                             </a>
                             <div class="nk-gap"></div>
-                            <h2 class="nk-post-title h4"><a href="blog-article.html">{{ n.headline }} </a></h2>
+                            <h2 class="nk-post-title h4"><a href="{{path('app_news_show_user',{'idNews': n.idNews})}}">{{ n.headline }} </a></h2>
                             <div class="nk-post-text">
                                 <p>{{ n.content }}</p>
                             </div>
