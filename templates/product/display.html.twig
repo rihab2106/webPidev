@@ -186,6 +186,7 @@ Additional Classes:
                 <div class="col-lg-6">
 
                     <div class="nk-product-cat-2">
+
                         <div style="color:red"class="">
                             <div class="position-absolute top-0 end-0 m-3 product-discount"><span  class="">{{ '-'~p.discount }}</span>%</div>
                         </div>
@@ -194,15 +195,16 @@ Additional Classes:
                             <img src="{{asset('uploads/product_images/' ~p.image) }}" alt="When the last &#39;natural&#39;">
                         </a>
                         <div class="nk-product-cont">
-                            <a href="{{ path('app_productfront_show', {"idProduct": p.idProduct}) }}"><h3 class="card-title cursor-pointer">{{~p.prodName }}</h3></a>
+                            <a href="{{ path('app_productfront_show', {"idProduct": p.idProduct}) }}"><h4  class="card-title cursor-pointer">{{~p.prodName }}</h4></a>
 
                             <div class="nk-gap-1"></div>
                             <div class="nk-product-rating" data-rating="4.5"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fas fa-star-half"></i></div>
                             <div class="nk-gap-1"></div>
-                            {{~p.Description }}
+{#                            {{~p.Description }}#}
 
-                            <div class="nk-gap-2"></div>
-                            <span class="me-2 text-decoration-line-through text-secondary">{{ p.price }}</span>
+                            <div class="nk-gap-2"><span class="me-2 text-decoration-line-through text-secondary">{{ "Available: "~p.Quantity }}</span></div>
+
+                            <div class="ribbon-2"><span>{{'-' ~p.discount }}</span>%</div>
                             <div class="nk-product-price">{{(p.price-(p.price*(p.discount/100))) }}</div>
                             <div class="nk-gap-1"></div>
                             <a href="{{ path('cart_add',{'idProduct': p.idProduct}) }}" class="nk-btn nk-btn-rounded nk-btn-color-dark-3 nk-btn-hover-color-main-1">Add to Cart</a>
@@ -216,7 +218,7 @@ Additional Classes:
 
             <!-- START: Pagination -->
             <div class="nk-gap-3 " ></div>
-            <div>{{ knp_pagination_render(products) }}</div>
+            <div class="nk-pagination-current" >{{ knp_pagination_render(products) }}</div>
 
             <div class="nk-pagination nk-pagination-center">
                 <a href="#"   class="nk-pagination-prev">
