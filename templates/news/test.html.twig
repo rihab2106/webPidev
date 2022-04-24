@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+	<div class="container">
+
+     <!-- START: Posts Grid -->
+            <div class="nk-blog-grid">
+                <div class="row">
+                    {% for n in news %}
+                    <div class="col-md-6">
+                        <!-- START: Post -->
+                        <div class="nk-blog-post">
+                            <a href="blog-article.html" class="nk-post-img">
+								<img src={{asset(n.img)}} alt="Smell magic in the air. Or maybe barbecue">
+                                <span class="nk-post-comments-count">4</span>
+                                
+                                <span class="nk-post-categories">
+                                    <span class="bg-main-4">NEWS</span>
+                                </span>
+                                
+                            </a>
+                            <div class="nk-gap"></div>
+                            <h2 class="nk-post-title h4"><a href="blog-article.html">{{ n.headline }} </a></h2>
+                            <div class="nk-post-text">
+                                <p>{{ n.content }}</p>
+                            </div>
+                            <div class="nk-gap"></div>
+                            <a href="blog-article.html" class="nk-btn nk-btn-rounded nk-btn-color-dark-3 nk-btn-hover-color-main-1">Read More</a>
+                            <div class="nk-post-date float-right"><span class="fa fa-calendar"></span> Sep 18, 2018</div>
+                        </div>
+                        <!-- END: Post -->
+                    </div>
+                    {% endfor %}
+                   
+                    
+                </div>
+
+                <!-- START: Pagination -->
+                <div class="nk-pagination nk-pagination-center">
+                    <a href="#" class="nk-pagination-prev">
+                        <span class="ion-ios-arrow-back"></span>
+                    </a>
+                    <nav>
+                        <a class="nk-pagination-current" href="#">1</a>
+                        <a href="#">2</a>
+                        <a href="#">3</a>
+                        <a href="#">4</a>
+                        <span>...</span>
+                        <a href="#">14</a>
+                    </nav>
+                    <a href="#" class="nk-pagination-next">
+                        <span class="ion-ios-arrow-forward"></span>
+                    </a>
+                </div>
+                <!-- END: Pagination -->
+            </div>
+    </div>
+            <!-- END: Posts Grid -->
+	{% endblock %}

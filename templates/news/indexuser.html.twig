@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}News{% endblock %}
+
+{% block body %}
+    <h1>News Section</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Img</th>
+                <th>Headline</th>
+                <th>Content</th>
+            </tr>
+        </thead>
+        <tbody> 
+        {% for news in news %}
+            <tr>
+                <td><img height=300 width=300 class="img-fluid" src="{{ asset(news.img) }}" alt="ma loadetsh"></td>
+                <td><a href="{{path('app_news_show_user',{'idNews': news.idNews})}}">{{ news.headline }}</a></td>
+                <td>{{ news.content }}</td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+
+{% endblock %}
