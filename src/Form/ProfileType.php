@@ -38,6 +38,12 @@ class ProfileType extends AbstractType
                 'label'=>'Password'
 
             ])
+            ->add('img', FileType::class,[
+                'label' => false,
+                'multiple' => true,
+                'mapped' => false,
+                'required' => false
+            ])
 
 
 

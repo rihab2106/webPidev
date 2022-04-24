@@ -101,5 +101,18 @@ class UsersRepository extends ServiceEntityRepository implements PasswordUpgrade
             ->setParameter('str', '%'.$str.'%')
             ->getResult();
     }
+    public function findAllWithSearch(?string $term)
+    {
+        $qb = $this->createQueryBuilder('e');
+        if ($term) {
+            $qb->andWhere('e.fullName LIKE :term OR e.email LIKE :term')
+                ->setParameter('term', '%' . $term . '%')
+            ;
+        }
+        return $qb
+            ->getQuery()
+            ->getResult();
+
+    }
 
 }

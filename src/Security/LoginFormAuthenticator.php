@@ -52,10 +52,12 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
         $roles=null;
         if (isset($user))
         $roles=$user->getRoles();
+        $isactive=$user->getISACTIVE();
         $credentials = [
             'email' => $request->request->get('email'),
             'password' => $request->request->get('password'),
             'roles'=> $roles,
+            'isactive'=>$isactive,
             'csrf_token' => $request->request->get('_csrf_token'),
         ];
         $request->getSession()->set(
@@ -109,11 +111,19 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
 
         VarDumper::dump($cre);
         VarDumper::dump($cre["roles"][0]);
-        if (isset($cre["roles"])) {
-            if (strcmp($cre["roles"][0], "ROLE_ADMIN") == 0)
+
+            if  (isset($cre["roles"])) {
+                if ($cre["isactive"]==1)
+                    return new RedirectResponse($this->urlGenerator->generate('app_login'));
+
+             elseif (strcmp($cre["roles"][0], "ROLE_ADMIN") == 0  )
                 return new RedirectResponse($this->urlGenerator->generate('backanduser_index'));
             return new RedirectResponse($this->urlGenerator->generate('app_groups_index'));
+
         }
+
+
+
     }
 
     

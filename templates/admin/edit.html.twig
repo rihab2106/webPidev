@@ -4,6 +4,22 @@
 
 {% block content %}
     <h1>Edit Users</h1>
+    {{ form_start(registrationForm, {'attr':{'novalidate':'novalidate'}}) }}
+    {{ form_row(registrationForm.fullName,{'value': user.fullName})  }}
+
+    {{ form_row(registrationForm.phone,{'value': user.plainPassword})  }}
+    {{ form_row(registrationForm.img,{'attr': {'class': 'form-control col-md-3'}}) }}
+    <div>
+
+
+        {{ form_end(registrationForm) }}
+    </div>
+
+
+
+
+
+
 
     {{ include('admin/_form.html.twig', {'button_label': 'Update'}) }}
 

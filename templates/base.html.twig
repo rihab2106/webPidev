@@ -78,9 +78,9 @@
 						<span class="ion-android-close"></span>
 					</button>
 
-					<p class="user-name mb-0">{{ app.user.username }}</p>
+					{#{<p class="user-name mb-0">{{ app.user.username }}</p>}#}
 					<p class="designattion mb-0">YOU ARE CONNECTED</p>
-					<a class="dropdown-item" href="javascript:;"><i class="bx bx-user"></i><span><a href="{{ path('app_profile', {'email': app.user.email }) }}">Profile</a></span></a>
+					{#{<a class="dropdown-item" href="javascript:;"><i class="bx bx-user"></i><span><a href="{{ path('app_profile', {'email': app.user.email }) }}">Profile</a></span></a>}#}
 
 					<a class="dropdown-item" href="javascript:;"><i class='bx bx-log-out-circle'></i><span><a href="{{ path('app_logout') }}">Logout</a></span></a>
 

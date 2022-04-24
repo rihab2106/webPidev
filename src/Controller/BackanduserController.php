@@ -13,21 +13,47 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Dompdf\Dompdf;
 use Dompdf\Options;
+use Knp\Component\Pager\PaginatorInterface;
 
 /**
  * @Route("/admin")
  */
 class BackanduserController extends AbstractController
 {
+//    /**
+//     * @Route("/", name="backanduser_index", methods={"GET"})
+//     */
+//    public function index(UsersRepository $usersRepository): Response
+//    {
+//        return $this->render('admin/index.html.twig', [
+//            'users' => $usersRepository->findAll(),
+//        ]);
+//    }
+
     /**
      * @Route("/", name="backanduser_index", methods={"GET"})
      */
-    public function index(UsersRepository $usersRepository): Response
-    {
+    public function index(Request $request,UsersRepository $userRepository,PaginatorInterface $paginator): Response
+    {   if($this->getUser()) {
+        if (!(in_array("ROLE_ADMIN", $this->getUser()->getRoles()))) {
+            return $this->redirectToRoute('front');
+        }
+    }
+        $search = $request->query->get("search");
+        $users = $userRepository->findAllWithSearch($search);
+        //$users= $userRepository->findAll();
+        $users=$paginator->paginate(
+            $users,// Requête contenant les données à paginer (ici les publications)
+            $request->query->getInt('page',1),// Numéro de la page en cours, passé dans l'URL, 1 si aucune page
+            2   // Nombre de résultats par page
+        );
         return $this->render('admin/index.html.twig', [
-            'users' => $usersRepository->findAll(),
+            'users' => $users,
         ]);
     }
+
+
+
     /**
      * @Route("/listp", name="backanduser_list", methods={"GET"})
      */
@@ -100,32 +126,112 @@ class BackanduserController extends AbstractController
      */
     public function edit(Request $request, Users $user, UserPasswordEncoderInterface $userPasswordEncoder,UsersRepository $usersRepository): Response
     {
-        $form = $this->createForm(ProfileType::class, $user);
+
+
+
+        if (!($this->getUser())) {
+
+
+            return $this->redirectToRoute('app_login');
+        }
+        $form = $this->createForm(ProfileType::class);
         $form->handleRequest($request);
+        $em = $this->getDoctrine()->getManager();
+
+        $user1 = $this->getUser()->getId();
+        $user = $em->getRepository(Users::class)->find($user1);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // encode the plain password
-            $user->setPassword(
-                $userPasswordEncoder->encodePassword(
-                    $user,
-                    $form->get('plainPassword')->getData()
-                )
+//            if ($encoder->isPasswordValid($user, $form["confirm"]->getData())) {
+//                if($form["newPassword"]->getData()) {
+//                    $user->setPassword($encoder->encodePassword($user, $form["newPassword"]->getData()));
+//                }
+            if ($form["fullName"]->getData()) {
+                $user->setFULLNAME($form["fullName"]->getData());
+            }
 
-            );
+            if ($form["password"]->getData()) {
+                $user->setPassword($form["password"]->getData());
+            }
+
+            $images = $form->get('img')->getData();
+
+
+                // On boucle sur les images
+                foreach($images as $image){
+                    // On génère un nouveau nom de fichier
+                    $fichier = md5(uniqid()).'.'.$image->guessExtension();
+
+                    // On copie le fichier dans le dossier uploads
+                    $image->move(
+                        $this->getParameter('images_directory'),
+                        $fichier
+                    );
+
+                    // On crée l'image dans la base de données
+
+                    $user->setImg($fichier);
 
 
 
-            $usersRepository->add($user);
+//
+//                if($form["img"]->getData()) {
+//                $user->setImage($form["img"]->getData());
+//            }
+                $entityManager = $this->getDoctrine()->getManager();
+                $entityManager->persist($user);
+                $entityManager->flush();
+                return $this->redirectToRoute('backanduser_edit');
 
-            return $this->redirectToRoute('backanduser_index', [], Response::HTTP_SEE_OTHER);
+
+                //}
+            }
+            return $this->redirectToRoute('app_logout');
+
 
         }
-
-        return $this->render('admin/edit.html.twig', [
-            'user' => $user,
-            'form' => $form->createView(),
+        return $this->render('bachendprofile/profile.html.twig', ['registrationForm' => $form->createView(),
+            'user' => $this->getUser(),
         ]);
     }
+
+
+
+
+
+
+
+
+
+
+
+
+//        $form = $this->createForm(ProfileType::class, $user);
+//        $form->handleRequest($request);
+//
+//        if ($form->isSubmitted() && $form->isValid()) {
+//            // encode the plain password
+//            $user->setPassword(
+//                $userPasswordEncoder->encodePassword(
+//                    $user,
+//                    $form->get('plainPassword')->getData()
+//                )
+//
+//            );
+//
+//
+//
+//            $usersRepository->add($user);
+//
+//            return $this->redirectToRoute('backanduser_index', [], Response::HTTP_SEE_OTHER);
+//
+//        }
+//
+//        return $this->render('admin/edit.html.twig', [
+//            'user' => $user,
+//            'form' => $form->createView(),
+//        ]);
+    //}
 
     /**
      * @Route("/{id}", name="backanduser_delete", methods={"POST"})
@@ -174,7 +280,28 @@ class BackanduserController extends AbstractController
         ]);
     }
 
-
+    /**
+     * @Route("/ban/{id}", name="ban",)
+     */
+    public function ban($id): Response
+    {
+        $user=$this->getDoctrine()->getRepository(Users::class)->find($id);
+        $user->setISACTIVE(1);
+        $this->getDoctrine()->getManager()->persist($user);
+        $this->getDoctrine()->getManager()->flush();
+        return $this->redirectToRoute('backanduser_index');
+    }
+    /**
+     * @Route("/unban/{id}", name="unban",)
+     */
+    public function unban($id): Response
+    {
+        $user=$this->getDoctrine()->getRepository(Users::class)->find($id);
+        $user->setISACTIVE(0);
+        $this->getDoctrine()->getManager()->persist($user);
+        $this->getDoctrine()->getManager()->flush();
+        return $this->redirectToRoute('backanduser_index');
+    }
 
 
 }

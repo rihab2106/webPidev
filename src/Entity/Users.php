@@ -65,6 +65,7 @@ class Users implements UserInterface
 
 
 
+
     public function getId(): ?int
     {
         return $this->id;
@@ -160,12 +161,12 @@ class Users implements UserInterface
 
     public function getISACTIVE(): ?int
     {
-        return $this->ISACTIVE;
+        return $this->isactive;
     }
 
     public function setISACTIVE(int $ISACTIVE): self
     {
-        $this->ISACTIVE = $ISACTIVE;
+        $this->isactive = $ISACTIVE;
 
         return $this;
     }
@@ -205,4 +206,17 @@ class Users implements UserInterface
 
         return $this;
     }
+    protected $captchaCode;
+
+    public function getCaptchaCode()
+    {
+        return $this->captchaCode;
+    }
+
+    public function setCaptchaCode($captchaCode)
+    {
+        $this->captchaCode = $captchaCode;
+    }
+
+
 }

@@ -20,6 +20,10 @@
             </tr>
         </thead>
         <tbody>
+        <form role="search" class="sr-input-func">
+            <input type="text" placeholder="Search..." class="search-int form-control" name="search">
+            <a href="#"><i class="fa fa-search"></i></a>
+        </form>
         {% for user in users %}
             <tr>
                 <td>{{ user.id }}</td>
@@ -34,6 +38,9 @@
                 <td>
                     <a href="{{ path('backanduser_show', {'id': user.id}) }}">show</a>
                     <a href="{{ path('backanduser_edit', {'id': user.id}) }}">edit</a>
+                    <a class="btn btn-warning"  href="{{ path('ban', {'id': user.id}) }}">Ban</a>
+                    <a class="btn btn-warning"  href="{{ path('unban', {'id': user.id}) }}">UnBan</a>
+
                 </td>
             </tr>
         {% else %}
@@ -41,9 +48,14 @@
                 <td colspan="10">no records found</td>
             </tr>
         {% endfor %}
+        <div class="navigation">
+            {{ knp_pagination_render(users) }}
+        </div>
         </tbody>
     </table>
 
     <a href="{{ path('backanduser_new') }}">Create new</a>
     <a href="{{ path('backanduser_list') }}">dowloads</a>
+
+
 {% endblock %}
