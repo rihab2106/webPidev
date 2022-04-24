@@ -13,10 +13,10 @@ class PaymentType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('cardnumber')
-            ->add('cvv')
-            ->add('expiration')
-            ->add('nameincard')
+            ->add('cardnumber', null ,['label' => 'Card Number '])
+            ->add('cvv',null ,['label' => 'CVV'])
+            ->add('expiration',null ,['label' => 'Expiration Date'])
+            ->add('nameincard',null ,['label' => 'Name on the card '])
             ->add('Place order',SubmitType::class)
         ;
     }

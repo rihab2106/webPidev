@@ -1,12 +1,16 @@
 <?php
 
 namespace App\Controller;
+use App\Entity\Category;
 use App\Entity\Product;
 use App\Form\ProductType;
 use App\Repository\ProductRepository;
-use Doctrine\DBAL\Types\TextType;
+use ContainerB5MtGwC\PaginatorInterface_82dac15;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+
 use Doctrine\ORM\EntityManagerInterface;
 
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -26,17 +30,43 @@ class ProductfrontController extends AbstractController
         ]);
     }
     /**
-     * @Route("/display", name="app_product_display", methods={"GET"})
+     * @Route("/display", name="app_product_display", methods={"GET","POST"})
      */
-    public function display(EntityManagerInterface $entityManager): Response
+    public function display(ProductRepository $productRepository,EntityManagerInterface $entityManager,PaginatorInterface $paginator,Request $request): Response
     {
+       $product = new Product();
+       $form =$this->createFormBuilder($product)
+           ->add('prodName',TextType::class,array('attr'=>array('class'=>'form-control')))->getForm();
+       $form->handleRequest($request);
+       if($form->isSubmitted() ){
+           $term =$product->getProdName();
+           $allprod =$productRepository->search($term);
 
-        $products = $entityManager
-            ->getRepository(Product::class)
-            ->findAll();
+
+       }else{
+           $allprod =$productRepository->findAll();
+       }
+
+
+
+        $repCat = $this->getDoctrine()->getRepository(Category::class);
+        $prod = $entityManager->getRepository(Product::class)->findAll();
+        $products = $paginator->paginate(
+            $prod,
+             /* query NOT result */
+            $request->query->getInt('page', 1), /*page number*/
+            4 /*limit per page*/
+        );
+
+
 
         return $this->render('product/display.html.twig', [
             'products' => $products,
+
+             "form"=>$form->createView()
+
+
+
         ]);
     }
     /**
@@ -51,7 +81,7 @@ class ProductfrontController extends AbstractController
     /**
      * @Route("/search", name="app_product_search")
      */
-    public function searchbyname(Request $request)
+    public function searchbyname(Request $request):Response
     {
         $em=$this->getDoctrine()->getManager();
         $product = $em->getRepository(Product::class);
@@ -63,10 +93,16 @@ class ProductfrontController extends AbstractController
         if($form->isSubmitted()){
             return $this->render("product/display.html.twig",[
                 "cat" => $repCat->findAll(),
-                "product" => $product->findByName($form->getData()["prodName"]),
+                "product" => $product->findByName($form["prodName"]->getData()),
                 "search"=>$form->createView()
             ]);
+
         }
+        return $this->render("product/display.html.twig",[
+            "cat" => $repCat->findAll(),
+            "product" => $product->findAll(),
+            "search"=>$form->createView()
+        ]);
 
     }
 

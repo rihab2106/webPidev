@@ -9,7 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Twilio\Rest\Client;
+
 
 /**
  * @Route("/product")
@@ -45,17 +45,7 @@ class ProductController extends AbstractController
             $em = $this->getDoctrine()->getManager();
             $em->persist($product);
             $em->flush();
-            $sid    = "AC97b9b1afb3b68605a0dbec9ce9567174";
-            $token  = "bedb866cd96c88f020e87879b89a749a";
-            $twilio = new Client($sid, $token);
 
-            $message = $twilio->messages
-                ->create("+21628564711", // to
-                    array(
-                        "messagingServiceSid" => "MGe9c9b8c623ffc333c419a522028b894f",
-                        "body" => "Your message"
-                    )
-                );
 
 
 

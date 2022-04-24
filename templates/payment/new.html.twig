@@ -32,7 +32,7 @@
         <!-- END: Breadcrumbs -->
 
         {{ form_start(formpay,{attr:{novalidate:'invalid'}}) }}
-        {{ form_widget(formpay) }}
+{#        {{ form_rest(formpay) }}#}
 
 
                 <div class="container">
@@ -59,39 +59,30 @@
                                     <div class="nk-gap-1"></div>
                                     <div class="row vertical-gap">
                                         <div class="col-sm-6">
-                                            <label for="email">Email Address <span class="text-main-1">*</span>:</label>
-                                            <input type="email" class="form-control required" name="email" id="email">
+                                            {{ form_row(formpay.cardnumber) }}
                                         </div>
                                         <div class="col-sm-6">
-                                            <label for="phone">Phone <span class="text-main-1">*</span>:</label>
-                                            <input type="tel" class="form-control required" name="phone" id="phone">
+                                            {{ form_row(formpay.cvv) }}
                                         </div>
                                     </div>
 
                                     <div class="nk-gap-1"></div>
-                                    <label for="country-sel">Country <span class="text-main-1">*</span>:</label>
-                                    <select name="country" class="form-control required" id="country-sel">
-                                        <option value="">Select a country...</option>
-                                    </select>
+
                                 </div>
 
                                 <div class="col-lg-6">
-                                    <label for="address">Address <span class="text-main-1">*</span>:</label>
-                                    <input type="text" class="form-control required" name="address" id="address">
+
 
                                     <div class="nk-gap-1"></div>
-                                    <label for="city">Town / City <span class="text-main-1">*</span>:</label>
-                                    <input type="text" class="form-control required" name="city" id="city">
+
 
                                     <div class="nk-gap-1"></div>
                                     <div class="row vertical-gap">
                                         <div class="col-sm-6">
-                                            <label for="state">State / Country <span class="text-main-1">*</span>:</label>
-                                            <input type="text" class="form-control required" name="state" id="state">
+                                           {{ form_row(formpay.expiration) }}
                                         </div>
                                         <div class="col-sm-6">
-                                            <label for="zip">Postcode / ZIP <span class="text-main-1">*</span>:</label>
-                                            <input type="tel" class="form-control required" name="zip" id="zip">
+                                            {{ form_row(formpay.nameincard) }}
                                         </div>
                                     </div>
 
@@ -99,10 +90,12 @@
                                     <label class="custom-control custom-checkbox">
                                         <input type="checkbox" class="custom-control-input">
                                         <span class="custom-control-indicator"></span>
-                                        Ship to different address?
+
                                     </label>
                                 </div>
                             </div>
+                            {{ form_widget(formpay) }}
+                            {{ form_end(formpay) }}
                         </form>
                         <!-- END: Billing Details -->
 

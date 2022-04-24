@@ -6,6 +6,7 @@ use App\Entity\Product;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
+use Doctrine\ORM\Query;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -90,4 +91,19 @@ class ProductRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
-}
+    /**
+     * return Query
+     *
+     */
+    public function  findAllVisible():Query{
+        return $this->findAllVisibleQuery()->getQuery();
+    }
+
+public function search($term)
+{
+    return $this->createQueryBuilder('Product')
+        ->andWhere('Product.prodName LIKE :prod')
+        ->setParameter('prod', '%' .$term. '%')
+        ->getQuery()
+        ->execute();
+}}

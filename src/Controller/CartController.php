@@ -30,11 +30,15 @@ class CartController extends AbstractController
         foreach ($completecart as $item) {
             $totalproduct =$item['Product']->getPrice()+($item['Product']->getPrice() * (($item['Product']->getDiscount())/100));
             $total += $totalproduct;
+
         }
         return $this->render('cart/display.html.twig', [
             'items' => $completecart,
-            'total' => $total
+            'total' => $total,
+            'completecard'=>$completecart
+
         ]);
+
     }
     /**
      * @Route("/cart/add/{idProduct}", name="cart_add")
