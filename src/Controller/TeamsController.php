@@ -13,40 +13,75 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Routing\Annotation\Route;
 use Dompdf\Dompdf;
 use Dompdf\Options;
-
+use App\Notifications\CreationCompteNotification;
+use Knp\Component\Pager\PaginatorInterface;
 
 class TeamsController extends AbstractController
 {
     /**
-     * @Route("/teams", name="app_teams")
+     * @var CreationCompteNotification
      */
-    public function index(): Response
+    private $notify_creation;
+
+
+    public function __construct(CreationCompteNotification $notify_creation)
     {
-        return $this->render('teams/index.html.twig', [
-            'controller_name' => 'TeamsController',
+        $this->notify_creation = $notify_creation;
+    }
+
+    /**
+     * @Route("/teams", name="teams")
+     */
+    public function index(Request $request, PaginatorInterface $paginator): Response
+    {
+        $donnees = $this->getDoctrine()->getRepository(Teams::class);
+
+        $teams = $paginator->paginate(
+            $donnees->findAll(),
+            $request->query->getInt('page', 1),
+            5
+        );
+        return $this->render('teams/displayTeamsFront.html.twig', [
+            'teams' => $teams
         ]);
+
     }
 
 
     /**
      * @Route("/displayTeams", name="displayTeams")
      */
-    public function display()
+    public function display(Request $request, PaginatorInterface $paginator)
     {
-        $rep = $this->getDoctrine()->getRepository(Teams::class);
+
+        $donnees = $this->getDoctrine()->getRepository(Teams::class);
+
+        $teams = $paginator->paginate(
+            $donnees->findAll(),
+            $request->query->getInt('page', 1),
+            5
+        );
         return $this->render('teams/displayTeams.html.twig', [
-            'teams' => $rep->findAll()
+            'teams' => $teams
         ]);
     }
 
     /**
      * @Route("/displayTeamsFront", name="displayTeamsFront")
      */
-    public function displayFront()
+    public function displayFront(Request $request, PaginatorInterface $paginator)
     {
-        $rep = $this->getDoctrine()->getRepository(Teams::class);
+
+
+        $donnees = $this->getDoctrine()->getRepository(Teams::class);
+
+        $teams = $paginator->paginate(
+            $donnees->findAll(),
+            $request->query->getInt('page', 1),
+            5
+        );
         return $this->render('teams/displayTeamsFront.html.twig', [
-            'teams' => $rep->findAll()
+            'teams' => $teams
         ]);
     }
 
@@ -65,24 +100,13 @@ class TeamsController extends AbstractController
             $mng->persist($c);
             $mng->flush();
 
+            $request->getSession()->getFlashBag()->add('info','added successfuly');
+            $this->addFlash(
+                'info',
+                'Added successfuly!'
+         );
 
-
-            $mail=[];
-
-
-            $msg= $c->getTeamName();
-
-            $message = (new \Swift_Message("New team is added with a name  : ".$msg))
-
-                ->setFrom('viatores10@gmail.com')
-                ->setTo('adtrophyhun@gmail.com')
-                ->setBody(
-                    $this->renderView(
-                        'teams/contact.html.twig',compact('new')
-                    ),
-                    'text/html'
-                ) ;
-            $mailer->send($message);
+            $this->notify_creation->notify();
 
 
             return $this->redirectToRoute("displayTeams");
@@ -96,7 +120,7 @@ class TeamsController extends AbstractController
     /**
      * @Route("/addTeamsFront", name="addTeamsFront")
      */
-    public function addFront(Request $request)
+    public function addFront(Request $request,\Swift_Mailer $mailer)
     {
         $mng = $this->getDoctrine()->getManager();
         $c = new Teams();
@@ -108,6 +132,26 @@ class TeamsController extends AbstractController
             $mng->persist($c);
             $mng->flush();
 
+            $mail=[];
+
+
+            $msg= $c->getTeamName();
+
+
+            $message = (new \Swift_Message("New team is added with a name  : ".$msg))
+
+                ->setFrom('trophyhunterteamleader@gmail.com')
+                ->setTo('adtrophyhun@gmail.com')
+                ->setBody(
+                    $this->renderView(
+                        'teams/contact.html.twig',compact('c')
+                    ),
+                    'text/html'
+                ) ;
+            $mailer->send($message);
+
+
+
             $this->addFlash(
                 'info','Added successfuly!'
             );
@@ -115,6 +159,8 @@ class TeamsController extends AbstractController
             return $this->redirectToRoute("displayTeamsFront");
 
         }
+
+
         return $this->render('teams/addTeamsFront.html.twig', [
             "formf" => $formf->createView()
         ]);

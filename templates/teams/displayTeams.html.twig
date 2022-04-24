@@ -1,6 +1,12 @@
 {% extends 'back/BackBase.html.twig' %}
 
 {% block body %}
+
+    {% for message in app.flashes('info') %}
+        <div class="alert alert-success">
+            {{message}}
+        </div>
+    {%endfor %}
     <a href="" class="btn btn-danger" id="deleteTrophy">Delete</a>
 
     <form action="{{ path('deleteTeams') }}" method="post">
@@ -36,27 +42,7 @@
     </script>
 {% endblock %}
 {% block content %}
-    {#<script>
 
-        $("#checkAll").click(function () {
-            $('input:checkbox').not(this).prop('checked', this.checked)
-        });
-        $("#delete").click(function() {
-            $.ajax({
-                url: "/deleteTrophies",
-                method: "POST",
-                dataType: "json",
-                data: {"trophies": {{ trophies }}}
-                async: true,
-                success: function (data, status){
-                    {% set trophies=data %}
-                },
-                error: function(xhr, textStatus, errorThrown) {
-                    alert('Ajax request failed.');
-                }
-            })
-        })
-    </script>#}
 
     <div>
         <p style="100px" > <input  id="myInput"  type="text" placeholder="search">
@@ -130,7 +116,11 @@
             });
         });
     </script>
-{% endblock %}
-{% block title %}
 
+    <div class="nk-pagination-center" class="nk-pagination-prev">
+
+        {{ knp_pagination_render(teams) }}
+
+    </div>
 {% endblock %}
+
