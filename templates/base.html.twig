@@ -78,9 +78,9 @@
 						<span class="ion-android-close"></span>
 					</button>
 
-					{#{<p class="user-name mb-0">{{ app.user.username }}</p>}#}
+					<p class="user-name mb-0">{{ app.user.username }}</p>
 					<p class="designattion mb-0">YOU ARE CONNECTED</p>
-					{#{<a class="dropdown-item" href="javascript:;"><i class="bx bx-user"></i><span><a href="{{ path('app_profile', {'email': app.user.email }) }}">Profile</a></span></a>}#}
+					<a class="dropdown-item" href="javascript:;"><i class="bx bx-user"></i><span><a href="{{ path('app_profile', {'email': app.user.email }) }}">Profile</a></span></a>
 
 					<a class="dropdown-item" href="javascript:;"><i class='bx bx-log-out-circle'></i><span><a href="{{ path('app_logout') }}">Logout</a></span></a>
 
@@ -93,7 +93,7 @@
 		</div>
 	</div>
 	<!-- END: Login Modal -->
-	<!-- END: Login Modal -->
+
 
 	<!-- Object Fit Polyfill -->
 	<script src="{{ asset("assets/vendor/object-fit-images/dist/ofi.min.js") }}"></script>
@@ -155,8 +155,19 @@
 	<script src="{{ asset("assets/js/goodgames.min.js") }}"></script>
 	<script src="{{ asset("assets/js/goodgames-init.js") }}"></script>
 	<!-- END: Scripts -->
+	<!-- Flashy Notifier here nermine-->
+
+
+	<script src="{{ asset('FlashyNotifier/js/flashy.js') }}"></script>
+	<script src="//code.jquery.com/jquery.js"></script>
+
+	<!-- Flashy Notifier here - nermine -->
+
+
+	<link rel="stylesheet" href="{{ asset('FlashyNotifier/css/flashy.css') }}">
 
 
 {% endblock %}
+{{ include('@MercurySeriesFlashy/flashy.html.twig') }}
 </body>
 </html>

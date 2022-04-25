@@ -12,6 +12,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use MercurySeries\FlashyBundle\FlashyNotifier;
 
 /**
  * @Route("/user")
@@ -63,9 +64,12 @@ class UsersController extends AbstractController
     public function showOne($email, Users $user): Response
     {
         $user=$this->getDoctrine()->getRepository(Users::class)->findOneBy(['email' => $email]);
+
+//        $flashyNotifier->primary('Thanks for signing up!', 'http://your-awesome-link.com');
         return $this->render('profile.html.twig', [
             'user' => $user,
         ]);
+
     }
 
     /**

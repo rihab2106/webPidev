@@ -48,14 +48,16 @@
                 <td colspan="10">no records found</td>
             </tr>
         {% endfor %}
-        <div class="navigation">
-            {{ knp_pagination_render(users) }}
-        </div>
-        </tbody>
-    </table>
 
-    <a href="{{ path('backanduser_new') }}">Create new</a>
-    <a href="{{ path('backanduser_list') }}">dowloads</a>
+        </tbody>
+
+    </table>
+    <div class="navigation">
+        {{ knp_pagination_render(users) }}
+    </div>
+    <p><a href="{{ path('backanduser_new') }}">Create new</a></p>
+    <a href="{{ path('backanduser_list') }}">Upload list of users</a>
+
 
 
 {% endblock %}

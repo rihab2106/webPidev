@@ -1,7 +1,7 @@
-{% extends 'base.html.twig' %}
+{% extends 'requestemail.twig' %}
 
 {% block title %}Reset your password{% endblock %}
-
+{% form_theme requestForm 'bootstrap_4_layout.html.twig' %}
 {% block body %}
     {% for flash_error in app.flashes('reset_password_error') %}
         <div class="alert alert-danger" role="alert">{{ flash_error }}</div>

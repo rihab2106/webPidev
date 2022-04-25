@@ -6,6 +6,7 @@ use App\Entity\Users;
 use App\Form\UsersType;
 use App\Form\ProfileType;
 use App\Repository\UsersRepository;
+use MercurySeries\FlashyBundle\FlashyNotifier;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -14,6 +15,7 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Dompdf\Dompdf;
 use Dompdf\Options;
 use Knp\Component\Pager\PaginatorInterface;
+
 
 /**
  * @Route("/admin")
@@ -47,10 +49,51 @@ class BackanduserController extends AbstractController
             $request->query->getInt('page',1),// Numéro de la page en cours, passé dans l'URL, 1 si aucune page
             2   // Nombre de résultats par page
         );
+
         return $this->render('admin/index.html.twig', [
             'users' => $users,
         ]);
     }
+//    /**
+//     * @Route("/{id}", name="stat")
+//     */
+//    public function evenement_stat(UsersRepository $userRepository): Response
+//    {
+//        $nbrs[] = array();
+//
+//        $e1 = $userRepository->find_Nb_Rec_Par_Status("Baned");
+//        dump($e1);
+//        $nbrs[] = $e1[0][1];
+//
+//
+//        $e2 = $userRepository->find_Nb_Rec_Par_Status("Ubaned");
+//        dump($e2);
+//        $nbrs[] = $e2[0][1];
+//
+//        /*
+//                $e3=$activiteRepository->find_Nb_Rec_Par_Status("Diffence");
+//                dump($e3);
+//                $nbrs[]=$e3[0][1];
+//        */
+//
+//        dump($nbrs);
+//        reset($nbrs);
+//        dump(reset($nbrs));
+//        $key = key($nbrs);
+//        dump($key);
+//        dump($nbrs[$key]);
+//
+//        unset($nbrs[$key]);
+//
+//        $nbrss = array_values($nbrs);
+//        dump(json_encode($nbrss));
+//
+//        return $this->render('admin/index.html.twig', [
+//            'nbr' => json_encode($nbrss),
+//        ]);
+//    }
+
+
 
 
 
@@ -128,110 +171,34 @@ class BackanduserController extends AbstractController
     {
 
 
-
-        if (!($this->getUser())) {
-
-
-            return $this->redirectToRoute('app_login');
-        }
-        $form = $this->createForm(ProfileType::class);
+        $form = $this->createForm(ProfileType::class, $user);
         $form->handleRequest($request);
-        $em = $this->getDoctrine()->getManager();
-
-        $user1 = $this->getUser()->getId();
-        $user = $em->getRepository(Users::class)->find($user1);
 
         if ($form->isSubmitted() && $form->isValid()) {
-//            if ($encoder->isPasswordValid($user, $form["confirm"]->getData())) {
-//                if($form["newPassword"]->getData()) {
-//                    $user->setPassword($encoder->encodePassword($user, $form["newPassword"]->getData()));
-//                }
-            if ($form["fullName"]->getData()) {
-                $user->setFULLNAME($form["fullName"]->getData());
-            }
+            // encode the plain password
+            $user->setPassword(
+                $userPasswordEncoder->encodePassword(
+                    $user,
+                    $form->get('plainPassword')->getData()
+                )
 
-            if ($form["password"]->getData()) {
-                $user->setPassword($form["password"]->getData());
-            }
-
-            $images = $form->get('img')->getData();
-
-
-                // On boucle sur les images
-                foreach($images as $image){
-                    // On génère un nouveau nom de fichier
-                    $fichier = md5(uniqid()).'.'.$image->guessExtension();
-
-                    // On copie le fichier dans le dossier uploads
-                    $image->move(
-                        $this->getParameter('images_directory'),
-                        $fichier
-                    );
-
-                    // On crée l'image dans la base de données
-
-                    $user->setImg($fichier);
+            );
 
 
 
-//
-//                if($form["img"]->getData()) {
-//                $user->setImage($form["img"]->getData());
-//            }
-                $entityManager = $this->getDoctrine()->getManager();
-                $entityManager->persist($user);
-                $entityManager->flush();
-                return $this->redirectToRoute('backanduser_edit');
+            $usersRepository->add($user);
 
-
-                //}
-            }
-            return $this->redirectToRoute('app_logout');
-
+            return $this->redirectToRoute('backanduser_index', [], Response::HTTP_SEE_OTHER);
 
         }
-        return $this->render('bachendprofile/profile.html.twig', ['registrationForm' => $form->createView(),
-            'user' => $this->getUser(),
+
+        return $this->render('admin/edit.html.twig', [
+            'user' => $user,
+            'form' => $form->createView(),
         ]);
+
     }
 
-
-
-
-
-
-
-
-
-
-
-
-//        $form = $this->createForm(ProfileType::class, $user);
-//        $form->handleRequest($request);
-//
-//        if ($form->isSubmitted() && $form->isValid()) {
-//            // encode the plain password
-//            $user->setPassword(
-//                $userPasswordEncoder->encodePassword(
-//                    $user,
-//                    $form->get('plainPassword')->getData()
-//                )
-//
-//            );
-//
-//
-//
-//            $usersRepository->add($user);
-//
-//            return $this->redirectToRoute('backanduser_index', [], Response::HTTP_SEE_OTHER);
-//
-//        }
-//
-//        return $this->render('admin/edit.html.twig', [
-//            'user' => $user,
-//            'form' => $form->createView(),
-//        ]);
-    //}
 
     /**
      * @Route("/{id}", name="backanduser_delete", methods={"POST"})
@@ -260,6 +227,7 @@ class BackanduserController extends AbstractController
      */
     public function editProfile(Request $request, Users $user, UserPasswordEncoderInterface $userPasswordEncoder, UsersRepository $userRepository): Response
     {
+
         $form = $this->createForm(ProfileType::class, $user);
         $form->handleRequest($request);
 
@@ -278,30 +246,32 @@ class BackanduserController extends AbstractController
             'user' => $user,
             'form' => $form->createView(),
         ]);
+
     }
 
     /**
      * @Route("/ban/{id}", name="ban",)
      */
-    public function ban($id): Response
+    public function ban($id,FlashyNotifier $flashyNotifier): Response
     {
         $user=$this->getDoctrine()->getRepository(Users::class)->find($id);
         $user->setISACTIVE(1);
         $this->getDoctrine()->getManager()->persist($user);
         $this->getDoctrine()->getManager()->flush();
+        $flashyNotifier->primary('the user is baned!', 'http://your-awesome-link.com');
         return $this->redirectToRoute('backanduser_index');
     }
     /**
      * @Route("/unban/{id}", name="unban",)
      */
-    public function unban($id): Response
+    public function unban($id,FlashyNotifier $flashyNotifier): Response
     {
         $user=$this->getDoctrine()->getRepository(Users::class)->find($id);
         $user->setISACTIVE(0);
         $this->getDoctrine()->getManager()->persist($user);
         $this->getDoctrine()->getManager()->flush();
+        $flashyNotifier->primary('the user is Unbaned!', 'http://your-awesome-link.com');
         return $this->redirectToRoute('backanduser_index');
     }
-
 
 }

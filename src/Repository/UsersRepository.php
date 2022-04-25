@@ -115,4 +115,15 @@ class UsersRepository extends ServiceEntityRepository implements PasswordUpgrade
 
     }
 
+    public function find_Nb_Rec_Par_Status($type)
+    {
+
+        $em = $this->getEntityManager();
+
+        $query = $em->createQuery(
+            'SELECT DISTINCT  count(r.id) FROM   App\Entity\Users r  where r.isactive = :isactive   '
+        );
+        $query->setParameter('isactive', $type);
+        return $query->getResult();
+    }
 }

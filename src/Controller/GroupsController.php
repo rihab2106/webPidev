@@ -9,6 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use MercurySeries\FlashyBundle\FlashyNotifier;
 
 /**
  * @Route("/groups")
@@ -18,8 +19,9 @@ class GroupsController extends AbstractController
     /**
      * @Route("/", name="app_groups_index", methods={"GET"})
      */
-    public function index(GroupsRepository $groupsRepository): Response
+    public function index(GroupsRepository $groupsRepository ,FlashyNotifier $flashyNotifier): Response
     {
+        $flashyNotifier->primary('Thanks for signing in!', 'http://your-awesome-link.com');
         return $this->render('groups/index.html.twig', [
             'groups' => $groupsRepository->findAll(),
         ]);
