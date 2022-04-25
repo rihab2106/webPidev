@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Competitions;
 use App\Entity\Teams;
 use App\Form\CompetitionsFormType;
+use App\Repository\CompetitionsRepository;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
@@ -206,6 +207,15 @@ class CompetitionsController extends AbstractController
             "teams"=> $rep->findBy(["idCompetion"=>$repc->find($id)])
 
             ]);
+    }
+
+
+    /**
+     * @Route ("tri",name="tri")
+     */
+    function OrderByName(CompetitionsRepository $repository){
+        $competition=$repository->OrderByName();
+        return $this->render("competitions/displayCompetitions.html.twig",['competitions'=>$competition]);
     }
 
 

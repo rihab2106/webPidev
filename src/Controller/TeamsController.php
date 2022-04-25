@@ -48,6 +48,8 @@ class TeamsController extends AbstractController
     }
 
 
+
+
     /**
      * @Route("/displayTeams", name="displayTeams")
      */
@@ -59,7 +61,7 @@ class TeamsController extends AbstractController
         $teams = $paginator->paginate(
             $donnees->findAll(),
             $request->query->getInt('page', 1),
-            5
+            8
         );
         return $this->render('teams/displayTeams.html.twig', [
             'teams' => $teams
@@ -88,7 +90,7 @@ class TeamsController extends AbstractController
     /**
      * @Route("/addTeams", name="addTeams")
      */
-    public function add(Request $request,\Swift_Mailer $mailer)
+    public function add(Request $request, \Swift_Mailer $mailer)
     {
         $mng = $this->getDoctrine()->getManager();
         $c = new Teams();
@@ -100,11 +102,10 @@ class TeamsController extends AbstractController
             $mng->persist($c);
             $mng->flush();
 
-            $request->getSession()->getFlashBag()->add('info','added successfuly');
             $this->addFlash(
                 'info',
                 'Added successfuly!'
-         );
+            );
 
             $this->notify_creation->notify();
 
@@ -120,7 +121,7 @@ class TeamsController extends AbstractController
     /**
      * @Route("/addTeamsFront", name="addTeamsFront")
      */
-    public function addFront(Request $request,\Swift_Mailer $mailer)
+    public function addFront(Request $request, \Swift_Mailer $mailer)
     {
         $mng = $this->getDoctrine()->getManager();
         $c = new Teams();
@@ -129,38 +130,29 @@ class TeamsController extends AbstractController
         $formf->handleRequest($request);
         if ($formf->isSubmitted() && $formf->isValid()) {
             $c = $formf->getData();
+
             $mng->persist($c);
             $mng->flush();
 
-            $mail=[];
+            $this->addFlash(
+                'danger', 'Added successfuly!'
+            );
 
-
-            $msg= $c->getTeamName();
-
-
-            $message = (new \Swift_Message("New team is added with a name  : ".$msg))
-
+            $mail = [];
+            $msg = $c->getTeamName();
+            $message = (new \Swift_Message("New team is added with a name  : " . $msg))
                 ->setFrom('trophyhunterteamleader@gmail.com')
                 ->setTo('adtrophyhun@gmail.com')
                 ->setBody(
                     $this->renderView(
-                        'teams/contact.html.twig',compact('c')
+                        'teams/contact.html.twig', compact('c')
                     ),
                     'text/html'
-                ) ;
+                );
             $mailer->send($message);
 
-
-
-            $this->addFlash(
-                'info','Added successfuly!'
-            );
-
             return $this->redirectToRoute("displayTeamsFront");
-
         }
-
-
         return $this->render('teams/addTeamsFront.html.twig', [
             "formf" => $formf->createView()
         ]);
@@ -270,7 +262,6 @@ class TeamsController extends AbstractController
 
 
     }
-
 
 
 }

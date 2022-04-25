@@ -83,4 +83,12 @@ class CompetitionsRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
+
+
+    public function OrderByName()
+    {
+        $em = $this->getEntityManager();
+        $query = $em->createQuery('select n from App\Entity\Competitions n order by n.gameName DESC');
+        return $query->getResult();
+    }
 }
