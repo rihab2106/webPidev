@@ -136,4 +136,10 @@ public function search(SearchInfo $search): \Knp\Component\Pager\Pagination\Pagi
     return $this->paginator->paginate(
         $query,$search->page,4
     );
-}}
+}
+//public function change($id){
+//    return $this->getEntityManager()
+//        ->createQuery("Update App\Entity\Product p set p.Quantity=p.Quantity-1 where ")
+//}
+
+}
