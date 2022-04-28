@@ -1,8 +1,14 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    {% for message in app.flashes('info') %}
-        <div class="alert alert-success">
+
+    {% for message in app.flashes('warning') %}
+        <div class="alert alert-warning">
+            {{message}}
+        </div>
+    {%endfor %}
+    {% for message in app.flashes('danger') %}
+        <div class="alert alert-danger">
             {{message}}
         </div>
     {%endfor %}
@@ -44,6 +50,21 @@
 {% endblock %}
 
 {% block content %}
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success">
+            {{message}}
+        </div>
+    {%endfor %}
+    {% for message in app.flashes('info') %}
+        <div class="alert alert-info">
+            {{message}}
+        </div>
+    {%endfor %}
+    {% for message in app.flashes('danger') %}
+        <div class="alert alert-danger">
+            {{message}}
+        </div>
+    {%endfor %}
     <a href="{{ path('addTeamsFront') }}">
         <button class="nk-btn nk-btn-rounded nk-btn-color-dark-3 nk-btn-hover-color-info">Add team</button></a>
     {% for t in  teams %}
