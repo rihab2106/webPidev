@@ -32,7 +32,11 @@ class CartController extends AbstractController
         $total =0.0;
         foreach ($completecart as $item) {
             $totalproduct =$item['Product']->getPrice()+($item['Product']->getPrice() * (($item['Product']->getDiscount())/100));
-$item['Product']->setQuantity(($item['Product']->getQuantity())-1);
+            if(($item['Product']->getQuantity())>0){
+
+                $item['Product']->setQuantity(($item['Product']->getQuantity())-1);
+
+            }
 $this->getDoctrine()->getManager()->flush();
 if (($item['Product']->getQuantity())==0){
     $sid    = "AC97b9b1afb3b68605a0dbec9ce9567174";
@@ -46,6 +50,7 @@ if (($item['Product']->getQuantity())==0){
                 "body" => "Product ".$item['Product']->getprodName()."is expired , please delete it"
             )
         );
+//    return $this->redirectToRoute("app_product_display");
 }
             $total += $totalproduct;
 
@@ -86,5 +91,45 @@ if (($item['Product']->getQuantity())==0){
      }
      $session -> set('cart', $cart);
      return $this-> redirectToRoute("app_cart");
+
+
     }
+
+
+
+
+
+
+//    /**
+//     * @Route("/display/c", name="cart_show")
+//     */
+//    public function indexcart(SessionInterface $session, ProductRepository $ProductRepository )
+//    {
+//        $cart = $session->get('cart',[]);
+//        $completecart= [];
+//        foreach ($cart as $idProduct => $quantity){
+//            $completecart[]= [
+//                'Product'=> $ProductRepository->find($idProduct),
+//                'quantity'=>$quantity
+//            ];
+//        }
+//        $total =0.0;
+//        foreach ($completecart as $item) {
+//            $totalproduct =$item['Product']->getPrice()+($item['Product']->getPrice() * (($item['Product']->getDiscount())/100));
+//            $item['Product']->setQuantity(($item['Product']->getQuantity())-1);
+//            $this->getDoctrine()->getManager()->flush();
+//
+//            $total += $totalproduct;
+//
+//        }
+//
+//        return $this->render('home/front_base.html.twig', [
+//            'items' => $completecart,
+//            'total' => $total,
+//            'completecard'=>$completecart
+//
+//        ]);
+//
+//    }
 }
+

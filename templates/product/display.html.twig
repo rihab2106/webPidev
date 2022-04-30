@@ -109,68 +109,38 @@ Additional Classes:
             {{ form_start(form) }}
             <div class="row vertical-gap">
 
-                <div class="col-lg-8">
-                    <div class="form-inline">
-                        <div class="col-md-4">
+                <div class="col-lg-12">
+                    <div class="form-check-inline">
+
+                        <div class="form-row" style="width: max-content"  >
                                 {{ form_row(form.categories) }}
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-md-3" style="margin-left: 20px">
                             {{ form_row(form.min) }}
+                        </div>
+                        <div class="col-md-1">
                         </div>
                         <div class="col-md-3">
                             {{ form_row(form.max) }}
                         </div>
-
+                        <div class="col-md-1">
+                        </div>
                         <div class="col-md-3">
                             {{ form_row(form.q) }}
+
                         </div>
-{#                        <div id="price-slider"></div>#}
-                       <button type="submit" class="btn btn-danger  w-15"  >Filter</button>
-{#                        <div class="col-md-8">#}
-{#                            <div class="nk-input-slider-inline">#}
-{#                                <div class="nk-input-slider">#}
-{#                                    <div class="nk-input-slider-content text-white">#}
-{#                                        PRICE:#}
-{#                                        <strong class="text-main-1">€ <span class="nk-input-slider-value-0"></span></strong>#}
-{#                                        -#}
-{#                                        <strong class="text-main-1">€ <span class="nk-input-slider-value-1"></span></strong>#}
-{#                                    </div>#}
-{#                                    <div class="nk-input-slider-input">#}
-{#                                        <input#}
-{#                                                type="text"#}
-{#                                                name="price-filter"#}
-{#                                                data-slider-min="0"#}
-{#                                                data-slider-max="1800"#}
-{#                                                data-slider-step="1"#}
-{#                                                data-slider-value="[200, 1200]"#}
-{#                                                data-slider-tooltip="hide"#}
-{#                                        >#}
-{#                                    </div>#}
-{#                                </div>#}
-
-{#                                <div>#}
-{#                                    <a href="#" class="nk-btn nk-btn-rounded nk-btn-color-white">Apply</a>#}
-{#                                </div>#}
-{#                            </div>#}
-{#                        </div>#}
-                    </div>
-                </div>
-
-                <div class="col-lg-4">
-                    <form action="#" class="nk-form" novalidate="novalidate">
-                        <div class="input-group">
+                      <div style="width: 100px"></div>
+                        <button type="submit" class="btn btn-danger  w-15"  style="margin-left: 40px">Filter</button>
 
 
 
-
-{#                            {{ form_start(search) }}#}
-{#                            {{ form_widget(search.name, {"attr": {"class":"form-control" }}) }}#}
-{#                                <button class="nk-btn nk-btn-color-main-1"><span class="ion-search"></span></button>{{ form_end(search) }}#}
                         </div>
                     </form>
+
                 </div>
                 {{ knp_pagination_sortable(products,'Price','p.price') }}
             </div>
+
             {{ form_end(form) }}
             <!-- END: Products Filter -->
 
@@ -222,7 +192,9 @@ Additional Classes:
                             <div class="ribbon-2"><span>{{'-' ~p.discount }}</span>%</div>
                             <div class="nk-product-price">{{(p.price-(p.price*(p.discount/100))) }}</div>
                             <div class="nk-gap-1"></div>
+                            {% if (p.Quantity)>0 %}
                             <a href="{{ path('cart_add',{'idProduct': p.idProduct}) }}" class="nk-btn nk-btn-rounded nk-btn-color-dark-3 nk-btn-hover-color-main-1">Add to Cart</a>
+                            {% endif %}
                         </div>
                     </div>
 
@@ -233,24 +205,9 @@ Additional Classes:
 
             <!-- START: Pagination -->
             <div class="nk-gap-3 " ></div>
-            <div class="mt-4 ">{{ knp_pagination_render(products) }}</div>
+            <div class="nk-pagination nk-pagination-center" style="color: #0b0d0f ">{{ knp_pagination_render(products) }}</div>
 
-            <div class="nk-pagination nk-pagination-center">
-                <a href=""   class="nk-pagination-prev">
 
-                </a>
-                <nav>
-                    <a class="nk-pagination-current" href="#">1</a>
-                    <a href="#">2</a>
-                    <a href="#">3</a>
-                    <a href="#">4</a>
-                    <span>...</span>
-                    <a href="#">14</a>
-                </nav>
-                <a href="#" class="nk-pagination-next">
-                    <span class="ion-ios-arrow-forward"></span>
-                </a>
-            </div>
             <!-- END: Pagination -->
 
             <!-- START: Most Popular -->

@@ -9767,3 +9767,20 @@ div.nk-error {
     background: #DD163B;
     box-shadow: 0 calc(-1*var(--f)) 0 inset #0005;
 }
+.checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: #eee;
+    border-radius: 50%;
+}
+.container .checkmark:after {
+    top: 9px;
+    left: 9px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: white;
+}
