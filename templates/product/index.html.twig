@@ -1,0 +1,173 @@
+{% extends 'back/BackBase.html.twig' %}
+
+{% block content %}
+    {# houni ajout mzyena #}
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row align-items-center">
+                        <div class="col-lg-3 col-xl-2">
+                            <a href="{{ path('app_product_new') }}" class="btn btn-light mb-3 mb-lg-0"><i class="bx bxs-plus-square"></i>New Product</a>
+                        </div>
+
+                        <div class="col-lg-9 col-xl-10">
+                            <form class="float-lg-end">
+                                <div class="row row-cols-lg-auto g-2">
+                                    <div class="col-12">
+                                        <div class="position-relative">
+
+                                            <input type="text" class="form-control ps-5" placeholder="Search Product..."> <span class="position-absolute top-50 product-show translate-middle-y"><i class="bx bx-search"></i></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+                                            <button type="button" class="btn btn-light">Sort By</button>
+                                            <div class="btn-group" role="group">
+                                                <button id="btnGroupDrop1" type="button" class="btn btn-light dropdown-toggle dropdown-toggle-nocaret px-1" data-bs-toggle="dropdown" aria-expanded="false">
+                                                    <i class="bx bx-chevron-down"></i>
+                                                </button>
+                                                <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1" style="margin: 0px;">
+                                                    <li><a class="dropdown-item" href="#">Dropdown link</a></li>
+                                                    <li><a class="dropdown-item" href="#">Dropdown link</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+                                            <button type="button" class="btn btn-light">Collection Type</button>
+                                            <div class="btn-group" role="group">
+                                                <button id="btnGroupDrop1" type="button" class="btn btn-light dropdown-toggle dropdown-toggle-nocaret px-1" data-bs-toggle="dropdown" aria-expanded="false">
+                                                    <i class="bx bxs-category"></i>
+                                                </button>
+                                                <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                                                    <li><a class="dropdown-item" href="#">Dropdown link</a></li>
+                                                    <li><a class="dropdown-item" href="#">Dropdown link</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="btn-group" role="group">
+                                            <button type="button" class="btn btn-light">Price Range</button>
+                                            <div class="btn-group" role="group">
+                                                <button id="btnGroupDrop1" type="button" class="btn btn-light dropdown-toggle dropdown-toggle-nocaret px-1" data-bs-toggle="dropdown" aria-expanded="false">
+                                                    <i class="bx bx-slider"></i>
+                                                </button>
+                                                <ul class="dropdown-menu dropdown-menu-start" aria-labelledby="btnGroupDrop1">
+                                                    <li><a class="dropdown-item" href="#">Dropdown link</a></li>
+                                                    <li><a class="dropdown-item" href="#">Dropdown link</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {#  <h1>Product index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>IdProduct</th>
+                <th>ProdName</th>
+                <th>Description</th>
+                <th>Price</th>
+                <th>Discount</th>
+                <th>Quantity</th>
+                <th>Image</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for product in products %}
+            <tr>
+                <td>{{ product.idProduct }}</td>
+                <td>{{ product.prodName }}</td>
+                <td>{{ product.description }}</td>
+                <td>{{ product.price }}</td>
+                <td>{{ product.discount }}</td>
+                <td>{{ product.quantity }}</td>
+                <td>{{ product.image }}</td>
+                <td>
+                    <a href="{{ path('app_product_show', {'idProduct': product.idProduct}) }}">show</a>
+                    <a href="{{ path('app_product_edit', {'idProduct': product.idProduct}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_product_new') }}">Create new</a>#}
+
+
+<div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4 row-cols-xxl-5 product-grid">
+    {% for p in products%}
+    <div class="col">
+
+        <div class="card">
+
+            <img src="{{asset('uploads/product_images/' ~p.image) }}"  height=auto; class="card-img-top" alt="">
+            <div class="">
+                <div class="position-absolute top-0 end-0 m-3 product-discount"><span class="">{{'-'~p.discount }}</span>%</div>
+            </div>
+            <div class="card-body">
+{#                <a href="{{ path('app_product_show', {"idProduct": p.idProduct}) }}"><h6 class="card-title cursor-pointer">{{~p.prodName }}</h6></a>#}
+                <h6 class="card-title cursor-pointer">{{~p.prodName }}</h6>
+                <div class="clearfix">
+                    <p class="mb-0 float-start"><strong>134</strong> Sales</p>
+                    <p class="mb-0 float-end fw-bold"><span class="me-2 text-decoration-line-through text-secondary">{{~p.price}}</span><span>{{~(p.price+(p.price*(p.discount/100)))}}</span></p>
+                </div>
+                <div class="d-flex align-items-center mt-3 fs-6">
+{#                    <div class="cursor-pointer">#}
+{#                        <i class="bx bxs-star text-warning"></i>#}
+{#                        <i class="bx bxs-star text-warning"></i>#}
+{#                        <i class="bx bxs-star text-warning"></i>#}
+{#                        <i class="bx bxs-star text-warning"></i>#}
+{#                        <i class="bx bxs-star text-secondary"></i>#}
+{#                    </div>#}
+                    </div>
+                    <p class="mb-0 ms-auto">{{'Quantity:  '~p.quantity }}</p>
+                </div>
+            <div class="card-body">
+
+                <div class="d-block">
+                    <form  method="POST" action="{{ path('app_product_delete', {'idProduct':p.idProduct}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+                        <input type="hidden" name="_method" value="DELETE">
+                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~p.idProduct) }}">
+                        <button class="btn btn-warning">Delete</button>
+                        <a href="{{ path('app_product_edit', {'idProduct': p.idProduct}) }}" class="card-link" style="color: darkgrey">
+                            <button type="button" class="btn btn-light">Update</button></a>
+                    </form>
+{#                    <a href="{{ path('app_product_delete', {'idProduct': p.idProduct}) }}" class="card-link" style="color: darkgrey">#}
+{#                        <button type="button" class="btn btn-light">Delete</button></a>#}
+
+                </div>
+
+
+
+
+
+
+            </div>
+            </div>
+
+        </div>
+
+    {% endfor %}
+    </div>
+
+
+
+{% endblock %}

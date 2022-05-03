@@ -1,0 +1,210 @@
+{% extends 'home/front_base.html.twig' %}
+
+{% block content %}
+    <!-- START: Login Modal -->
+
+    <!-- END: Login Modal -->
+
+{#<style>#}
+{#    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }#}
+{#    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }#}
+{#</style>#}
+
+{#<div class="example-wrapper">#}
+{#    <h1>Hello {{ controller_name }}! ✅</h1>#}
+
+{#    This friendly message is coming from:#}
+{#    <ul>#}
+{#        <li>Your controller at <code><a href="{{ 'E:/s8/web-symfony/projects/TrophyHunter/src/Controller/CartController.php'|file_link(0) }}">src/Controller/CartController.php</a></code></li>#}
+{#        <li>Your template at <code><a href="{{ 'E:/s8/web-symfony/projects/TrophyHunter/templates/cart/display.html.twig'|file_link(0) }}">templates/cart/index.html.twig</a></code></li>#}
+{#    </ul>#}
+{#</div>#}
+{#    container cartname#}
+    <div class="container">
+        <ul class="nk-breadcrumbs">
+
+
+            <li><a href="index.html">Home</a></li>
+
+
+            <li><svg class="svg-inline--fa fa-angle-right fa-w-8" aria-hidden="true" data-prefix="fa" data-icon="angle-right" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512" data-fa-i2svg=""><path fill="currentColor" d="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9 0l-22.6-22.6c-9.4-9.4-9.4-24.6 0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1 34z"></path></svg><!-- <span class="fa fa-angle-right"></span> --></li>
+
+            <li><a href="{{ path('app_product_display') }}">Store</a></li>
+
+
+            <li><svg class="svg-inline--fa fa-angle-right fa-w-8" aria-hidden="true" data-prefix="fa" data-icon="angle-right" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512" data-fa-i2svg=""><path fill="currentColor" d="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9 0l-22.6-22.6c-9.4-9.4-9.4-24.6 0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1 34z"></path></svg><!-- <span class="fa fa-angle-right"></span> --></li>
+
+            <li><span>Cart</span></li>
+
+        </ul>
+    </div>
+    <div class="nk-gap-1"></div>
+    {#this#}
+{#    <div class="nk-info-box text-success">#}
+{#        <div class="nk-info-box-icon">#}
+{#            <i class="ion-checkmark-round"></i>#}
+{#        </div>#}
+{#        <h3>Success!</h3>#}
+{#        <em>Hath days lesser meat signs very. Fruit second can't moved seas meat two. Grass face isn't forth firmament dry. Don't.</em>#}
+{#    </div>#}
+{#    this#}
+{#    container cartdata#}
+    <div class="container">
+        <form class="nk-store nk-store-cart">
+            {% if items | length > 0 %}
+            <div class="table-responsive">
+
+                <table class="table nk-store-cart-products">
+                <tbody>
+                {% for item in items  %}
+                <tr>
+                <td class="nk-product-cart-thumb">
+                <a href="store-product.html" class="nk-image-box-1 nk-post-image">
+                <img src="{{asset('uploads/product_images/' ~item.Product.image) }}" alt="However, I have reason" width="115">
+                </a>
+                </td>
+                <td class="nk-product-cart-title">
+                <h5 class="h6">Product:</h5>
+                <div class="nk-gap-1"></div>
+
+                <h2 class="nk-post-title h4">
+{#                <a href="store-product.html">However, I have reason</a>#}
+                    <a  href="#" data-toggle="modal" data-target="#modalpayment"> {{~item.Product.prodName }}<path fill="currentColor" d="M256 0c88.366 0 160 71.634 160 160s-71.634 160-160 160S96 248.366 96 160 167.634 0 256 0zm183.283 333.821l-71.313-17.828c-74.923 53.89-165.738 41.864-223.94 0l-71.313 17.828C29.981 344.505 0 382.903 0 426.955V464c0 26.51 21.49 48 48 48h416c26.51 0 48-21.49 48-48v-37.045c0-44.052-29.981-82.45-72.717-93.134z"></path></a>
+
+                </h2>
+                </td>
+                <td class="nk-product-cart-price">
+                <h5 class="h6">Price:</h5>
+                <div class="nk-gap-1"></div>
+
+                <strong>{{~item.Product.price+((item.Product.price*(item.Product.discount/100))) }}</strong>
+                </td>
+                <td class="nk-product-cart-quantity">
+                    <h5 class="h6">Quantity:</h5>
+                    <div class="nk-gap-1"></div>
+
+                    <div class="nk-form">
+{#                        <input type="number" class="form-control" value="1" min="1" max="21">#}
+                        {{~item.quantity}}
+                    </div>
+                </td>
+                    <td class="nk-product-cart-remove">
+                        <h5 class="h6">Delete☹</h5>
+                        <div class="nk-gap-1"></div>
+
+                        <div class="nk-form">
+                        <a href="{{ path('cart_remove',{"idProduct": item.Product.idProduct}) }}" class="btn btn-danger btn-sm">
+                            <i class="fas fa-trash"></i>
+                        </a>
+                        </div>
+                    </td>
+
+                    {% endfor%}
+{#                <td class="nk-product-cart-total">#}
+{#                    <h5 class="h6">Total:</h5>#}
+{#                    <div class="nk-gap-1"></div>#}
+
+{#                    <strong>€ 32.00</strong>#}
+{#                </td>#}
+
+                </tr>
+
+
+
+                </tbody>
+                </table>
+
+                {# <!-- START: Products in Cart -->#}
+
+                <!-- END: Products in Cart -->
+
+            </div>
+            <div class="nk-gap-1"></div>
+{#            <a class="nk-btn nk-btn-rounded nk-btn-color-white float-right" href="#">Update Cart</a>#}
+
+            <div class="clearfix"></div>
+            <div class="nk-gap-2"></div>
+            <div class="row vertical-gap">
+                <div class="col-md-6">
+
+                    <!-- START: Calculate Shipping -->
+{#                    <h3 class="nk-title h4">Calculate Shipping</h3>#}
+{#                    <form action="#" class="nk-form" novalidate="novalidate">#}
+{#                        <label for="country-sel">Country <span class="text-main-1">*</span>:</label>#}
+{#                        <select name="country" class="form-control required" id="country-sel">#}
+{#                            <option value="">Select a country...</option>#}
+{#                        </select>#}
+
+{#                        <div class="nk-gap-1"></div>#}
+{#                        <div class="row vertical-gap">#}
+{#                            <div class="col-sm-6">#}
+{#                                <label for="state">State / Country <span class="text-main-1">*</span>:</label>#}
+{#                                <input type="text" class="form-control required" name="state" id="state">#}
+{#                            </div>#}
+{#                            <div class="col-sm-6">#}
+{#                                <label for="zip">Postcode / ZIP <span class="text-main-1">*</span>:</label>#}
+{#                                <input type="tel" class="form-control required" name="zip" id="zip">#}
+{#                            </div>#}
+{#                        </div>#}
+
+{#                        <div class="nk-gap-1"></div>#}
+{#                        <a class="nk-btn nk-btn-rounded nk-btn-color-white float-right" href="#">Update Totals</a>#}
+{#                    </form>#}
+                    <!-- END: Calculate Shipping -->
+
+                </div>
+                <div class="col-md-6">
+                    <!-- START: Cart Totals -->
+                    <h3 class="nk-title h4">Cart Totals</h3>
+                    <table class="nk-table nk-table-sm">
+                        <tbody>
+                        <tr class="nk-store-cart-totals-subtotal">
+                            <td>
+                                Subtotal
+                            </td>
+                            <td>
+                                {{ total }}
+                            </td>
+                        </tr>
+                        <tr class="nk-store-cart-totals-shipping">
+                            <td>
+                                Taxes
+                            </td>
+                            <td>
+                                Calculated at checkout
+                            </td>
+                        </tr>
+                        <tr class="nk-store-cart-totals-total">
+                            <td>
+                                Total
+                            </td>
+                            <td>
+                          {{ total }}
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <!-- END: Cart Totals -->
+                </div>
+            </div>
+
+            <div class="nk-gap-2"></div>
+{#            <a class="nk-btn nk-btn-rounded nk-btn-color-main-1 float-right" href="{{ path('app_payment_new') }}" > Proceed To Checkout<path fill="currentColor" d="M256 0c88.366 0 160 71.634 160 160s-71.634 160-160 160S96 248.366 96 160 167.634 0 256 0zm183.283 333.821l-71.313-17.828c-74.923 53.89-165.738 41.864-223.94 0l-71.313 17.828C29.981 344.505 0 382.903 0 426.955V464c0 26.51 21.49 48 48 48h416c26.51 0 48-21.49 48-48v-37.045c0-44.052-29.981-82.45-72.717-93.134z"></path></a>#}
+                <form action="/checkout" method="POST">
+                    <a class="nk-btn nk-btn-rounded nk-btn-color-main-1 float-right" href="{{ path('app_payment_check') }}">Checkout</a>
+
+                </form>
+
+            <div class="clearfix"></div>
+            {% else %}
+                <div class="css-map4tx" data-component="CartMainContentAndSidebarLayout">
+                    <div class="css-11fvpc2" data-testid="cart-layout-main">
+                        <div class="css-zigog8" data-component="FallbackMessage"><div class="css-g46w8s" data-testid="icon">
+                            </div><div class="css-cn3xcj" data-testid="title"><span class="css-mywzwd" data-component="Text">
+                                        <span data-component="Message">Your cart is empty.</span></span></div><div data-testid="body">
+                                    <span class="css-z3vg5b" data-component="Text"><a class="css-8dq9ld" role="link" href="{{path('app_product_display') }}">
+                                            <span data-component="Message">Shop for Games &amp; Apps</span></a></span></div></div></div></div>
+            {% endif %}
+        </form></div>
+    </div>
+{% endblock %}

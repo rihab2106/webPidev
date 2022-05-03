@@ -3,7 +3,6 @@
 namespace App\Form;
 
 use App\Entity\Trophies;
-
 use phpDocumentor\Reflection\Types\Collection;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;

@@ -19,7 +19,7 @@ class Category
      *
      * @ORM\Column(name="ID_CATEGORY", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $idCategory;
 

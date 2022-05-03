@@ -8,6 +8,7 @@
     <!--favicon-->
     <link rel="icon" href="{{asset("assets/images/logo11.png")}}" type="image/png" />
     <!--plugins-->
+
     <link href="{{asset("BackAssets/plugins/simplebar/css/simplebar.css")}}" rel="stylesheet" />
     <link href="{{asset("BackAssets/plugins/perfect-scrollbar/css/perfect-scrollbar.css")}}" rel="stylesheet" />
     <link href="{{asset("BackAssets/plugins/metismenu/css/metisMenu.min.css")}}" rel="stylesheet" />
@@ -114,6 +115,10 @@
                     <li><a href="{{ path('addTeams') }}" ><i class="bx bx-category    "></i>Add</a></li>
                     <li><a href="{{ path('displayTeams') }}" ><i class="bx bx-category    "></i>List Of Teams</a></li>
 
+                    {#  <li><a href="{{ path('displayCat') }}" ><i class="bx bx-category    "></i>Categories</a></li>
+                    <li><a href="{{ path('displayGames') }}" ><i class="bx bxs-game"></i>Display All Games</a></li>
+                    <li><a href="{{ path('displayTrophies') }}" ><i class="bx bx-trophy"></i>Trophies</a></li>
+#}
                 </ul>
             </li>
 
@@ -129,6 +134,10 @@
                     <li><a href="authentication-signin.html.twig" ><i class="bx bx-right-arrow-alt"></i>Delete</a></li>
                     <li><a href="authentication-signin.html.twig" ><i class="bx bx-right-arrow-alt"></i>Modify</a></li>
                     <li><a href="authentication-signin.html.twig" ><i class="bx bx-right-arrow-alt"></i>Display</a></li>
+                    <li><a href="{{ path('app_product_new') }}"><i class="bx bx-right-arrow-alt"></i>Add</a></li>
+{#                    <li><a href="authentication-signin.html.twig" ><i class="bx bx-right-arrow-alt"></i>Delete</a></li>#}
+{#                    <li><a href="authentication-signin.html.twig" ><i class="bx bx-right-arrow-alt"></i>Modify</a></li>#}
+                    <li><a href="{{ path('app_product_index') }}" ><i class="bx bx-right-arrow-alt"></i>Display</a></li>
 
                 </ul>
             </li>
@@ -160,6 +169,8 @@
                 <ul>
                     <li><a href="{{ path('Gamestat') }}" ><i class="bx bx-stats"></i>Statistics</a></li>
 
+                    <li> <a href="charts-apex-chart.html.twig"><i class="bx bx-right-arrow-alt"></i>Apex</a>
+                    </li>
                     <li> <a href="charts-chartjs.html.twig"><i class="bx bx-right-arrow-alt"></i>Chartjs</a>
                     </li>
                     <li> <a href="charts-highcharts.html.twig"><i class="bx bx-right-arrow-alt"></i>Highcharts</a>
@@ -241,6 +252,7 @@
                                     </div>
                                 </div>
                             </div>
+
                         </li>
                         <li class="nav-item dropdown dropdown-large">
                             <a class="nav-link dropdown-toggle dropdown-toggle-nocaret position-relative" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"> <span class="alert-count">7</span>
@@ -1549,6 +1561,19 @@
                     </div>
                 </div>
             </div>
+            {# {% block content %}
+            {% endblock %} #}
+
+            <!--end row-->
+
+            <!--end row-->
+
+            <!--end row-->
+
+            <!--end row-->
+
+            <!--end row-->
+
         </div>
     </div>
     <!--end page wrapper -->

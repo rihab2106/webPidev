@@ -32,6 +32,7 @@ class Comments
      * @var int|null
      *
 <<<<<<< HEAD
+<<<<<<< HEAD
      * @ORM\Column(name="LIKES", type="integer", nullable=true)
      */
     private $likes;
@@ -40,10 +41,16 @@ class Comments
      */
     private $likes = NULL;
 >>>>>>> o/competitionsTeams
+=======
+     * @ORM\Column(name="LIKES", type="integer", nullable=true)
+     */
+    private $likes;
+>>>>>>> o/work
 
     /**
      * @var int|null
      *
+<<<<<<< HEAD
 <<<<<<< HEAD
      * @ORM\Column(name="DISLIKES", type="integer", nullable=true)
      */
@@ -66,11 +73,32 @@ class Comments
 
 <<<<<<< HEAD
 =======
+=======
+     * @ORM\Column(name="DISLIKES", type="integer", nullable=true)
+     */
+    private $dislikes;
+
+>>>>>>> o/work
     public function getIdComment(): ?int
     {
         return $this->idComment;
     }
 
+<<<<<<< HEAD
+=======
+    public function getIdNews(): ?int
+    {
+        return $this->idNews;
+    }
+
+    public function setIdNews(?int $idNews): self
+    {
+        $this->idNews = $idNews;
+
+        return $this;
+    }
+
+>>>>>>> o/work
     public function getComment(): ?string
     {
         return $this->comment;
@@ -107,6 +135,7 @@ class Comments
         return $this;
     }
 
+<<<<<<< HEAD
     public function getIdNews(): ?News
     {
         return $this->idNews;
@@ -120,5 +149,7 @@ class Comments
     }
 
 >>>>>>> o/competitionsTeams
+=======
+>>>>>>> o/work
 
 }

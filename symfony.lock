@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
     "abraham/twitteroauth": {
         "version": "0.7.4"
     },
@@ -10,6 +11,22 @@
     },
     "clue/stream-filter": {
         "version": "v1.6.0"
+=======
+    "algolia/algoliasearch-client-php": {
+        "version": "3.2.0"
+    },
+    "algolia/search-bundle": {
+        "version": "5.2",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "main",
+            "version": "3.0",
+            "ref": "fd172e8feabf6b1c0818e18de90c2a3f82ea0a60"
+        },
+        "files": [
+            "./config/packages/algolia_search.yaml"
+        ]
+>>>>>>> o/work
     },
     "doctrine/annotations": {
         "version": "1.13",
@@ -32,14 +49,26 @@
     "doctrine/common": {
         "version": "3.2.2"
     },
+<<<<<<< HEAD
     "doctrine/dbal": {
         "version": "3.3.3"
+=======
+    "doctrine/data-fixtures": {
+        "version": "1.5.2"
+    },
+    "doctrine/dbal": {
+        "version": "3.3.4"
+>>>>>>> o/work
     },
     "doctrine/deprecations": {
         "version": "v0.5.3"
     },
     "doctrine/doctrine-bundle": {
+<<<<<<< HEAD
         "version": "2.5",
+=======
+        "version": "2.6",
+>>>>>>> o/work
         "recipe": {
             "repo": "github.com/symfony/recipes",
             "branch": "master",
@@ -54,6 +83,21 @@
             "./src/Repository/.gitignore"
         ]
     },
+<<<<<<< HEAD
+=======
+    "doctrine/doctrine-fixtures-bundle": {
+        "version": "3.4",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "3.0",
+            "ref": "1f5514cfa15b947298df4d771e694e578d4c204d"
+        },
+        "files": [
+            "./src/DataFixtures/AppFixtures.php"
+        ]
+    },
+>>>>>>> o/work
     "doctrine/doctrine-migrations-bundle": {
         "version": "3.2",
         "recipe": {
@@ -86,7 +130,11 @@
         "version": "2.11.2"
     },
     "doctrine/persistence": {
+<<<<<<< HEAD
         "version": "2.3.0"
+=======
+        "version": "2.4.1"
+>>>>>>> o/work
     },
     "doctrine/sql-formatter": {
         "version": "1.1.2"
@@ -94,6 +142,7 @@
     "egulias/email-validator": {
         "version": "3.1.2"
     },
+<<<<<<< HEAD
     "evenement/evenement": {
         "version": "v3.0.1"
     },
@@ -139,6 +188,16 @@
     },
     "friendsofphp/proxy-manager-lts": {
         "version": "v1.0.7"
+=======
+    "friendsofphp/proxy-manager-lts": {
+        "version": "v1.0.7"
+    },
+    "fzaninotto/faker": {
+        "version": "v1.9.2"
+    },
+    "jms/metadata": {
+        "version": "2.6.1"
+>>>>>>> o/work
     },
     "knplabs/knp-components": {
         "version": "v3.4.0"
@@ -149,6 +208,7 @@
     "laminas/laminas-code": {
         "version": "4.5.1"
     },
+<<<<<<< HEAD
     "maennchen/zipstream-php": {
         "version": "2.1.0"
     },
@@ -182,6 +242,8 @@
     "opis/closure": {
         "version": "3.6.3"
     },
+=======
+>>>>>>> o/work
     "monolog/monolog": {
         "version": "1.27.0"
     },
@@ -197,6 +259,7 @@
     "phar-io/version": {
         "version": "3.2.1"
     },
+<<<<<<< HEAD
     "php-http/curl-client": {
         "version": "v1.7.1"
     },
@@ -220,6 +283,8 @@
     "phenx/php-svg-lib": {
         "version": "0.4.1"
     },
+=======
+>>>>>>> o/work
     "phpdocumentor/reflection-common": {
         "version": "2.2.0"
     },
@@ -227,10 +292,13 @@
         "version": "5.3.0"
     },
     "phpdocumentor/type-resolver": {
+<<<<<<< HEAD
         "version": "1.6.0"
     },
     "phpoffice/phpspreadsheet": {
         "version": "1.22.0"
+=======
+>>>>>>> o/work
         "version": "1.6.1"
     },
     "phpspec/prophecy": {
@@ -271,12 +339,15 @@
     "psr/container": {
         "version": "1.1.2"
     },
+<<<<<<< HEAD
     "psr/http-client": {
         "version": "1.0.1"
     },
     "psr/http-factory": {
         "version": "1.0.1"
     },
+=======
+>>>>>>> o/work
     "psr/http-message": {
         "version": "1.0.1"
     },
@@ -289,6 +360,7 @@
     "psr/simple-cache": {
         "version": "1.0.1"
     },
+<<<<<<< HEAD
     "react/cache": {
         "version": "v1.1.1"
     },
@@ -312,6 +384,8 @@
     "sabberworm/php-css-parser": {
         "version": "8.4.0"
     },
+=======
+>>>>>>> o/work
     "sebastian/cli-parser": {
         "version": "1.0.1"
     },
@@ -355,7 +429,11 @@
         "version": "3.0.3"
     },
     "sebastian/type": {
+<<<<<<< HEAD
         "version": "2.3.4"
+=======
+        "version": "3.0.0"
+>>>>>>> o/work
     },
     "sebastian/version": {
         "version": "3.0.2"
@@ -372,6 +450,7 @@
             "./config/packages/sensio_framework_extra.yaml"
         ]
     },
+<<<<<<< HEAD
 <<<<<<< HEAD
     "spatie/macroable": {
         "version": "1.0.1"
@@ -397,16 +476,27 @@
     "symfony/asset": {
         "version": "v4.4.40"
 >>>>>>> o/competitionsTeams
+=======
+    "stripe/stripe-php": {
+        "version": "v7.125.0"
+    },
+    "symfony/asset": {
+        "version": "v4.4.40"
+>>>>>>> o/work
     },
     "symfony/browser-kit": {
         "version": "v4.4.37"
     },
     "symfony/cache": {
 <<<<<<< HEAD
+<<<<<<< HEAD
         "version": "v4.4.38"
 =======
         "version": "v4.4.40"
 >>>>>>> o/competitionsTeams
+=======
+        "version": "v4.4.40"
+>>>>>>> o/work
     },
     "symfony/cache-contracts": {
         "version": "v2.5.0"
@@ -447,10 +537,14 @@
     },
     "symfony/dependency-injection": {
 <<<<<<< HEAD
+<<<<<<< HEAD
         "version": "v4.4.39"
 =======
         "version": "v4.4.40"
 >>>>>>> o/competitionsTeams
+=======
+        "version": "v4.4.40"
+>>>>>>> o/work
     },
     "symfony/deprecation-contracts": {
         "version": "v2.5.0"
@@ -466,10 +560,14 @@
     },
     "symfony/error-handler": {
 <<<<<<< HEAD
+<<<<<<< HEAD
         "version": "v4.4.37"
 =======
         "version": "v4.4.40"
 >>>>>>> o/competitionsTeams
+=======
+        "version": "v4.4.40"
+>>>>>>> o/work
     },
     "symfony/event-dispatcher": {
         "version": "v4.4.37"
@@ -479,10 +577,14 @@
     },
     "symfony/expression-language": {
 <<<<<<< HEAD
+<<<<<<< HEAD
         "version": "v4.4.37"
 =======
         "version": "v4.4.40"
 >>>>>>> o/competitionsTeams
+=======
+        "version": "v4.4.40"
+>>>>>>> o/work
     },
     "symfony/filesystem": {
         "version": "v4.4.39"
@@ -504,10 +606,14 @@
     },
     "symfony/form": {
 <<<<<<< HEAD
+<<<<<<< HEAD
         "version": "v4.4.38"
 =======
         "version": "v4.4.40"
 >>>>>>> o/competitionsTeams
+=======
+        "version": "v4.4.40"
+>>>>>>> o/work
     },
     "symfony/framework-bundle": {
         "version": "4.4",
@@ -532,10 +638,14 @@
     },
     "symfony/http-client": {
 <<<<<<< HEAD
+<<<<<<< HEAD
         "version": "v4.4.39"
 =======
         "version": "v4.4.40"
 >>>>>>> o/competitionsTeams
+=======
+        "version": "v4.4.40"
+>>>>>>> o/work
     },
     "symfony/http-client-contracts": {
         "version": "v2.5.0"
@@ -545,10 +655,14 @@
     },
     "symfony/http-kernel": {
 <<<<<<< HEAD
+<<<<<<< HEAD
         "version": "v4.4.39"
 =======
         "version": "v4.4.40"
 >>>>>>> o/competitionsTeams
+=======
+        "version": "v4.4.40"
+>>>>>>> o/work
     },
     "symfony/inflector": {
         "version": "v4.4.37"
@@ -563,10 +677,14 @@
             "branch": "master",
             "version": "4.3",
 <<<<<<< HEAD
+<<<<<<< HEAD
             "ref": "bbfc7e27257d3a3f12a6fb0a42540a42d9623a37"
 =======
             "ref": "97a61eabb351d7f6cb7702039bcfe07fe9d7e03c"
 >>>>>>> o/competitionsTeams
+=======
+            "ref": "bbfc7e27257d3a3f12a6fb0a42540a42d9623a37"
+>>>>>>> o/work
         },
         "files": [
             "./config/packages/mailer.yaml"
@@ -621,11 +739,17 @@
         ]
     },
 <<<<<<< HEAD
+<<<<<<< HEAD
     "symfony/polyfill-intl-grapheme": {
         "version": "v1.25.0"
     },
 =======
 >>>>>>> o/competitionsTeams
+=======
+    "symfony/polyfill-intl-grapheme": {
+        "version": "v1.25.0"
+    },
+>>>>>>> o/work
     "symfony/polyfill-intl-icu": {
         "version": "v1.25.0"
     },
@@ -652,6 +776,7 @@
     },
     "symfony/process": {
 <<<<<<< HEAD
+<<<<<<< HEAD
         "version": "v4.4.37"
     },
     "symfony/property-access": {
@@ -660,6 +785,8 @@
     "symfony/property-info": {
         "version": "v4.4.37"
 =======
+=======
+>>>>>>> o/work
         "version": "v4.4.40"
     },
     "symfony/property-access": {
@@ -667,7 +794,10 @@
     },
     "symfony/property-info": {
         "version": "v4.4.40"
+<<<<<<< HEAD
 >>>>>>> o/competitionsTeams
+=======
+>>>>>>> o/work
     },
     "symfony/proxy-manager-bridge": {
         "version": "v4.4.39"
@@ -712,10 +842,14 @@
     },
     "symfony/serializer": {
 <<<<<<< HEAD
+<<<<<<< HEAD
         "version": "v4.4.39"
 =======
         "version": "v4.4.40"
 >>>>>>> o/competitionsTeams
+=======
+        "version": "v4.4.40"
+>>>>>>> o/work
     },
     "symfony/service-contracts": {
         "version": "v2.5.0"
@@ -723,6 +857,7 @@
     "symfony/stopwatch": {
         "version": "v4.4.38"
     },
+<<<<<<< HEAD
 <<<<<<< HEAD
     "symfony/string": {
         "version": "v5.4.3"
@@ -741,6 +876,10 @@
             "./config/packages/test/swiftmailer.yaml"
         ]
 >>>>>>> o/competitionsTeams
+=======
+    "symfony/string": {
+        "version": "v5.4.3"
+>>>>>>> o/work
     },
     "symfony/translation": {
         "version": "4.4",
@@ -760,10 +899,14 @@
     },
     "symfony/twig-bridge": {
 <<<<<<< HEAD
+<<<<<<< HEAD
         "version": "v4.4.38"
 =======
         "version": "v4.4.40"
 >>>>>>> o/competitionsTeams
+=======
+        "version": "v4.4.40"
+>>>>>>> o/work
     },
     "symfony/twig-bundle": {
         "version": "4.4",
@@ -780,11 +923,14 @@
         ]
     },
 <<<<<<< HEAD
+<<<<<<< HEAD
     "symfony/ux-chartjs": {
         "version": "v2.1.0"
     },
 =======
 >>>>>>> o/competitionsTeams
+=======
+>>>>>>> o/work
     "symfony/validator": {
         "version": "4.4",
         "recipe": {
@@ -803,10 +949,14 @@
     },
     "symfony/var-exporter": {
 <<<<<<< HEAD
+<<<<<<< HEAD
         "version": "v4.4.39"
 =======
         "version": "v4.4.40"
 >>>>>>> o/competitionsTeams
+=======
+        "version": "v4.4.40"
+>>>>>>> o/work
     },
     "symfony/web-link": {
         "version": "v4.4.37"
@@ -826,6 +976,18 @@
         ]
     },
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+    "symfony/web-server-bundle": {
+        "version": "4.4",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "3.3",
+            "ref": "dae9b39fd6717970be7601101ce5aa960bf53d9a"
+        }
+    },
+>>>>>>> o/work
     "symfony/webpack-encore-bundle": {
         "version": "1.14",
         "recipe": {
@@ -844,6 +1006,7 @@
             "./package.json",
             "./webpack.config.js"
         ]
+<<<<<<< HEAD
 =======
     "symfony/web-server-bundle": {
         "version": "4.4",
@@ -854,10 +1017,13 @@
             "ref": "dae9b39fd6717970be7601101ce5aa960bf53d9a"
         }
 >>>>>>> o/competitionsTeams
+=======
+>>>>>>> o/work
     },
     "symfony/yaml": {
         "version": "v4.4.37"
     },
+<<<<<<< HEAD
     "theseer/tokenizer": {
         "version": "1.2.1"
     },
@@ -874,12 +1040,38 @@
     "twig/twig": {
         "version": "v3.3.8"
 =======
+=======
+    "symfonycasts/verify-email-bundle": {
+        "version": "v1.10.0"
+    },
+    "theseer/tokenizer": {
+        "version": "1.2.1"
+    },
+>>>>>>> o/work
     "twig/extra-bundle": {
         "version": "v3.3.8"
     },
     "twig/twig": {
         "version": "v3.3.9"
+<<<<<<< HEAD
 >>>>>>> o/competitionsTeams
+=======
+    },
+    "twilio/sdk": {
+        "version": "6.36.1"
+    },
+    "vich/uploader-bundle": {
+        "version": "1.19",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "1.7",
+            "ref": "c4f5755b37fb65b9c6a3cbdae91205c15a137ed4"
+        },
+        "files": [
+            "./config/packages/vich_uploader.yaml"
+        ]
+>>>>>>> o/work
     },
     "webmozart/assert": {
         "version": "1.10.0"

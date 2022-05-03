@@ -1,0 +1,76 @@
+{% extends 'back/BackBase.html.twig' %}
+
+{% block content %}
+    <link href="{{  asset("Backassets/plugins/Drag-And-Drop/dist/imageuploadify.min.css")}}" rel="stylesheet"/>
+    <div class="card border-top border-0 border-4 border-white">
+        <div class="card-body">
+            <div class="border p-4 rounded">
+                <div class="card-title d-flex align-items-center">
+                    <div><i class="bx bxs-user me-1 font-22 text-white"></i>
+                    </div>
+                    <h5 class="mb-0 text-white">ADD Product</h5>
+                </div>
+                <hr/>
+
+                {{ form_start(form,{attr:{novalidate:'invalid'}}) }}
+{{ form_widget(form) }}
+
+            </div>
+        </div>
+    </div>
+
+
+
+{#    <div class="row">#}
+{#        <div class="col-lg-12">#}
+{#            <div class="border border-3 p-4 rounded">#}
+{#                {{ form_start(form,{'attr': {'idProduct': 'my_captcha_form','novalidate': 'novalidate'}})}}#}
+{#                <div class="mb-3">#}
+{#                    {{ form(form.prodName,{'attr': {'class': 'form-control'}}) }}#}
+
+{#                </div>#}
+{#                <div class="mb-3">#}
+{#                    <label for="inputProductDescription" class="form-label">Description</label>#}
+{#                    <textarea class="form-control" id="inputProductDescription" rows="3"></textarea>#}
+{#                </div>#}
+
+{#                <div class="mb-3">#}
+{#                    <label for="inputPrice" class="form-label">Price</label>#}
+{#                    <input type="email" class="form-control" id="inputPrice" placeholder="00.00">#}
+{#                </div>#}
+{#                <div class="mb-3">#}
+{#                    <label for="inputCompareatprice" class="form-label">Discount</label>#}
+{#                    <input type="password" class="form-control" id="inputCompareatprice" placeholder="00.00">#}
+{#                </div>#}
+{#                <div class="col-12">#}
+{#                    <label for="inputProductType" class="form-label">Category</label>#}
+{#                    <select class="form-select" id="inputProductType">#}
+{#                        <option></option>#}
+{#                        <option value="1">One</option>#}
+{#                        <option value="2">Two</option>#}
+{#                        <option value="3">Three</option>#}
+{#                    </select>#}
+{#                </div>#}
+{#                <div class="col-12">#}
+{#                    <label for="inputProductTags" class="form-label">Quantity</label>#}
+{#                    <input type="text" class="form-control" id="inputProductTags" placeholder="Enter Product Tags">#}
+{#                </div>#}
+
+{#                <div class="mb-3">#}
+{#                    <label for="inputProductDescription" class="form-label">Product Images</label>#}
+
+{#                    <input id="image-uploadify" type="file" accept=".xlsx,.xls,image/*,.doc,audio/*,.docx,video/*,.ppt,.pptx,.txt,.pdf" multiple="" style="display: none;"><div class="imageuploadify well"><div class="imageuploadify-overlay"><i class="fa fa-picture-o"></i></div><div class="imageuploadify-images-list text-center"><i class="bx bxs-cloud-upload"></i><span class="imageuploadify-message">Drag&amp;Drop Your File(s)Here To Upload</span><button type="button" class="btn btn-default">or select file to upload</button></div></div>#}
+{#                </div>#}
+
+{#                    <div class="col-12">#}
+{#                        <div class="d-grid">#}
+{#                            <button type="button" class="btn btn-light">Save Product</button>#}
+{#                        </div>#}
+{#                    </div>#}
+{#            </div>#}
+{#            {{ form_end(form, {'render_rest': false}) }}#}
+{#        </div>#}
+
+{#    </div>#}
+
+{% endblock %}
