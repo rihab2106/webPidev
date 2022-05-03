@@ -1,0 +1,72 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {% for message in app.flashes('info') %}
+        <div class="alert alert-success">
+            {{message}}
+        </div>
+    {%endfor %}
+
+    <a href="" class="btn btn-danger" id="deleteTrophy">Delete</a>
+
+    <form action="{{ path('deleteTeamsFront') }}" method="post">
+        <table class="table" contenteditable="false">
+
+            <tr>
+
+                <th>Id Team</th>
+                <th>Name Game</th>
+                <th>Team Name</th>
+                <th>Delete</th>
+                <th>Edit</th>
+
+            </tr>
+            {% for t in teams %}
+                <tr>
+                    <td>{{ t.idTeam }}</td>
+                    <td>{{ t.idCompetion.gameName}}</td>
+                    <td>{{ t.teamName}}</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            {% endfor %}
+
+        </table>
+    </form>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+        $("#checkAll").click(function () {
+            $('input:checkbox').not(this).prop('checked', this.checked)
+        });
+        $("tr:odd").css("background-color", "rgba(34,128,234,0.85)");
+
+    </script>
+{% endblock %}
+
+{% block content %}
+    <a href="{{ path('addTeamsFront') }}">
+        <button class="nk-btn nk-btn-rounded nk-btn-color-dark-3 nk-btn-hover-color-info">Add team</button></a>
+    {% for t in  teams %}
+    <div class="nk-team">
+        <div class="nk-team-logo">
+            <img src="assets/images/team-1-lg.jpg" alt="">
+        </div>
+        <div class="nk-team-cont">
+            <h3 class="h5 mb-20"><span class="text-main-1">Team Name :</span> {{ t.teamName }}</h3>
+            <h4 class="h6 mb-5" ><span class="text-main-1">Game Name :</span>  {{ t.idCompetion.gameName }}</h4>
+            <a href="{{ path('deleteTeamsFront', {'id': t.idTeam}) }}"><button class="nk-btn nk-btn-rounded nk-btn-color-dark-3 nk-btn-hover-color-info">Delete</button></a>
+            <a href="{{ path('updateTeamsFront', {'id': t.idTeam}) }}">
+                <button class="nk-btn nk-btn-rounded nk-btn-color-dark-3 nk-btn-hover-color-info">Modify</button></a>
+            <div class="nk-team-photo" style="background-image: url('assets/images/team-photo.png');"></div>
+        </div>
+    </div>
+    {% endfor %}
+<div class="nk-pagination-center" class="nk-pagination-prev">
+
+  {{ knp_pagination_render(teams) }}
+
+</div>
+
+{% endblock %}
+
+

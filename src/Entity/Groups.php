@@ -24,9 +24,9 @@ class Groups
     /**
      * @var string|null
      *
-     * @ORM\Column(name="NAME", type="string", length=50, nullable=true)
+     * @ORM\Column(name="NAME", type="string", length=50, nullable=true, options={"default"="NULL"})
      */
-    private $name;
+    private $name = 'NULL';
 
     /**
      * @var string|null

@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html lang="en">
 
@@ -84,6 +83,36 @@
                     <li><a href="{{ path('displayGames') }}" ><i class="bx bxs-game"></i>Display All Games</a></li>
                     <li><a href="{{ path('displayTrophies') }}" ><i class="bx bx-trophy"></i>Trophies</a></li>
 
+                    {#<li><a href="{{ path('displayCat') }}" ><i class="bx bx-category    "></i>Categories</a></li>
+                    <li><a href="{{ path('displayGames') }}" ><i class="bx bxs-game"></i>Display All Games</a></li>
+                    <li><a href="{{ path('displayTrophies') }}" ><i class="bx bx-trophy"></i>Trophies</a></li>#}
+
+                </ul>
+            </li>
+            <li>
+                <a class="has-arrow" href="javascript:;">
+                    <div class="parent-icon"><i class="bx bx-game"></i>
+                    </div>
+                    <div class="menu-title">Competitions</div>
+                </a>
+                <ul>
+
+                    <li><a href="{{ path('addCompetitions') }}" ><i class="bx bx-category    "></i>Add</a></li>
+                    <li><a href="{{ path('displayCompetitions') }}" ><i class="bx bx-category    "></i>List Of Competitions</a></li>
+
+                </ul>
+            </li>
+
+            <li>
+                <a class="has-arrow" href="javascript:;">
+                    <div class="parent-icon"><i class="bx bx-atom"></i>
+                    </div>
+                    <div class="menu-title">Teams</div>
+                </a>
+                <ul>
+
+                    <li><a href="{{ path('addTeams') }}" ><i class="bx bx-category    "></i>Add</a></li>
+                    <li><a href="{{ path('displayTeams') }}" ><i class="bx bx-category    "></i>List Of Teams</a></li>
 
                 </ul>
             </li>
@@ -150,6 +179,8 @@
                     </li>
                 </ul>
             </li>
+
+
 
         </ul>
         <!--end navigation-->
@@ -513,6 +544,7 @@
     <!--start page wrapper -->
     <div class="page-wrapper">
         <div class="page-content">
+
             {% block content %}
             {% endblock %}
             <div class="row row-cols-1 row-cols-lg-2 row-cols-xl-3">
@@ -601,6 +633,7 @@
                                     </div>
                                 </div>
                             </div>
+
                             <div id="chart4"></div>
                         </div>
                     </div>
@@ -1562,6 +1595,8 @@
         </ul>
     </div>
 </div>
+</div>
+
 <!--end switcher-->
 <!-- Bootstrap JS -->
 <script src="{{asset("BackAssets/js/bootstrap.bundle.min.js")}}"></script>
@@ -1589,6 +1624,7 @@
 </script>
 {% block script %}
 {% endblock %}
+
 </body>
 
 </html>

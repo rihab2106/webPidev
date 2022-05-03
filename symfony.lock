@@ -131,6 +131,15 @@
             "./config/routes/kms_froala_editor.yaml"
         ]
     },
+    "dompdf/dompdf": {
+        "version": "v1.2.1"
+    },
+    "egulias/email-validator": {
+        "version": "3.1.2"
+    },
+    "friendsofphp/proxy-manager-lts": {
+        "version": "v1.0.7"
+    },
     "knplabs/knp-components": {
         "version": "v3.4.0"
     },
@@ -173,6 +182,15 @@
     "opis/closure": {
         "version": "3.6.3"
     },
+    "monolog/monolog": {
+        "version": "1.27.0"
+    },
+    "myclabs/deep-copy": {
+        "version": "1.11.0"
+    },
+    "nikic/php-parser": {
+        "version": "v4.13.2"
+    },
     "phar-io/manifest": {
         "version": "2.0.3"
     },
@@ -196,6 +214,11 @@
     },
     "php-http/promise": {
         "version": "1.1.0"
+    "phenx/php-font-lib": {
+        "version": "0.5.4"
+    },
+    "phenx/php-svg-lib": {
+        "version": "0.4.1"
     },
     "phpdocumentor/reflection-common": {
         "version": "2.2.0"
@@ -208,6 +231,7 @@
     },
     "phpoffice/phpspreadsheet": {
         "version": "1.22.0"
+        "version": "1.6.1"
     },
     "phpspec/prophecy": {
         "version": "v1.15.0"
@@ -285,6 +309,8 @@
     },
     "react/stream": {
         "version": "v1.2.0"
+    "sabberworm/php-css-parser": {
+        "version": "8.4.0"
     },
     "sebastian/cli-parser": {
         "version": "1.0.1"
@@ -346,6 +372,7 @@
             "./config/packages/sensio_framework_extra.yaml"
         ]
     },
+<<<<<<< HEAD
     "spatie/macroable": {
         "version": "1.0.1"
     },
@@ -363,12 +390,23 @@
     },
     "symfony/asset": {
         "version": "v4.4.37"
+=======
+    "swiftmailer/swiftmailer": {
+        "version": "v6.3.0"
+    },
+    "symfony/asset": {
+        "version": "v4.4.40"
+>>>>>>> o/competitionsTeams
     },
     "symfony/browser-kit": {
         "version": "v4.4.37"
     },
     "symfony/cache": {
+<<<<<<< HEAD
         "version": "v4.4.38"
+=======
+        "version": "v4.4.40"
+>>>>>>> o/competitionsTeams
     },
     "symfony/cache-contracts": {
         "version": "v2.5.0"
@@ -408,7 +446,11 @@
         ]
     },
     "symfony/dependency-injection": {
+<<<<<<< HEAD
         "version": "v4.4.39"
+=======
+        "version": "v4.4.40"
+>>>>>>> o/competitionsTeams
     },
     "symfony/deprecation-contracts": {
         "version": "v2.5.0"
@@ -423,7 +465,11 @@
         "version": "v4.4.37"
     },
     "symfony/error-handler": {
+<<<<<<< HEAD
         "version": "v4.4.37"
+=======
+        "version": "v4.4.40"
+>>>>>>> o/competitionsTeams
     },
     "symfony/event-dispatcher": {
         "version": "v4.4.37"
@@ -432,7 +478,11 @@
         "version": "v1.1.11"
     },
     "symfony/expression-language": {
+<<<<<<< HEAD
         "version": "v4.4.37"
+=======
+        "version": "v4.4.40"
+>>>>>>> o/competitionsTeams
     },
     "symfony/filesystem": {
         "version": "v4.4.39"
@@ -453,7 +503,11 @@
         ]
     },
     "symfony/form": {
+<<<<<<< HEAD
         "version": "v4.4.38"
+=======
+        "version": "v4.4.40"
+>>>>>>> o/competitionsTeams
     },
     "symfony/framework-bundle": {
         "version": "4.4",
@@ -477,7 +531,11 @@
         ]
     },
     "symfony/http-client": {
+<<<<<<< HEAD
         "version": "v4.4.39"
+=======
+        "version": "v4.4.40"
+>>>>>>> o/competitionsTeams
     },
     "symfony/http-client-contracts": {
         "version": "v2.5.0"
@@ -486,7 +544,11 @@
         "version": "v4.4.39"
     },
     "symfony/http-kernel": {
+<<<<<<< HEAD
         "version": "v4.4.39"
+=======
+        "version": "v4.4.40"
+>>>>>>> o/competitionsTeams
     },
     "symfony/inflector": {
         "version": "v4.4.37"
@@ -500,7 +562,11 @@
             "repo": "github.com/symfony/recipes",
             "branch": "master",
             "version": "4.3",
+<<<<<<< HEAD
             "ref": "bbfc7e27257d3a3f12a6fb0a42540a42d9623a37"
+=======
+            "ref": "97a61eabb351d7f6cb7702039bcfe07fe9d7e03c"
+>>>>>>> o/competitionsTeams
         },
         "files": [
             "./config/packages/mailer.yaml"
@@ -554,9 +620,12 @@
             "./tests/bootstrap.php"
         ]
     },
+<<<<<<< HEAD
     "symfony/polyfill-intl-grapheme": {
         "version": "v1.25.0"
     },
+=======
+>>>>>>> o/competitionsTeams
     "symfony/polyfill-intl-icu": {
         "version": "v1.25.0"
     },
@@ -582,6 +651,7 @@
         "version": "v1.25.0"
     },
     "symfony/process": {
+<<<<<<< HEAD
         "version": "v4.4.37"
     },
     "symfony/property-access": {
@@ -589,6 +659,15 @@
     },
     "symfony/property-info": {
         "version": "v4.4.37"
+=======
+        "version": "v4.4.40"
+    },
+    "symfony/property-access": {
+        "version": "v4.4.40"
+    },
+    "symfony/property-info": {
+        "version": "v4.4.40"
+>>>>>>> o/competitionsTeams
     },
     "symfony/proxy-manager-bridge": {
         "version": "v4.4.39"
@@ -632,7 +711,11 @@
         "version": "v4.4.37"
     },
     "symfony/serializer": {
+<<<<<<< HEAD
         "version": "v4.4.39"
+=======
+        "version": "v4.4.40"
+>>>>>>> o/competitionsTeams
     },
     "symfony/service-contracts": {
         "version": "v2.5.0"
@@ -640,8 +723,24 @@
     "symfony/stopwatch": {
         "version": "v4.4.38"
     },
+<<<<<<< HEAD
     "symfony/string": {
         "version": "v5.4.3"
+=======
+    "symfony/swiftmailer-bundle": {
+        "version": "3.5",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "2.5",
+            "ref": "f0b2fccdca2dfd97dc2fd5ad216d5e27c4f895ac"
+        },
+        "files": [
+            "./config/packages/dev/swiftmailer.yaml",
+            "./config/packages/swiftmailer.yaml",
+            "./config/packages/test/swiftmailer.yaml"
+        ]
+>>>>>>> o/competitionsTeams
     },
     "symfony/translation": {
         "version": "4.4",
@@ -660,7 +759,11 @@
         "version": "v2.5.0"
     },
     "symfony/twig-bridge": {
+<<<<<<< HEAD
         "version": "v4.4.38"
+=======
+        "version": "v4.4.40"
+>>>>>>> o/competitionsTeams
     },
     "symfony/twig-bundle": {
         "version": "4.4",
@@ -676,9 +779,12 @@
             "./templates/base.html.twig"
         ]
     },
+<<<<<<< HEAD
     "symfony/ux-chartjs": {
         "version": "v2.1.0"
     },
+=======
+>>>>>>> o/competitionsTeams
     "symfony/validator": {
         "version": "4.4",
         "recipe": {
@@ -696,7 +802,11 @@
         "version": "v4.4.39"
     },
     "symfony/var-exporter": {
+<<<<<<< HEAD
         "version": "v4.4.39"
+=======
+        "version": "v4.4.40"
+>>>>>>> o/competitionsTeams
     },
     "symfony/web-link": {
         "version": "v4.4.37"
@@ -715,6 +825,7 @@
             "./config/routes/dev/web_profiler.yaml"
         ]
     },
+<<<<<<< HEAD
     "symfony/webpack-encore-bundle": {
         "version": "1.14",
         "recipe": {
@@ -733,6 +844,16 @@
             "./package.json",
             "./webpack.config.js"
         ]
+=======
+    "symfony/web-server-bundle": {
+        "version": "4.4",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "3.3",
+            "ref": "dae9b39fd6717970be7601101ce5aa960bf53d9a"
+        }
+>>>>>>> o/competitionsTeams
     },
     "symfony/yaml": {
         "version": "v4.4.37"
@@ -740,6 +861,7 @@
     "theseer/tokenizer": {
         "version": "1.2.1"
     },
+<<<<<<< HEAD
     "tightenco/collect": {
         "version": "v8.83.8"
     },
@@ -751,6 +873,13 @@
     },
     "twig/twig": {
         "version": "v3.3.8"
+=======
+    "twig/extra-bundle": {
+        "version": "v3.3.8"
+    },
+    "twig/twig": {
+        "version": "v3.3.9"
+>>>>>>> o/competitionsTeams
     },
     "webmozart/assert": {
         "version": "1.10.0"

@@ -124,12 +124,14 @@
                     
         <li class=" nk-drop-item">
             <a href="{{ path('displayGames') }}">
+            <a href="">
                 Games
                 
             </a><ul class="dropdown">
                         
         <li>
             <a href="{{ path('displayGames') }}">
+            <a href="">
                Display Games
                 
             </a>
@@ -218,17 +220,22 @@
         <li class=" nk-drop-item">
             <a href="tournaments.html">
                 Tournaments
+            <a href={{ path("displayCompetitionsFront") }}>
+                Competitions & Teams
                 
             </a><ul class="dropdown">
                         
         <li>
             <a href="tournaments.html">
                 Tournament
+            <a href={{ path("displayCompetitionsFront") }}>
+                Competitions
                 
             </a>
         </li>
         <li>
             <a href="tournaments-teams.html">
+            <a href={{ path("displayTeamsFront") }}>
                 Teams
                 
             </a>
@@ -239,6 +246,7 @@
                 
             </a>
         </li>
+
                     </ul>
         </li>
         <li class=" nk-drop-item">
