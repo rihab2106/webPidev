@@ -2,13 +2,21 @@
 
 namespace App\Entity;
 
+use App\Entity\News;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
+
+
+
 
 /**
  * Comments
  *
  * @ORM\Table(name="comments", indexes={@ORM\Index(name="FK_COMMENTS_REFERENCE_NEWS", columns={"ID_NEWS"})})
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\CommentsRepository")
+ * 
+
  */
 class Comments
 {
@@ -22,83 +30,59 @@ class Comments
     private $idComment;
 
     /**
-     * @var string|null
+     * @var ?News
      *
-     * @ORM\Column(name="COMMENT", type="string", length=512, nullable=true)
+     * 
+     * @ORM\ManyToOne(targetEntity="News")
+     * @ORM\JoinColumns({
+     * @ORM\JoinColumn(name="ID_NEWS", referencedColumnName="ID_NEWS")
+     * })
+     */
+    private $idNews;
+
+    /**
+     * @var string
+     * @Assert\NotBlank(message="Your comment cannot be empty")
+     * @Assert\Length(
+     *      min = 2,
+     *      max = 100,
+     *      minMessage = "Comments must be at least {{ limit }} characters long",
+     *      maxMessage = "Comments cannot be longer than {{ limit }} characters")
+     * @ORM\Column(name="COMMENT", type="string", length=512, nullable=false)
      */
     private $comment;
 
     /**
      * @var int|null
-     *
-<<<<<<< HEAD
-<<<<<<< HEAD
-     * @ORM\Column(name="LIKES", type="integer", nullable=true)
+     * 
+     * @ORM\Column(name="LIKES", type="integer", options={"default" : 0},nullable=true)
      */
     private $likes;
-=======
-     * @ORM\Column(name="LIKES", type="integer", nullable=true, options={"default"="NULL"})
-     */
-    private $likes = NULL;
->>>>>>> o/competitionsTeams
-=======
-     * @ORM\Column(name="LIKES", type="integer", nullable=true)
-     */
-    private $likes;
->>>>>>> o/work
 
     /**
      * @var int|null
      *
-<<<<<<< HEAD
-<<<<<<< HEAD
-     * @ORM\Column(name="DISLIKES", type="integer", nullable=true)
-     */
-    private $dislikes;
-=======
-     * @ORM\Column(name="DISLIKES", type="integer", nullable=true, options={"default"="NULL"})
-     */
-    private $dislikes = NULL;
->>>>>>> o/competitionsTeams
-
-    /**
-     * @var \News
-     *
-     * @ORM\ManyToOne(targetEntity="News")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="ID_NEWS", referencedColumnName="ID_NEWS")
-     * })
-     */
-    private $idNews;
-
-<<<<<<< HEAD
-=======
-=======
-     * @ORM\Column(name="DISLIKES", type="integer", nullable=true)
+     * @ORM\Column(name="DISLIKES", type="integer",options={"default" : 0}, nullable=true)
      */
     private $dislikes;
 
->>>>>>> o/work
     public function getIdComment(): ?int
     {
         return $this->idComment;
     }
 
-<<<<<<< HEAD
-=======
-    public function getIdNews(): ?int
+    public function getIdNews(): ?News
     {
         return $this->idNews;
     }
 
-    public function setIdNews(?int $idNews): self
+    public function setIdNews(?News $idNews):self
     {
         $this->idNews = $idNews;
 
         return $this;
     }
 
->>>>>>> o/work
     public function getComment(): ?string
     {
         return $this->comment;
@@ -135,21 +119,5 @@ class Comments
         return $this;
     }
 
-<<<<<<< HEAD
-    public function getIdNews(): ?News
-    {
-        return $this->idNews;
-    }
-
-    public function setIdNews(?News $idNews): self
-    {
-        $this->idNews = $idNews;
-
-        return $this;
-    }
-
->>>>>>> o/competitionsTeams
-=======
->>>>>>> o/work
 
 }

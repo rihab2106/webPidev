@@ -8,7 +8,8 @@ use Doctrine\ORM\Mapping as ORM;
  * News
  *
  * @ORM\Table(name="news")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\NewsRepository")
+ * 
  */
 class News
 {
@@ -82,6 +83,13 @@ class News
 
         return $this;
     }
+
+    public function __toString(): string
+    {
+        return $this->idNews;
+    }
+
+    
 
 
 }

@@ -22,6 +22,7 @@ class Cart
     private $idCart;
 
     /**
+<<<<<<< HEAD
      * @var float|null
      *
 <<<<<<< HEAD
@@ -59,11 +60,48 @@ class Cart
 
 <<<<<<< HEAD
 =======
+=======
+     * @var int|null
+     *
+     * @ORM\Column(name="ID_USER", type="integer", nullable=true)
+     */
+    private $idUser;
+
+    /**
+     * @var float|null
+     *
+     * @ORM\Column(name="SUM", type="float", precision=8, scale=2, nullable=true)
+     */
+    private $sum;
+
+    /**
+     * @var float|null
+     *
+     * @ORM\Column(name="DISCOUNT", type="float", precision=10, scale=0, nullable=true)
+     */
+    private $discount;
+
+>>>>>>> o/ayubbranch
     public function getIdCart(): ?int
     {
         return $this->idCart;
     }
 
+<<<<<<< HEAD
+=======
+    public function getIdUser(): ?int
+    {
+        return $this->idUser;
+    }
+
+    public function setIdUser(?int $idUser): self
+    {
+        $this->idUser = $idUser;
+
+        return $this;
+    }
+
+>>>>>>> o/ayubbranch
     public function getSum(): ?float
     {
         return $this->sum;
@@ -88,6 +126,7 @@ class Cart
         return $this;
     }
 
+<<<<<<< HEAD
     public function getIdUser(): ?Users
     {
         return $this->idUser;
@@ -101,5 +140,7 @@ class Cart
     }
 
 >>>>>>> o/competitionsTeams
+=======
+>>>>>>> o/ayubbranch
 
 }
