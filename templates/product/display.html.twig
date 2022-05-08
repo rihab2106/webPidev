@@ -1,4 +1,4 @@
-{% extends 'home/front_base.html.twig' %}
+{% extends 'base.html.twig' %}
 
 {% block content %}
 
@@ -190,6 +190,8 @@ Additional Classes:
                             <div class="nk-gap-2"><span class="me-2 text-decoration-line-through text-secondary">{{ "Available: "~p.Quantity }}</span></div>
 
                             <div class="ribbon-2"><span>{{'-' ~p.discount }}</span>%</div>
+                            <div class="nk-product-price">{{'Original Price: $'~p.price }}</div>
+                            <br>
                             <div class="nk-product-price">{{(p.price-(p.price*(p.discount/100))) }}</div>
                             <div class="nk-gap-1"></div>
                             {% if (p.Quantity)>0 %}

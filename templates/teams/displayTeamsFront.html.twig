@@ -3,6 +3,21 @@
 
 
 {% block content %}
+{% for message in app.flashes('success') %}
+        <div class="alert alert-success">
+            {{message}}
+        </div>
+    {%endfor %}
+    {% for message in app.flashes('info') %}
+        <div class="alert alert-info">
+            {{message}}
+        </div>
+    {%endfor %}
+    {% for message in app.flashes('danger') %}
+        <div class="alert alert-danger">
+            {{message}}
+        </div>
+    {%endfor %}
     <a href="{{ path('addTeamsFront') }}">
         <button class="nk-btn nk-btn-rounded nk-btn-color-dark-3 nk-btn-hover-color-info">Add team</button></a>
     {% for t in  teams %}
@@ -25,7 +40,6 @@
   {{ knp_pagination_render(teams) }}
 
 </div>
-
 {% endblock %}
 
 

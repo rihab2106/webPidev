@@ -5,7 +5,8 @@
 {% block body %}
     <h1>Insert your comment</h1>
 
-    {{ include('comments/_form.html.twig') }}
+   {#  {{ include('comments/_form.html.twig') }} #}
+   {{form(form)}}
 <div id="captcha" class="g-recaptcha"></div> 
 	<script>
   

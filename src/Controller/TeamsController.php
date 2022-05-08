@@ -15,7 +15,7 @@ use Dompdf\Dompdf;
 use Dompdf\Options;
 use App\Notifications\CreationCompteNotification;
 use Knp\Component\Pager\PaginatorInterface;
-use Symfony\Component\VarDumper\VarDumper;
+
 
 class TeamsController extends AbstractController
 {
@@ -83,6 +83,7 @@ class TeamsController extends AbstractController
             $request->query->getInt('page', 1),
             5
         );
+
         return $this->render('teams/displayTeamsFront.html.twig', [
             'teams' => $teams
         ]);
@@ -136,7 +137,8 @@ class TeamsController extends AbstractController
             $mng->flush();
 
             $this->addFlash(
-                'danger', 'Added successfuly!'
+                'success',
+                'Added successfuly!'
             );
 
             $mail = [];
@@ -173,6 +175,10 @@ class TeamsController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $c = $form->getData();
             $mng->flush();
+            $this->addFlash(
+                'info',
+                'Updated successfuly!'
+            );
             return $this->redirectToRoute("displayTeams");
 
         }
@@ -196,6 +202,10 @@ class TeamsController extends AbstractController
         if ($formf->isSubmitted() && $formf->isValid()) {
             $c = $formf->getData();
             $mng->flush();
+            $this->addFlash(
+                'info',
+                'Updated successfuly!'
+            );
             return $this->redirectToRoute("displayTeamsFront");
 
         }
@@ -211,9 +221,12 @@ class TeamsController extends AbstractController
     {
         $rep = $this->getDoctrine()->getRepository(Teams::class);
         $mng = $this->getDoctrine()->getManager();
-        VarDumper::dump($rep->find($id));
         $mng->remove($rep->find($id));
         $mng->flush();
+        $this->addFlash(
+            'danger',
+            'Deleted successfuly!'
+        );
         return $this->redirectToRoute("displayTeams");
 
     }
@@ -228,6 +241,10 @@ class TeamsController extends AbstractController
         $mng = $this->getDoctrine()->getManager();
         $mng->remove($rep->find($id));
         $mng->flush();
+        $this->addFlash(
+            'danger',
+            'Deleted successfuly!'
+        );
         return $this->redirectToRoute("displayTeamsFront");
 
     }

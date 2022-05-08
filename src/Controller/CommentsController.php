@@ -67,6 +67,13 @@ class CommentsController extends AbstractController
             ->getForm(); */
             $form=$this->createForm(CommentsType::class,$comment);
        /*  $form->add("Add",SubmitType::class); */
+       $form->add('Add Comment',SubmitType::class,[
+        'disabled' => 'true',
+        
+        'attr' => ['class' => 'save btn-primary btn'],
+       
+       
+       ]);
         $form->handleRequest($request);
 
         /*  $form = $this->createForm(CommentsType::class, $comment);
@@ -112,6 +119,13 @@ class CommentsController extends AbstractController
             ->getForm(); */
             $form=$this->createForm(CommentsType::class,$comment);
        // $form->add("Add",SubmitType::class);
+       $form->add('Add Comment',SubmitType::class,[
+        'disabled' => 'true',
+        
+        'attr' => ['class' => 'save btn-primary btn'],
+       
+       
+       ]);
         $form->handleRequest($request);
 
         /*  $form = $this->createForm(CommentsType::class, $comment);
@@ -159,7 +173,8 @@ class CommentsController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->flush();
+            //$entityManager->flush();
+            $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('app_comments_index', [], Response::HTTP_SEE_OTHER);
         }

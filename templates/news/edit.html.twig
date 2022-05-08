@@ -5,7 +5,7 @@
 {% block content %}
     <h1>Edit News</h1>
 
-    {{ include('news/_form.html.twig', {'button_label': 'Update'}) }}
+    {{ include('news/_form.html.twig') }}
 
     <a href="{{ path('app_news_index') }}">Back To List</a>
 

@@ -39,12 +39,12 @@
 
 
 		<tbody>
-			<button>
-{# 				<a href="{{ path('add_comment'),{'id': news.idNews} }}"> Add a comment</a>
- #}                
-			</button>
+	{# 	<button>
+				<a href="{{ path('add_comment'),{'id': news.idNews} }}"> Add a comment</a>
+                
+			</button> #}
 
-            <button>
+            <button class="btn btn-light">
             <a href="{{ path('add_comment', {'news': news.idNews}) }}">Add a Comment</a>
             </button>
 
@@ -69,4 +69,10 @@
 
 <tr>
 	<td colspan="5">no records found</td>
-</tr>{% endfor %}<a href="{{ path('app_news_index') }}">Back To News</a><a href="{{ path('app_news_edit', {'idNews': news.idNews}) }}">Edit</a>{{ include('news/_delete_form.html.twig') }}{% endblock %}
+</tr>{% endfor %}
+<br>
+<a href="{{ path('app_news_index') }}">Back To News</a>
+<br>
+<a href="{{ path('app_news_edit', {'idNews': news.idNews}) }}">Edit</a>
+<br>
+{{ include('news/_delete_form.html.twig') }}{% endblock %}

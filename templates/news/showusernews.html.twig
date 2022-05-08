@@ -7,9 +7,9 @@
 <style>
 
 #likebutton { color: #00FF00; }
-
 </style>
-	<h1>News And Comments</h1>
+	
+<h1>News And Comments</h1>
 
    <pre>
 	   {{ app.session.get('like') }}
@@ -32,6 +32,7 @@
 			
 		</tbody>
 	</table>
+
 	<table class="table">
 		<thead>
 			<tr>
@@ -48,14 +49,16 @@
 		<tbody>
 			
             
-            <button>
-            <a href="{{ path('add_comment_user', {'news': news.idNews}) }}">Add a Comment</a>
+            <a href="{{ path('add_comment_user', {'news': news.idNews}) }}">
+			<button class="btn btn-primary">
+            Add a Comment
             </button>
+			</a>
 
-			<button>
-            <a href="{{ path('app_news_index_suer', {'news': news.idNews}) }}">Return to News</a>
+            <a href="{{ path('app_news_index_suer', {'news': news.idNews}) }}">
+			<button class="btn btn-primary">Return to News
             </button>
-
+			</a>
          
 			{% for c in com %}
 				<tr>
@@ -76,23 +79,17 @@
 				    
 					
 					
-					</a>
 					
-				    <td>
 			
 					
 				</tr>
+				{% endfor %}
 			</a>
 		</tbody>
+	</table>
+	
 
-	</td>
-
-
-</tr>{% else %}
-
-<tr>
-	<td colspan="5">no records found</td>
-</tr>{% endfor %}{% endblock %}
+{% endblock %}
 {% block javascripts %}
 	{# <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 

@@ -25,7 +25,8 @@ class CommentsType extends AbstractType
     
         $builder
             ->add('comment')
-            ->add('Add Comment',SubmitType::class,$formOptions)
+            //->add('Add Comment',SubmitType::class,$formOptions)
+           
            
         ;
     }
