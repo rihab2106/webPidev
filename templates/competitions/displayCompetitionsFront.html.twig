@@ -1,44 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block body %}
-    <a href="" class="btn btn-danger" id="deleteTrophy">Delete</a>
 
-    <form action="{{ path('deleteCompetitionsFront') }}" method="post">
-        <table class="table" contenteditable="false">
-
-            <tr>
-                <th>
-                    <input type="checkbox" id="checkAll"> Check All
-
-                </th>
-                <th>Id Competition</th>
-                <th>Game Name</th>
-                <th>Date of Competition</th>
-                <th>Edit</th>
-            </tr>
-            {% for c in competitions %}
-                <tr>
-                    <td>
-
-                        <input type="checkbox" name="check[]" value="{{ c.idCompetion }}">
-
-                    </td>
-                    <td>{{ c.gameName }}</td>
-                    <td>{{ c.dateofcomp }}</td>
-                    <td></td>
-                </tr>
-            {% endfor %}
-        </table>
-    </form>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script>
-        $("#checkAll").click(function () {
-            $('input:checkbox').not(this).prop('checked', this.checked)
-        });
-        $("tr:odd").css("background-color", "rgba(34,128,234,0.85)");
-
-    </script>
-{% endblock %}
 {% block content %}
     {#<script>
 

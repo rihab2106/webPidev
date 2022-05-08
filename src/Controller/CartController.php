@@ -31,7 +31,7 @@ class CartController extends AbstractController
         }
         $total =0.0;
         foreach ($completecart as $item) {
-            $totalproduct =$item['Product']->getPrice()+($item['Product']->getPrice() * (($item['Product']->getDiscount())/100));
+            $totalproduct =$item['Product']->getPrice()-($item['Product']->getPrice() * (($item['Product']->getDiscount())/100));
             if(($item['Product']->getQuantity())>0){
 
                 $item['Product']->setQuantity(($item['Product']->getQuantity())-1);

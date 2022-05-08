@@ -1,4 +1,4 @@
-{% extends 'home/front_base.html.twig' %}
+{% extends 'base.html.twig' %}
 
 {% block content %}
     <!-- START: Login Modal -->
@@ -77,7 +77,7 @@
                 <h5 class="h6">Price:</h5>
                 <div class="nk-gap-1"></div>
 
-                <strong>{{~item.Product.price+((item.Product.price*(item.Product.discount/100))) }}</strong>
+                <strong>{{~item.Product.price-((item.Product.price*(item.Product.discount/100))) }}</strong>
                 </td>
                 <td class="nk-product-cart-quantity">
                     <h5 class="h6">Quantity:</h5>

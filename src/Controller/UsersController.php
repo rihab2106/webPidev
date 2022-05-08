@@ -4,101 +4,166 @@ namespace App\Controller;
 
 use App\Entity\Users;
 use App\Form\UsersType;
+use App\Form\ProfileType;
 use App\Repository\UsersRepository;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
-
+use Symfony\Component\Routing\Annotation\Route;
+use MercurySeries\FlashyBundle\FlashyNotifier;
 
 /**
- * @Route("/users")
+ * @Route("/user")
  */
 class UsersController extends AbstractController
 {
     /**
-     * @Route("/", name="app_users_index", methods={"GET"})
+     * @Route("/", name="app_user_index", methods={"GET"})
      */
-    public function index(UsersRepository $usersRepository): Response
+    public function index(UsersRepository $userRepository): Response
     {
-        return $this->render('users/index.html.twig', [
-            'users' => $usersRepository->findAll(),
+        return $this->render('user/index.html.twig', [
+            'users' => $userRepository->findAll(),
         ]);
     }
 
     /**
-     * @Route("/new", name="app_users_new", methods={"GET", "POST"})
+     * @Route("/new", name="app_user_new", methods={"GET", "POST"})
      */
-    public function new(Request $request, UsersRepository $usersRepository): Response
+    public function new(Request $request, UsersRepository $userRepository): Response
     {
         $user = new Users();
         $form = $this->createForm(UsersType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $usersRepository->add($user);
-            return $this->redirectToRoute('app_users_index', [], Response::HTTP_SEE_OTHER);
+            $userRepository->add($user);
+            return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->render('users/new.html.twig', [
+        return $this->render('user/new.html.twig', [
             'user' => $user,
             'form' => $form->createView(),
         ]);
     }
 
     /**
-     * @Route("/{id}", name="app_users_show", methods={"GET"})
+     * @Route("/{id}", name="app_user_show", methods={"GET"})
      */
     public function show(Users $user): Response
     {
-        return $this->render('users/show.html.twig', [
+        return $this->render('user/show.html.twig', [
             'user' => $user,
         ]);
     }
+    /**
+     * @Route("/profile/{email}", name="app_profile", methods={"GET"})
+     */
+    public function showOne($email, Users $user): Response
+    {
+        $user=$this->getDoctrine()->getRepository(Users::class)->findOneBy(['email' => $email]);
+
+//        $flashyNotifier->primary('Thanks for signing up!', 'http://your-awesome-link.com');
+        return $this->render('profile.html.twig', [
+            'user' => $user,
+        ]);
+
+    }
 
     /**
-     * @Route("/{id}/edit", name="app_users_edit", methods={"GET", "POST"})
+     * @Route("/profile/{email}/edit", name="app_profile_edit", methods={"GET", "POST"})
      */
-    public function edit(Request $request, Users $user, UserPasswordEncoderInterface $userPasswordEncoder,UsersRepository $usersRepository): Response
+    public function editProfile(Request $request, Users $user, UserPasswordEncoderInterface $userPasswordEncoder, UsersRepository $userRepository): Response
     {
-        $form = $this->createForm(UsersType::class, $user);
+        $form = $this->createForm(ProfileType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // encode the plain password
             $user->setPassword(
                 $userPasswordEncoder->encodePassword(
                     $user,
                     $form->get('plainPassword')->getData()
                 )
-
             );
-
-
-
-            $usersRepository->add($user);
-
-            return $this->redirectToRoute('app_users_index', [], Response::HTTP_SEE_OTHER);
-
+            $userRepository->add($user);
+            return $this->redirectToRoute('app_profile', ['email' => $user->getEmail()], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->render('users/edit.html.twig', [
+        return $this->render('editProfile.html.twig', [
+            'user' => $user,
+            'form' => $form->createView(),
+        ]);
+    }
+
+
+    /**
+     * @Route("/{id}/edit", name="app_user_edit", methods={"GET", "POST"})
+     */
+    public function edit(Request $request, Users $user, UserPasswordEncoderInterface $userPasswordEncoder, UsersRepository $userRepository): Response
+    {
+        $form = $this->createForm(UsersType::class, $user);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $user->setPassword(
+                $userPasswordEncoder->encodePassword(
+                    $user,
+                    $form->get('plainPassword')->getData()
+                )
+            );
+            $userRepository->add($user);
+            return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->render('edit.html.twig', [
             'user' => $user,
             'form' => $form->createView(),
         ]);
     }
 
     /**
-     * @Route("/{id}", name="app_users_delete", methods={"POST"})
+     * @Route("/{id}", name="app_user_delete", methods={"POST"})
      */
-    public function delete(Request $request, Users $user, UsersRepository $usersRepository): Response
+    public function delete(Request $request, Users $user, UsersRepository $userRepository): Response
     {
         if ($this->isCsrfTokenValid('delete'.$user->getId(), $request->request->get('_token'))) {
-            $usersRepository->remove($user);
+            $userRepository->remove($user);
         }
 
-        return $this->redirectToRoute('app_users_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
     }
+    /**
+     * Creates a new ActionItem entity.
+     *
+     * @Route("/search", name="ajax_search")
+     *@Method("GET")
+     */
+    public function searchAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $requestString = $request->get('q');
+
+        $user=  $em->getRepository(Users::class)->findEntitiesByString($requestString);
+
+        if(!$user) {
+            $result['user']['error'] = "any user found";
+        } else {
+            $result['user'] = $this->getRealEntities($user);
+        }
+
+        return new Response(json_encode($result));
+    }
+
+    public function getRealEntities($user){
+
+        foreach ($user as $user){
+            $realEntities[$user->getId()] = $user->getFULLNAME();
+        }
+
+        return $realEntities;
+    }
+
 }

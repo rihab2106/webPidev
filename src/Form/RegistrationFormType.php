@@ -13,20 +13,14 @@ use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Captcha\Bundle\CaptchaBundle\Form\Type\CaptchaType;
+use Captcha\Bundle\CaptchaBundle\Validator\Constraints\ValidCaptcha;
 class RegistrationFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add('email',EmailType::class)
-            ->add('agreeTerms', CheckboxType::class, [
-                'mapped' => false,
-                'constraints' => [
-                    new IsTrue([
-                        'message' => 'You should agree to our terms.',
-                    ]),
-                ],
-            ])
             ->add('plainPassword', PasswordType::class, [
                 // instead of being set onto the object directly,
                 // this is read and encoded in the controller
@@ -52,7 +46,18 @@ class RegistrationFormType extends AbstractType
                 'required' => false
             ])
 
-        ;
+
+            ->add('captchaCode', CaptchaType::class, [
+                'captchaConfig' => 'ExampleCaptchaUserRegistration',
+                'constraints' => [
+                    new ValidCaptcha([
+                        'message' => 'Invalid captcha, please try again',
+                    ]),
+                ],
+            ]);
+
+
+
     }
 
     public function configureOptions(OptionsResolver $resolver): void

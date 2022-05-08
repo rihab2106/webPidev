@@ -16,7 +16,10 @@ class NewsType extends AbstractType
         $builder
             ->add('headline')
             ->add('content')
-            ->add('img', FileType::class);
+            ->add('img', FileType::class, [
+                "data_class"=>null,
+                "attr"=>["class"=> "form-control"]
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

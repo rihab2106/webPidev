@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}UserGroups{% endblock %}
+
+{% block body %}
+    <h1>UserGroups</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>IdUsersGps</th>
+                <td>{{ user_group.idUsersGps }}</td>
+            </tr>
+            <tr>
+                <th>Status</th>
+                <td>{{ user_group.status }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_usergroups_index') }}">back to list</a>
+
+    <a href="{{ path('app_usergroups_edit', {'idUsersGps': user_group.idUsersGps}) }}">edit</a>
+
+    {{ include('usergroups/_delete_form.html.twig') }}
+{% endblock %}

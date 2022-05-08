@@ -1,54 +1,42 @@
 <?php
 
-namespace App\Entity\Payment;
+namespace App\Entity;
 
+use App\Repository\UserGroupsRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * UserGroups
- *
- * @ORM\Table(name="user_groups", indexes={@ORM\Index(name="fk_ID_GROUP", columns={"ID_GROUP"}), @ORM\Index(name="fk_ID_USER", columns={"ID_USER"})})
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass=UserGroupsRepository::class)
  */
 class UserGroups
 {
     /**
-     * @var int
-     *
-     * @ORM\Column(name="ID_USERS_GPS", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @ORM\GeneratedValue
+     * @ORM\Column(name="ID_USERS_GPS",type="integer")
      */
     private $idUsersGps;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="status", type="string", length=20, nullable=false)
-     */
-    private $status;
-
-    /**
-     * @var \Groups
-     *
-     * @ORM\ManyToOne(targetEntity="Groups")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="ID_GROUP", referencedColumnName="ID_GROUP")
-     * })
-     */
-    private $idGroup;
-
     /**
      * @var \Users
-     *
-     * @ORM\ManyToOne(targetEntity="Users")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="ID_USER", referencedColumnName="ID_USER")
-     * })
+     *  @ORM\ManyToOne(targetEntity="Users")
+     * @ORM\JoinColumn(name="ID_USER", referencedColumnName="ID_USER")
      */
     private $idUser;
 
-    public function getIdUsersGps(): ?int
+    /**
+     * @var \Groups
+     *@ORM\ManyToOne(targetEntity="Groups")
+     *@ORM\JoinColumn(name="ID_GROUP", referencedColumnName="ID_GROUP")
+     */
+    private $idGroup;
+    /**
+     * @ORM\Column(type="string", length=255,nullable=true)
+     */
+    private $status;
+
+
+
+    public function getId(): ?int
     {
         return $this->idUsersGps;
     }
@@ -58,6 +46,22 @@ class UserGroups
         return $this->status;
     }
 
+    /**
+     * @return \Users
+     */
+    public function getIdUser(): \Users
+    {
+        return $this->idUser;
+    }
+
+    /**
+     * @param \Users $idUser
+     */
+    public function setIdUser(\Users $idUser): void
+    {
+        $this->idUser = $idUser;
+    }
+
     public function setStatus(string $status): self
     {
         $this->status = $status;
@@ -65,29 +69,19 @@ class UserGroups
         return $this;
     }
 
-    public function getIdGroup(): ?Groups
+    /**
+     * @return \Groups
+     */
+    public function getIdGroup(): \Groups
     {
         return $this->idGroup;
     }
 
-    public function setIdGroup(?Groups $idGroup): self
+    /**
+     * @param \Groups $idGroup
+     */
+    public function setIdGroup(\Groups $idGroup): void
     {
         $this->idGroup = $idGroup;
-
-        return $this;
     }
-
-    public function getIdUser(): ?Users
-    {
-        return $this->idUser;
-    }
-
-    public function setIdUser(?Users $idUser): self
-    {
-        $this->idUser = $idUser;
-
-        return $this;
-    }
-
-
 }

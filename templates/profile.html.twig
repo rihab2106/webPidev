@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+{% block title %}User{% endblock %}
+
+{% block body %}
+    <h1>Profile</h1>
+
+    <table class="table">
+        <tbody>
+        <tr>
+            <th>Id</th>
+            <td>{{ user.id }}</td>
+        </tr>
+        <tr>
+            <th>FullName</th>
+            <td>{{ user.fullName }}</td>
+        </tr>
+
+
+
+
+
+
+
+        <tr>
+            <th>Img</th>
+            <td><img src="{{ asset('/uploads/'~user.img) }}" alt="" width="150"></td>
+        </tr>
+
+        </tbody>
+    </table>
+
+
+
+
+        <button class="btn btn-lg btn-primary mt-5  " >
+            <a href="{{ path('app_profile_edit', {'email': user.email }) }}" class="btn btn-primary btn-lg ">Edit</a>
+        </button>
+    <button class="btn btn-lg btn-primary mt-5  " >
+        <a href="{{ path('app_groups_index') }}" class="btn btn-primary btn-lg ">Back</a>
+    </button>
+
+
+{% endblock %}

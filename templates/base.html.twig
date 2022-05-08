@@ -20,7 +20,7 @@
 		<meta name="keywords" content="game, gaming, template, HTML template, responsive, Bootstrap, premium">
 		<meta name="author" content="_nK">
 
-		<link rel="icon" type="image/png" href="{{ asset("assets/images/favicon.png") }}">
+		<link rel="icon" type="image/png" href="{{ asset('assets/images/favicon.png') }}">
 
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		{% block stylesheets %}
@@ -74,7 +74,29 @@
 		{#{{ include('home/home.html.twig') }}#}
 		{{ include('home/footer.html.twig') }}
 		{% block javascripts %}
+		<div class="nk-modal modal fade" id="modalLogin" tabindex="-1" role="dialog" aria-hidden="true">
 
+		<div class="modal-dialog modal-sm" role="document">
+			<div class="modal-content">
+				<div class="modal-body">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span class="ion-android-close"></span>
+					</button>
+
+					<p class="user-name mb-0">{{ app.user.username }}</p>
+					<p class="designattion mb-0">YOU ARE CONNECTED</p>
+					<a class="dropdown-item" href="javascript:;"><i class="bx bx-user"></i><span><a href="{{ path('app_profile', {'email': app.user.email }) }}">Profile</a></span></a>
+
+					<a class="dropdown-item" href="javascript:;"><i class='bx bx-log-out-circle'></i><span><a href="{{ path('app_logout') }}">Logout</a></span></a>
+
+
+					<div class="nk-gap-1"></div>
+
+
+				</div>
+			</div>
+		</div>
+	</div>
 			<!-- Object Fit Polyfill -->
 			<script src="{{ asset("assets/vendor/object-fit-images/dist/ofi.min.js") }}"></script>
 
@@ -139,6 +161,19 @@
 
 		{% endblock %}
 
+<!-- Flashy Notifier here nermine-->
 
+
+	<script src="{{ asset('FlashyNotifier/js/flashy.js') }}"></script>
+	<script src="//code.jquery.com/jquery.js"></script>
+
+	<!-- Flashy Notifier here - nermine -->
+
+
+	<link rel="stylesheet" href="{{ asset('FlashyNotifier/css/flashy.css') }}">
+
+
+{# {% endblock %} #}
+{{ include('@MercurySeriesFlashy/flashy.html.twig') }}
 	</body>
 </html>

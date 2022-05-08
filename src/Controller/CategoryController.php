@@ -71,5 +71,19 @@ class CategoryController extends AbstractController
             $mng->flush();
             return $this->redirectToRoute("displayCat");
         }
+        return $this->render("category/addCat.html.twig",[
+            "fo"=>$form->createView()
+        ]);
     }
+    /**
+     * @Route("/deleteCat/{id}", name="deleteCat")
+     */
+    public function delete($id)
+    {
+        $mng=$this->getDoctrine()->getManager();
+        $mng->remove($this->getDoctrine()->getRepository(Category::class)->find($id));
+        $mng->flush();
+        return $this->redirectToRoute("displayCat");
+    }
+
 }

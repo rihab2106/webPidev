@@ -1,47 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block body %}
-    {% for message in app.flashes('info') %}
-        <div class="alert alert-success">
-            {{message}}
-        </div>
-    {%endfor %}
 
-    <a href="" class="btn btn-danger" id="deleteTrophy">Delete</a>
-
-    <form action="{{ path('deleteTeamsFront') }}" method="post">
-        <table class="table" contenteditable="false">
-
-            <tr>
-
-                <th>Id Team</th>
-                <th>Name Game</th>
-                <th>Team Name</th>
-                <th>Delete</th>
-                <th>Edit</th>
-
-            </tr>
-            {% for t in teams %}
-                <tr>
-                    <td>{{ t.idTeam }}</td>
-                    <td>{{ t.idCompetion.gameName}}</td>
-                    <td>{{ t.teamName}}</td>
-                    <td></td>
-                    <td></td>
-                </tr>
-            {% endfor %}
-
-        </table>
-    </form>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script>
-        $("#checkAll").click(function () {
-            $('input:checkbox').not(this).prop('checked', this.checked)
-        });
-        $("tr:odd").css("background-color", "rgba(34,128,234,0.85)");
-
-    </script>
-{% endblock %}
 
 {% block content %}
     <a href="{{ path('addTeamsFront') }}">

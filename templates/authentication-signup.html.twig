@@ -6,7 +6,7 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<!--favicon-->
-	<link href="{{asset("BackAssets/images/favicon-32x32.png")}}" type="image/png" />
+	  <link rel="icon" href="{{asset("assets/images/logo11.png")}}" type="image/png" />
 	<!--plugins-->
 	<link href="{{asset("BackAssets/plugins/simplebar/css/simplebar.css")}}" rel="stylesheet" />
 	<link href="{{asset("BackAssets/plugins/perfect-scrollbar/css/perfect-scrollbar.css")}}" rel="stylesheet" />
@@ -18,7 +18,7 @@
 	<link href="{{asset("BackAssets/css/bootstrap.min.css")}}" rel="stylesheet">
 	<link href="{{asset("BackAssets/css/app.css")}}" rel="stylesheet">
 	<link href="{{asset("BackAssets/css/icons.css")}}" rel="stylesheet">
-	<title>Dashtrans - Bootstrap5 Admin Template</title>
+	<title>Trophy Hunter</title>
 </head>
 
 <body class="bg-theme bg-theme2">
@@ -36,50 +36,24 @@
 								<div class="border p-4 rounded">
 									<div class="text-center">
 										<h3 class="">Sign Up</h3>
-										<p>Already have an account? <a href="authentication-signin.html.twig">Sign in here</a>
+										<p>Already have an account? <a href="{{ path('app_login') }}">Sign in here</a>
 										</p>
 									</div>
 
-									<div class="form-body">
-										<form class="row g-3">
-											<div class="col-sm-6">
-												<label for="inputFirstName" class="form-label">Full Name</label>
-												<input type="text" class="form-control" id="inputFirstName" placeholder="Jhon">
-											</div>
 
-											<div class="col-12">
-												<label for="inputEmailAddress" class="form-label">Email Address</label>
-												<input type="email" class="form-control" id="inputEmailAddress" placeholder="example@user.com">
-											</div>
-											<div class="col-12">
-												<label for="inputChoosePassword" class="form-label">Password</label>
-												<div class="input-group" id="show_hide_password">
-													<input type="password" class="form-control border-end-0" id="inputChoosePassword" value="12345678" placeholder="Enter Password"> <a href="javascript:;" class="input-group-text bg-transparent"><i class='bx bx-hide'></i></a>
-												</div>
-											</div>
+									{{ form_start(registrationForm) }}
 
-											<div class="col-12">
-												<div class="form-check form-switch">
-													<input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked">
-													<label class="form-check-label" for="flexSwitchCheckChecked">I read and agree to Terms & Conditions</label>
-												</div>
-											</div>
-											<div class="col-12">
-												<div class="d-grid">
-													<button type="submit" class="btn btn-light"><i class='bx bx-user'></i>Sign up</button>
-												</div>
-											</div>
-										</form>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<!--end row-->
-			</div>
-		</div>
-	</div>
+									{{ form_row(registrationForm.email) }}
+									{{ form_row(registrationForm.plainPassword, {
+										label: 'Password'
+									}) }}
+									{{ form_row(registrationForm.fullName) }}
+									{{ form_row(registrationForm.img) }}
+									<button type="submit" class="btn">Register</button>
+									{{ form_end(registrationForm) }}
+
+
+
 	<!--end wrapper-->
 	<!-- Bootstrap JS -->
 	<script src="{{asset("BackAssets/js/bootstrap.bundle.min.js")}}"></script>

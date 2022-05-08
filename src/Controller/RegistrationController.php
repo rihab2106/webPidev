@@ -52,10 +52,10 @@ class RegistrationController extends AbstractController
                 $fichier = md5(uniqid()).'.'.$image->guessExtension();
 
                 // On copie le fichier dans le dossier uploads
-              /*   $image->move(
+                $image->move(
                     $this->getParameter('images_directory'),
                     $fichier
-                ); */
+                );
 
                 // On crée l'image dans la base de données
 
@@ -68,7 +68,7 @@ class RegistrationController extends AbstractController
             // generate a signed url and email it to the user
             $this->emailVerifier->sendEmailConfirmation('app_verify_email', $user,
                 (new TemplatedEmail())
-                    ->from(new Address('mouelhiayoub21@gmail.com', 'trophyhunter'))
+                    ->from(new Address('benamaranermine99@gmail.com', 'trophyhunter'))
                     ->to($user->getEmail())
                     ->subject('Please Confirm your Email')
                     ->htmlTemplate('registration/confirmation_email.html.twig')

@@ -19,7 +19,7 @@
             <tr>
                 <td><a href="{{path('app_news_comments',{'idNews': news.idNews})}}">{{ news.headline }}</a></td>
                 <td>{{ news.content }}</td>
-                <td>{{ news.img }}</td>
+                <td><img src="{{ news.img }}" width="300px" height="200px"></td>
                 
                 <td>
 

@@ -1,0 +1,14 @@
+{{ form_start(form) }}
+    {{ form_widget(form) }}
+ {# Si la route est "annonces_edit on affiche les images #}
+	{% if app.request.attributes.get('_route') == 'backanduser_edit' %}
+
+
+
+
+
+
+
+    {% endif %}
+<button class="btn">{{ button_label|default('Save') }}</button>
+{{ form_end(form) }}

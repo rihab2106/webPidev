@@ -48,7 +48,7 @@ class PaymentController extends AbstractController
         }
         $total =0.0;
         foreach ($completecart as $item) {
-            $totalproduct =$item['Product']->getPrice()+($item['Product']->getPrice() * (($item['Product']->getDiscount())/100));
+            $totalproduct =$item['Product']->getPrice()-($item['Product']->getPrice() * (($item['Product']->getDiscount())/100));
              $total +=round($totalproduct, 2);
 
         }

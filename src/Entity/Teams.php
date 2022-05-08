@@ -44,7 +44,7 @@ class Teams
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\ManyToMany(targetEntity="Users", mappedBy="idTeam")
+     * @ORM\ManyToMany(targetEntity="Users", mappedBy="")
      */
     private $idUser;
 

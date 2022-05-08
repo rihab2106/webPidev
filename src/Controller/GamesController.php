@@ -47,7 +47,7 @@ class GamesController extends AbstractController
         ]);
     }
     /**
-     * @Route("/admin/displayGames", name="displayGames")
+     * @Route("/displayGames", name="displayGames")
      */
     public function display(Request $request, PaginatorInterface $paginator)
     {
@@ -86,16 +86,13 @@ class GamesController extends AbstractController
 
     }
     /**
-     * @Route("/displayGames", name="displayGamesFront")
+     * @Route("/frontDisplayGames", name="displayGamesFront")
      */
-    public function displayFront(Request $request, PaginatorInterface $paginator){
+    public function displayFront(Request $request){
         $rep = $this->getDoctrine()->getRepository(Games::class);
         $repCat = $this->getDoctrine()->getRepository(Category::class);
-        $games=$paginator->paginate(
-            $rep->findAll(),
-            $request->query->getInt('page', 1),
-            $request->query->getInt('limit', 2)
-        );
+        $games= $rep->findAll();
+            
         return $this->render("games/FrontDisplayGames.html.twig", [
             "cat" => $repCat->findAll(),
             "games"=> $games
@@ -227,7 +224,7 @@ class GamesController extends AbstractController
         }
     }
     /**
-     * @Route("/admin/stat", name="Gamestat")
+     * @Route("/stat", name="Gamestat")
      */
     public function stat(ChartBuilderInterface $chartBuilder)
     {
@@ -239,7 +236,7 @@ class GamesController extends AbstractController
         ]);
     }
     /**
-     * @Route("/admin/fetchOnline/{id}", name="fetchOnline")
+     * @Route("/fetchOnline/{id}", name="fetchOnline")
      */
     public function fetchOnline($id,HttpClientInterface $client)
     {
@@ -272,7 +269,7 @@ class GamesController extends AbstractController
     }
 
     /**
-     * @Route("/admin/translate/{id}", name="translate")
+     * @Route("/translate/{id}", name="translate")
      */
     public function translate($id,HttpClientInterface $client)
     {
@@ -314,7 +311,7 @@ class GamesController extends AbstractController
     }
 
     /**
-     * @Route("/admin/msg",name="msg")
+     * @Route("/msg",name="msg")
      */
     public function msg(Request $request)
     {

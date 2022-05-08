@@ -15,6 +15,7 @@ use Dompdf\Dompdf;
 use Dompdf\Options;
 use App\Notifications\CreationCompteNotification;
 use Knp\Component\Pager\PaginatorInterface;
+use Symfony\Component\VarDumper\VarDumper;
 
 class TeamsController extends AbstractController
 {
@@ -210,6 +211,7 @@ class TeamsController extends AbstractController
     {
         $rep = $this->getDoctrine()->getRepository(Teams::class);
         $mng = $this->getDoctrine()->getManager();
+        VarDumper::dump($rep->find($id));
         $mng->remove($rep->find($id));
         $mng->flush();
         return $this->redirectToRoute("displayTeams");

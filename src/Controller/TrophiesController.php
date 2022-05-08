@@ -34,7 +34,7 @@ class TrophiesController extends AbstractController
         ]);
     }
     /**
-     * @Route("/admin/displayTrophies", name="displayTrophies")
+     * @Route("/displayTrophies", name="displayTrophies")
      */
     public function display()
     {
@@ -108,7 +108,7 @@ class TrophiesController extends AbstractController
         ]);
     }
     /**
-     * @Route("/admin/displayGamesTro/{id}", name="displayGamesTroAdmin")
+     * @Route("/ad/displayGamesTro/{id}", name="displayGamesTroAdmin")
      */
     public function displayGamesTrophiesAdmin($id, HttpClientInterface $client)
     {
@@ -132,7 +132,7 @@ class TrophiesController extends AbstractController
     }
 
     /**
-     * @Route("/admin/exportCSV",name="exportCSV")
+     * @Route("/exportCSV",name="exportCSV")
      */
     public function ExportCSV()
     {

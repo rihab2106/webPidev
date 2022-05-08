@@ -1,0 +1,42 @@
+{% extends 'back/BackBase.html.twig' %}
+
+{% block title %}Users{% endblock %}
+
+{% block content %}
+    <h1>Users</h1>
+
+    <table class="table">
+        <tbody>
+
+            <tr>
+                <th>FullName</th>
+                <td>{{ user.fullName }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ user.email }}</td>
+            </tr>
+
+
+
+            <tr>
+                <th>Img</th>
+                <td><img src="{{ asset('/uploads/'~user.img) }}" alt="" width="150"></td>
+            </tr>
+            <tr>
+                <th>Roles</th>
+                <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
+            </tr>
+            <tr>
+                <th>IsVerified</th>
+                <td>{{ user.isVerified ? 'Yes' : 'No' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('backanduser_index') }}">back to list</a>
+
+    <p><a href="{{ path('backanduser_edit', {'id': user.id}) }}">edit</a></p>
+
+
+{% endblock %}

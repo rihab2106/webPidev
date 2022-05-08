@@ -6,7 +6,7 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<!--favicon-->
-	<link href="{{asset("BackAssets/images/favicon-32x32.png")}}" type="image/png" />
+	  <link rel="icon" href="{{asset("assets/images/logo11.png")}}" type="image/png" />
 	<!--plugins-->
 	<link href="{{asset("BackAssets/plugins/simplebar/css/simplebar.css")}}" rel="stylesheet" />
 	<link href="{{asset("BackAssets/plugins/perfect-scrollbar/css/perfect-scrollbar.css")}}" rel="stylesheet" />
@@ -18,7 +18,7 @@
 	<link href="{{asset("BackAssets/css/bootstrap.min.css")}}" rel="stylesheet">
 	<link href="{{asset("BackAssets/css/app.css")}}" rel="stylesheet">
 	<link href="{{asset("BackAssets/css/icons.css")}}" rel="stylesheet">
-	<title>Dashtrans - Bootstrap5 Admin Template</title>
+	<title>Trophy Hunter</title>
 </head>
 
 <body class="bg-theme bg-theme2">
@@ -36,44 +36,48 @@
 								<div class="border p-4 rounded">
 									<div class="text-center">
 										<h3 class="">Sign in</h3>
-										<p>Don't have an account yet? <a href="authentication-signup.html.twig">Sign up here</a>
+										<p>Don't have an account yet? <a href="{{ path('app_register') }}">Sign up here</a>
+
+
 										</p>
 									</div>
-									<div class="d-grid">
-										<a class="btn my-4 shadow-sm btn-light" href="javascript:;"> <span class="d-flex justify-content-center align-items-center">
-                          <img class="me-2" src="{{asset("BackAssets/images/icons/search.svg")}}" width="16" alt="Image Description">
-                          <span>Sign in with Google</span>
-											</span>
-										</a> <a href="javascript:;" class="btn btn-light"><i class="bx bxl-facebook"></i>Sign in with Facebook</a>
-									</div>
-									<div class="login-separater text-center mb-4"> <span>OR SIGN IN WITH EMAIL</span>
-										<hr/>
-									</div>
-									<div class="form-body">
-										<form class="row g-3">
-											<div class="col-12">
-												<label for="inputEmailAddress" class="form-label">Email Address</label>
-												<input type="email" class="form-control" id="inputEmailAddress" placeholder="Email Address">
-											</div>
-											<div class="col-12">
-												<label for="inputChoosePassword" class="form-label">Enter Password</label>
-												<div class="input-group" id="show_hide_password">
-													<input type="password" class="form-control border-end-0" id="inputChoosePassword" value="12345678" placeholder="Enter Password"> <a href="javascript:;" class="input-group-text bg-transparent"><i class='bx bx-hide'></i></a>
-												</div>
-											</div>
-											<div class="col-md-6">
-												<div class="form-check form-switch">
-													<input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked>
-													<label class="form-check-label" for="flexSwitchCheckChecked">Remember Me</label>
-												</div>
-											</div>
-											<div class="col-md-6 text-end">	<a href="authentication-forgot-password.html.twig">Forgot Password ?</a>
-											</div>
-											<div class="col-12">
-												<div class="d-grid">
-													<button type="submit" class="btn btn-light"><i class="bx bxs-lock-open"></i>Sign in</button>
-												</div>
-											</div>
+									<form method="post" >
+										{% if error %}
+											<div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+										{% endif %}
+
+
+
+
+										<label for="inputEmail">Email</label>
+										<input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
+										<label for="inputPassword">Password</label>
+										<input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
+
+										<input type="hidden" name="_csrf_token"
+											   value="{{ csrf_token('authenticate') }}"
+										>
+
+										{#
+										Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
+                                        See https://symfony.com/doc/current/security/remember_me.html
+                                        <div class="checkbox mb-3">
+                                            <label>
+                                                <input type="checkbox" name="_remember_me"> Remember me
+                                            </label>
+                                        </div>
+										#}
+										<a href="{{ path('app_forgot_password_request') }}" class="btn btn-primary btn-lg ">Forgot Password?</a>
+										<button class="btn btn-lg btn-primary" type="submit">
+											Sign in
+										</button>
+
+
+
+
+
+									</form>
+
 										</form>
 									</div>
 								</div>

@@ -64,7 +64,7 @@ class ProductfrontController extends AbstractController
         ]);
     }
     /**
-     * @Route("/{idProduct}", name="app_productfront_show", methods={"GET"})
+     * @Route("/pro/{idProduct}", name="app_productfront_show", methods={"GET"})
      */
     public function show(Product $product): Response
     {
