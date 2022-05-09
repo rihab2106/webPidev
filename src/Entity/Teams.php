@@ -41,20 +41,9 @@ class Teams
      */
     private $idCompetion;
 
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     *
-     * @ORM\ManyToMany(targetEntity="Users", mappedBy="idTeam")
-     */
-    private $idUser;
 
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->idUser = new \Doctrine\Common\Collections\ArrayCollection();
-    }
+
+
 
     public function getIdTeam(): ?int
     {
@@ -85,31 +74,10 @@ class Teams
         return $this;
     }
 
-    /**
-     * @return Collection<int, Users>
-     */
-    public function getIdUser(): Collection
-    {
-        return $this->idUser;
-    }
 
-    public function addIdUser(Users $idUser): self
-    {
-        if (!$this->idUser->contains($idUser)) {
-            $this->idUser[] = $idUser;
-            $idUser->addIdTeam($this);
-        }
 
-        return $this;
-    }
 
-    public function removeIdUser(Users $idUser): self
-    {
-        if ($this->idUser->removeElement($idUser)) {
-            $idUser->removeIdTeam($this);
-        }
 
-        return $this;
-    }
+
 
 }
