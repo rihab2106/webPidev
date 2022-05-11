@@ -153,9 +153,12 @@ class GamesController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()){
             $g=$form->getData();
-            $file =$form["img"]->getData();
-            $file->move("C:\\xampp\\htdocs\\TrophyHunter\\public\\BackAssets\\images\\GameImgs",$file->getClientOriginalName());
-            $g->setImg("BackAssets\\images\\GameImgs\\".$file->getClientOriginalName());
+            $img =$form["img"]->getData();
+            //$file->move("C:\\xampp\\htdocs\\TrophyHunter\\public\\BackAssets\\images\\GameImgs",$file->getClientOriginalName());
+            $g->setImg("BackAssets\\images\\GameImgs\\".$g["img"]);
+            $fp=fopen("BackAssets\\images\\GameImgs\\".$obj->{"slug"}.".jpg","w");
+            fwrite($fp,$img);
+            fclose($fp);
             $mng->flush();
             return $this->redirectToRoute("displayGames");
         }

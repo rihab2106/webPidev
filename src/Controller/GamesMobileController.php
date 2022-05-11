@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Category;
 use App\Entity\Games;
+
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -93,4 +94,20 @@ class GamesMobileController extends AbstractController
         $json = $normalizer->normalize($games, "json");
         return new Response(json_encode($json));
     }
+    /**
+     * @Route("/mobile/uploadImg", name="uploadImg")
+     */
+    public function uploadImg(Request $request, NormalizerInterface $normalizer){
+        //houni uploadi image 
+       if (isset($_FILES['file']["name"])){
+           $img=file_get_contents($_FILES["file"]["tmp_name"]);
+           $fp=fopen("BackAssets\\images\\GameImgs\\".$_FILES['file']["name"].".jpg","w");
+           fwrite($fp,$img);
+           fclose($fp);
+
+       }
+       
+        return new Response('json_encode($_FILES)');
+    }
+    
 }
