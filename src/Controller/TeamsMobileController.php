@@ -40,7 +40,7 @@ class TeamsMobileController extends AbstractController
     }
 
     /**
-     * @Route("/admin/mobile/addTeams", name="AddTeamsMobile", methods={"POST","GET"})
+     * @Route("/mobile/addTeams", name="AddTeamsMobile", methods={"POST","GET"})
      */
     public function addTeamsMobile(Request $request, NormalizerInterface $normalizer){
         $em= $this->getDoctrine()->getManager();
@@ -87,7 +87,7 @@ class TeamsMobileController extends AbstractController
 
 
     /**
-     * @Route("/admin/mobile/updateTeams", name="UpdateTeamsMobile")
+     * @Route("/mobile/updateTeams", name="UpdateTeamsMobile")
      */
     public function updateTeamsMobile(Request $request, NormalizerInterface $normalizer){
         $em= $this->getDoctrine()->getManager();
