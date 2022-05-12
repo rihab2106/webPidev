@@ -16,7 +16,7 @@ class NewsMobileController extends AbstractController
 {
 
     /**
-     * @Route("/news/getNews", name="GetNewsMobile")
+     * @Route("/mobile/getNews", name="GetNewsMobile")
      */
     public function getNewsMobile(Request $request, NormalizerInterface $normalizer)
     {
@@ -27,7 +27,7 @@ class NewsMobileController extends AbstractController
     }
 
     /**
-     * @Route("/admin/mobile/addNews", name="AddNewsMobile", methods={"POST","GET"})
+     * @Route("/mobile/addNews", name="AddNewsMobile", methods={"POST","GET"})
      */
     public function addNewsMobile(Request $request, NormalizerInterface $normalizer){
         $em= $this->getDoctrine()->getManager();
@@ -50,17 +50,17 @@ class NewsMobileController extends AbstractController
     }
 
     /**
-     * @Route("/admin/mobile/deleteNews", name="DeleteNewsMobile")
+     * @Route("/news/mobile/deleteNews", name="DeleteNewsMobile", methods={"POST","GET","DELETE"})
      */
     public function deleteNewsMobile(Request $request, NormalizerInterface $normalizer)
     {
         $em = $this->getDoctrine()->getManager();
-        $news = $em->getRepository(News::class)->find($request->get('idnews'));
+        $news = $em->getRepository(News::class)->find($request->get('idNews'));
         $em->remove($news);
         $em->flush();
         $json= $normalizer->normalize($news, "json", [
             'attributes' => 
-                ['idnews']]);           
+                ['idNews']]);           
        
         return new Response(json_encode($json));
     }
@@ -68,7 +68,7 @@ class NewsMobileController extends AbstractController
 
 
     /**
-     * @Route("/admin/mobile/updateNews", name="UpdateNewsMobile")
+     * @Route("/mobile/updateNews", name="UpdateNewsMobile")
      */
     public function updateNewsMobile(Request $request, NormalizerInterface $normalizer){
         $em= $this->getDoctrine()->getManager();
@@ -86,6 +86,21 @@ class NewsMobileController extends AbstractController
                 'img']
         ]);
         return new Response(json_encode($json));
+    }
+    /**
+     * @Route("/news/mobile/uploadImg", name="uploadImg")
+     */
+    public function uploadImg(Request $request, NormalizerInterface $normalizer){
+        //houni uploadi image 
+       if (isset($_FILES['file']["name"])){
+           $img=file_get_contents($_FILES["file"]["tmp_name"]);
+           $fp=fopen("BackAssets\\images\\GameImgs\\".$_FILES['file']["name"].".jpg","w");
+           fwrite($fp,$img);
+           fclose($fp);
+
+       }
+       
+        return new Response('json_encode($_FILES)');
     }
 
 

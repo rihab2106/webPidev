@@ -16,7 +16,7 @@ class CommentsMobileController extends AbstractController
 {
 
     /**
-     * @Route("/Comments/getComments", name="GetCommentsMobile")
+     * @Route("/mobile/getComments", name="GetCommentsMobile")
      */
     public function getCommentsMobile(Request $request, NormalizerInterface $normalizer)
     {
