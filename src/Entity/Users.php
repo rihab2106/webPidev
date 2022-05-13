@@ -171,10 +171,10 @@ class Users implements UserInterface
         return $this;
     }
 
-    public function getPRIVILEGE(): ?int
+    /*public function getPRIVILEGE(): ?int
     {
         return $this->PRIVILEGE_;
-    }
+    }*/
 
     public function setPRIVILEGE(?int $PRIVILEGE_): self
     {

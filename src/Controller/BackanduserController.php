@@ -54,47 +54,6 @@ class BackanduserController extends AbstractController
             'users' => $users,
         ]);
     }
-//    /**
-//     * @Route("/{id}", name="stat")
-//     */
-//    public function evenement_stat(UsersRepository $userRepository): Response
-//    {
-//        $nbrs[] = array();
-//
-//        $e1 = $userRepository->find_Nb_Rec_Par_Status("Baned");
-//        dump($e1);
-//        $nbrs[] = $e1[0][1];
-//
-//
-//        $e2 = $userRepository->find_Nb_Rec_Par_Status("Ubaned");
-//        dump($e2);
-//        $nbrs[] = $e2[0][1];
-//
-//        /*
-//                $e3=$activiteRepository->find_Nb_Rec_Par_Status("Diffence");
-//                dump($e3);
-//                $nbrs[]=$e3[0][1];
-//        */
-//
-//        dump($nbrs);
-//        reset($nbrs);
-//        dump(reset($nbrs));
-//        $key = key($nbrs);
-//        dump($key);
-//        dump($nbrs[$key]);
-//
-//        unset($nbrs[$key]);
-//
-//        $nbrss = array_values($nbrs);
-//        dump(json_encode($nbrss));
-//
-//        return $this->render('admin/index.html.twig', [
-//            'nbr' => json_encode($nbrss),
-//        ]);
-//    }
-
-
-
 
 
     /**
